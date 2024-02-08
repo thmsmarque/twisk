@@ -40,7 +40,7 @@ public class Monde implements Iterable<Etape> {
      */
     public void ajouter(Etape... etapes)
     {
-
+        lesEtapes.ajouter(etapes);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Monde implements Iterable<Etape> {
      */
     public int nbEtapes()
     {
-        return 0;
+        return lesEtapes.nbEtapes();
     }
 
     /**
