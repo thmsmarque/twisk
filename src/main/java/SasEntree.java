@@ -1,4 +1,9 @@
 package main.java;
 
-public class SasEntree {
+public class SasEntree extends Activite {
+
+    Monde m;
+    public SasEntree(){
+
+    }
 }

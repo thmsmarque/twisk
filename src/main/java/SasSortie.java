@@ -1,4 +1,8 @@
 package main.java;
 
-public class SasSortie {
+public class SasSortie extends Activite{
+    Monde m;
+    public SasSortie(){
+
+    }
 }
