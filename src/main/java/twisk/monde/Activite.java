@@ -4,9 +4,8 @@ public class Activite extends Etape {
 
     int temps;
     int ecartTemps;
-
-    public Activite(String nom) {
-        super(nom);
+    public Activite() {
+        super("Act");
     }
 
     public Activite(String nom, int temps, int ecartTemps){
