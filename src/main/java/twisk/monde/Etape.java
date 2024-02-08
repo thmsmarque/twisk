@@ -8,11 +8,12 @@ public abstract class Etape implements Iterable<Etape>{
     GestionnaireEtapes gestionnaire;
 
     /**
-     * Constructeur d'etape
+     * Constructeur de la classe etape
      * @param nom
      */
     public Etape(String nom){
         this.nom = nom;
+        gestionnaire = new GestionnaireEtapes();
     }
 
     /**
@@ -45,5 +46,13 @@ public abstract class Etape implements Iterable<Etape>{
      */
     public Iterator<Etape> iterator(){
     return this.gestionnaire.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "Etape{" +
+                "nom='" + nom + '\'' +
+                ", gestionnaire=" + gestionnaire +
+                '}';
     }
 }

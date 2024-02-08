@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Monde implements Iterable<Etape> {
     GestionnaireEtapes lesEtapes;
     SasEntree entree;
-    SasSortie sortie;
+    //SasSortie sortie;
 
     /**
      * Constructeur de la classe Monde
@@ -69,5 +69,13 @@ public class Monde implements Iterable<Etape> {
     public Iterator<Etape> iterator()
     {
         return lesEtapes.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "Monde{" +
+                "lesEtapes=" + lesEtapes +
+                ", entree=" + entree +
+                '}';
     }
 }

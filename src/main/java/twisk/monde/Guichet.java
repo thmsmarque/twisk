@@ -14,4 +14,12 @@ public class Guichet extends Etape{
     public boolean estUnGuichet(){
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Guichet{" +
+                "nbJetons=" + nbJetons +
+                ", gestionnaire=" + gestionnaire +
+                '}';
+    }
 }

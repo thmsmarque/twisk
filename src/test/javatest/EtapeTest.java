@@ -1,9 +1,9 @@
 package javatest;
 
+import org.junit.jupiter.api.Test;
 import main.java.twisk.monde.Activite;
 import main.java.twisk.monde.Etape;
 import main.java.twisk.monde.Guichet;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,8 +26,10 @@ class EtapeTest {
         e.AjouterSuccesseur(e3,e1,e2);
         e4.AjouterSuccesseur(e5);
 
-        assert(e.iterator().next()==e3) : "Le successeur n'est pas défini";
-
+        assertEquals(e.iterator().next(),e3);
+        assertEquals(e4.iterator().next(),e5);
+        //A revoir, ne fonctionne pas :
+        // assert(e4.iterator().hasNext()) : "Le gestionnaire d'étape est vide";
 
 
     }

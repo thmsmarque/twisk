@@ -1,4 +1,4 @@
-package javatest;
+/*package javatest;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,4 +9,4 @@ class GestionnaireEtapesTest {
     @Test
     void nbEtapes() {
     }
-}
+}*/
