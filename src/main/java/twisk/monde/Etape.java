@@ -19,7 +19,7 @@ public abstract class Etape implements Iterable<Etape>{
      *Ajoute un successeur au gestionnaire d'étape
      * @param successeur
      */
-    void AjouterSuccesseur(Etape...successeur){
+    public void AjouterSuccesseur(Etape...successeur){
         this.gestionnaire.ajouter(successeur);
     }
 
@@ -27,7 +27,7 @@ public abstract class Etape implements Iterable<Etape>{
      * Vérifie si l'objet est une activité ou un guichet
      * @return boolean
      */
-    boolean estUneActivite(){
+    public boolean estUneActivite(){
     return false;
     }
 
@@ -35,7 +35,7 @@ public abstract class Etape implements Iterable<Etape>{
      * Vérifie si l'objet est une activité ou un guichet
      * @return boolean
      */
-    boolean estUnGuichet(){
+    public boolean estUnGuichet(){
     return false;
     }
 

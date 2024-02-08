@@ -11,7 +11,7 @@ public class Guichet extends Etape{
         this.nbJetons = nb;
     }
 
-    boolean estUnGuichet(){
+    public boolean estUnGuichet(){
         return true;
     }
 }

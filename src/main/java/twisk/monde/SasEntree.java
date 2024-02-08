@@ -4,5 +4,6 @@ public class SasEntree extends Activite {
 
     Monde m;
     public SasEntree(){
+        super("Entree");
     }
 }

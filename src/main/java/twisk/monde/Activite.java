@@ -4,8 +4,8 @@ public class Activite extends Etape {
 
     int temps;
     int ecartTemps;
-    public Activite() {
-        super("Act");
+    public Activite(String nom) {
+        super(nom);
     }
 
     public Activite(String nom, int temps, int ecartTemps){
@@ -15,7 +15,7 @@ public class Activite extends Etape {
     }
 
     @Override
-    boolean estUneActivite() {
+    public boolean estUneActivite() {
         return true;
     }
 }
