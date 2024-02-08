@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class GestionnaireEtapes {
+public class GestionnaireEtapes implements Iterable<Etape>{
 
     ArrayList<Etape> listeetapes;
 
@@ -41,7 +41,7 @@ public class GestionnaireEtapes {
      * Crée l'iterator de la classe
      * @return iterator
      */
-    Iterator<Etape> iterator()
+    public Iterator<Etape> iterator()
     {
         return listeetapes.iterator();
     }

@@ -3,7 +3,7 @@ package main.java.twisk.monde;
 import java.lang.String;
 import java.util.Iterator;
 
-public abstract class Etape {
+public abstract class Etape implements Iterable<Etape>{
     private String nom;
     GestionnaireEtapes gestionnaire;
 
@@ -43,7 +43,7 @@ public abstract class Etape {
      * Crée l'iterator de la classe Etape
      * @return l'iterator de la classe Etape
      */
-    Iterator<Etape> iterator(){
+    public Iterator<Etape> iterator(){
     return this.gestionnaire.iterator();
     }
 }
