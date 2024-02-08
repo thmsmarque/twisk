@@ -1,11 +1,12 @@
 package main.java.twisk.monde;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class GestionnaireEtapes {
 
-    ArrayList<Etape> etapes;
+    ArrayList<Etape> listeetapes;
 
     /**
      * Constructeur de la classe GestionnaireEtapes
@@ -13,7 +14,7 @@ public class GestionnaireEtapes {
      */
     public GestionnaireEtapes()
     {
-
+        listeetapes = new ArrayList<>();
     }
 
 
@@ -24,7 +25,7 @@ public class GestionnaireEtapes {
      */
     public void ajouter(Etape... etapes)
     {
-
+        listeetapes.addAll(Arrays.asList(etapes));
     }
 
     /**
@@ -33,7 +34,7 @@ public class GestionnaireEtapes {
      */
     public int nbEtapes()
     {
-        return etapes.size();
+        return listeetapes.size();
     }
 
     /**
@@ -42,7 +43,7 @@ public class GestionnaireEtapes {
      */
     Iterator<Etape> iterator()
     {
-        return etapes.iterator();
+        return listeetapes.iterator();
     }
 
 }
