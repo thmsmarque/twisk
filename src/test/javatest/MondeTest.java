@@ -1,5 +1,8 @@
 package javatest;
 
+import main.java.twisk.monde.Activite;
+import main.java.twisk.monde.Etape;
+import main.java.twisk.monde.Monde;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,17 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MondeTest {
 
     @Test
-    void aCommeEntree() {/*
-        Monde m = new Monde();
-
-        assertTrue(m.getEntree().getGestionnaire().estVide());
-
-        Etape e = new Activite("Activite");
-        Etape e1 = new Guichet("Guichet");
-
-        m.aCommeEntree(e1);
-
-        assertEquals(m.getEntree(),e1);*/
+    void aCommeEntree() {
     }
 
     @Test
@@ -25,12 +18,15 @@ class MondeTest {
     }
 
     @Test
-    void ajouter() {
+    void nbEtapes() {
+        Monde m = new Monde();
+        assertTrue(m.getLesEtapes().estVide());
+        Etape e = new Activite("Activite");
+        m.ajouter(e);
+        assertEquals(m.getLesEtapes().nbEtapes(),1);
+
     }
 
-    @Test
-    void nbEtapes() {
-    }
 
     @Test
     void nbGuichets() {
