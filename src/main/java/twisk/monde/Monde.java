@@ -5,14 +5,17 @@ import java.util.Iterator;
 public class Monde implements Iterable<Etape> {
     GestionnaireEtapes lesEtapes;
     SasEntree entree;
-    //SasSortie sortie;
+    SasSortie sortie;
 
     /**
      * Constructeur de la classe Monde
      */
     public Monde()
     {
+
         lesEtapes = new GestionnaireEtapes();
+        this.entree = new SasEntree();
+        this.sortie = new SasSortie();
     }
 
     /**
@@ -21,7 +24,7 @@ public class Monde implements Iterable<Etape> {
      */
     public void aCommeEntree(Etape... etapes)
     {
-
+        this.entree.AjouterSuccesseur(etapes);
     }
 
     /**
@@ -31,7 +34,34 @@ public class Monde implements Iterable<Etape> {
      */
     public void aCommeSortie(Etape... etapes)
     {
+        this.sortie.AjouterSuccesseur(etapes);
+    }
 
+    /**
+     * Méthode qui donne la ou les entrée(s)
+     *
+     * @return entrée(s) du monde
+     */
+    public SasEntree getEntree() {
+        return entree;
+    }
+
+    /**
+     * Méthode qui donne la ou les sortie(s)
+     *
+     * @return sortie(s) du monde
+     */
+    public SasSortie getSortie() {
+        return sortie;
+    }
+
+    /**
+     * Méthode qui donne les étapes du monde
+     *
+     * @return les étapes du monde
+     */
+    public GestionnaireEtapes getLesEtapes() {
+        return lesEtapes;
     }
 
     /**

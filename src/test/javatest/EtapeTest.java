@@ -37,7 +37,7 @@ class EtapeTest {
     }
 
     @Test
-    void ajouterSuccesseur() {
+    void nbSuccesseur() {
         Etape e = new Activite("Activite");
         Etape e3 = new Activite("Activite",5,5);
         Etape e1 = new Guichet("Guichet");
@@ -60,6 +60,12 @@ class EtapeTest {
         // L'iterateur qui n'a pas de next :
         assertFalse(ite4.hasNext());
         assertFalse(ite5.hasNext());
+
+        //Nombre de successeur :
+        assertEquals(e.getGestionnaire().nbEtapes(),3);
+        assertEquals(e4.getGestionnaire().nbEtapes(),1);
+        assertEquals(e5.getGestionnaire().nbEtapes(),0);
+
 
 
     }

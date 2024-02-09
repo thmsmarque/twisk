@@ -52,6 +52,10 @@ public class GestionnaireEtapes implements Iterable<Etape>{
         return listeetapes.iterator();
     }
 
+    public boolean estVide() {
+        return this.listeetapes.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "GestionnaireEtapes{" +
