@@ -7,6 +7,8 @@ public abstract class Etape implements Iterable<Etape>{
     private String nom;
     GestionnaireEtapes gestionnaire;
 
+    int indiceEtape;
+
     /**
      * Constructeur de la classe etape
      * @param nom
