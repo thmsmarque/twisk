@@ -1,10 +1,10 @@
 package javatest;
 
-import main.java.twisk.outils.FabriqueNumero;
+import twisk.outils.FabriqueNumero;
 import org.junit.jupiter.api.Test;
-import main.java.twisk.monde.Activite;
-import main.java.twisk.monde.Etape;
-import main.java.twisk.monde.Guichet;
+import twisk.monde.Activite;
+import twisk.monde.Etape;
+import twisk.monde.Guichet;
 
 import java.util.Iterator;
 

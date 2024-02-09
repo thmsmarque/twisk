@@ -1,7 +1,7 @@
 package javatest;
 
-import main.java.twisk.monde.*;
-import main.java.twisk.outils.FabriqueNumero;
+import twisk.monde.*;
+import twisk.outils.FabriqueNumero;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,7 +1,7 @@
-package main.java.twisk.simulation;
+package twisk.simulation;
 
-import main.java.twisk.monde.Monde;
-import main.java.twisk.monde.Etape;
+import twisk.monde.Monde;
+import twisk.monde.Etape;
 
 import java.util.Iterator;
 

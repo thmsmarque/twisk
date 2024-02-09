@@ -1,6 +1,6 @@
-package main.java.twisk.monde;
+package twisk.monde;
 
-import main.java.twisk.outils.FabriqueNumero;
+import twisk.outils.FabriqueNumero;
 
 public class ActiviteRestreinte extends Activite{
     public ActiviteRestreinte(String nom, FabriqueNumero fn) {

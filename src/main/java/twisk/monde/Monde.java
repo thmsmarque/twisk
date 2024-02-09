@@ -1,4 +1,4 @@
-package main.java.twisk.monde;
+package twisk.monde;
 
 import java.util.Iterator;
 
@@ -90,7 +90,6 @@ public class Monde implements Iterable<Etape> {
     {
         int nbGuichet = 0;
         Iterator<Etape> it = lesEtapes.iterator();
-        System.out.println("Ici");
         do
         {
             if(it.next().estUnGuichet())

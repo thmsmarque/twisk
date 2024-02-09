@@ -1,8 +1,8 @@
-package main.java.twisk;
+package twisk;
 
-import main.java.twisk.monde.*;
-import main.java.twisk.outils.FabriqueNumero;
-import main.java.twisk.simulation.Simulation;
+import twisk.monde.*;
+import twisk.outils.FabriqueNumero;
+import twisk.simulation.Simulation;
 
 import java.util.Scanner;
 
