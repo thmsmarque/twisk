@@ -23,8 +23,6 @@ class GestionnaireEtapesTest {
         g.ajouter(e);
 
         assertEquals(g.getListeetapes().get(0),e);
-
-
     }
     @Test
     void nbEtapes() {
