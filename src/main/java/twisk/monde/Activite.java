@@ -11,6 +11,10 @@ public class Activite extends Etape {
      */
     public Activite(String nom) {
         super(nom);
+
+        //Initialisation à 0 par défaut
+        this.temps=0;
+        this.ecartTemps=0;
     }
 
     /**
@@ -29,6 +33,24 @@ public class Activite extends Etape {
         this.ecartTemps = ecartTemps;
     }
 
+    /**
+     * @return l'écart temp de l'activité
+     */
+    public int getEcartTemps() {
+        return ecartTemps;
+    }
+
+    /**
+     * @return le temps de l'activité
+     */
+    public int getTemps() {
+        return temps;
+    }
+
+    /**
+     * Vérifie si l'objet est une activité
+     * @return true si l'objet est une activite
+     */
     @Override
     public boolean estUneActivite() {
         return true;

@@ -17,6 +17,21 @@ public abstract class Etape implements Iterable<Etape>{
     }
 
     /**
+     *
+     * @return nom de l'etape
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @return gestionne d'étapes de l'etape
+     */
+    public GestionnaireEtapes getGestionnaire() {
+        return gestionnaire;
+    }
+
+    /**
      *Ajoute un successeur au gestionnaire d'étape
      * @param successeur
      */
@@ -55,4 +70,5 @@ public abstract class Etape implements Iterable<Etape>{
                 ", gestionnaire=" + gestionnaire +
                 '}';
     }
+
 }
