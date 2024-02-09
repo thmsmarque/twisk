@@ -47,6 +47,9 @@ class EtapeTest {
         Etape e1 = new Guichet("Guichet");
         Etape e2 = new Guichet("Guichet",5);
 
+        assertTrue(e instanceof Activite);
+
+
     }
 
     @Test
