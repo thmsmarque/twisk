@@ -12,7 +12,7 @@ public class Monde implements Iterable<Etape> {
      */
     public Monde()
     {
-
+        lesEtapes = new GestionnaireEtapes();
     }
 
     /**
@@ -58,7 +58,17 @@ public class Monde implements Iterable<Etape> {
      */
     public int nbGuichets()
     {
-        return 0;
+        int nbGuichet = 0;
+        Iterator<Etape> it = lesEtapes.iterator();
+        System.out.println("Ici");
+        do
+        {
+            if(it.next().estUnGuichet())
+            {
+                nbGuichet++;
+            }
+        }while(it.hasNext());
+        return nbGuichet;
     }
 
 
@@ -74,8 +84,8 @@ public class Monde implements Iterable<Etape> {
     @Override
     public String toString() {
         return "Monde{" +
-                "lesEtapes=" + lesEtapes +
-                ", entree=" + entree +
+                "\n\t\tlesEtapes=" + lesEtapes +
+                "\n\t\t, entree=" + entree +
                 '}';
     }
 }
