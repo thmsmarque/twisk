@@ -5,6 +5,8 @@ import main.java.twisk.monde.Activite;
 import main.java.twisk.monde.Etape;
 import main.java.twisk.monde.Guichet;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EtapeTest {
@@ -25,11 +27,15 @@ class EtapeTest {
 
         e.AjouterSuccesseur(e3,e1,e2);
         e4.AjouterSuccesseur(e5);
+        Iterator<Etape> ite = e.iterator();
+        Iterator<Etape> ite4 = e4.iterator();
 
-        assertEquals(e.iterator().next(),e3);
-        assertEquals(e4.iterator().next(),e5);
+        assertEquals(ite.next(),e3);
+        assertEquals(ite.next(),e1);
+        assertEquals(ite.next(),e2);
+        assertEquals(ite4.next(),e5);
         //A revoir, ne fonctionne pas :
-        // assert(e4.iterator().hasNext()) : "Le gestionnaire d'étape est vide";
+        assertFalse(ite4.hasNext());
 
 
     }
