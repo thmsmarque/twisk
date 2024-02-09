@@ -1,5 +1,6 @@
 package javatest;
 
+import main.java.twisk.outils.FabriqueNumero;
 import org.junit.jupiter.api.Test;
 import main.java.twisk.monde.Activite;
 import main.java.twisk.monde.Etape;
@@ -13,10 +14,11 @@ class EtapeTest {
 
     @Test
     void testConstructeur(){
-        Etape e = new Activite("Activite");
-        Etape e3 = new Activite("Activite",5,5);
-        Etape e1 = new Guichet("Guichet");
-        Etape e2 = new Guichet("Guichet",5);
+        FabriqueNumero fn = FabriqueNumero.getInstance();
+        Etape e = new Activite("Activite",fn);
+        Etape e3 = new Activite("Activite",5,5,fn);
+        Etape e1 = new Guichet("Guichet",fn);
+        Etape e2 = new Guichet("Guichet",5,fn);
 
 
         //ACTIVITE :
@@ -38,12 +40,13 @@ class EtapeTest {
 
     @Test
     void nbSuccesseur() {
-        Etape e = new Activite("Activite");
-        Etape e3 = new Activite("Activite",5,5);
-        Etape e1 = new Guichet("Guichet");
-        Etape e2 = new Guichet("Guichet",5);
-        Etape e4 = new Activite("Activite");
-        Etape e5 = new Activite("Activite");
+        FabriqueNumero fn = FabriqueNumero.getInstance();
+        Etape e = new Activite("Activite",fn);
+        Etape e3 = new Activite("Activite",5,5,fn);
+        Etape e1 = new Guichet("Guichet",fn);
+        Etape e2 = new Guichet("Guichet",5,fn);
+        Etape e4 = new Activite("Activite",fn);
+        Etape e5 = new Activite("Activite",fn);
 
         e.AjouterSuccesseur(e3,e1,e2);
         e4.AjouterSuccesseur(e5);
@@ -72,8 +75,9 @@ class EtapeTest {
 
     @Test
     void estUneActivite() {
-        Etape e = new Activite("Activite");
-        Etape e1 = new Guichet("Guichet");
+        FabriqueNumero fn = FabriqueNumero.getInstance();
+        Etape e = new Activite("Activite",fn);
+        Etape e1 = new Guichet("Guichet",fn);
 
         //Activité :
         assertTrue(e.estUneActivite());
@@ -85,8 +89,9 @@ class EtapeTest {
 
     @Test
     void estUnGuichet() {
-        Etape e = new Activite("Activite");
-        Etape e1 = new Guichet("Guichet");
+        FabriqueNumero fn = FabriqueNumero.getInstance();
+        Etape e = new Activite("Activite",fn);
+        Etape e1 = new Guichet("Guichet",fn);
 
         //Activité :
         assertFalse(e.estUnGuichet());

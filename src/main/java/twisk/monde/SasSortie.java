@@ -1,9 +1,11 @@
 package main.java.twisk.monde;
 
+import main.java.twisk.outils.FabriqueNumero;
+
 public class SasSortie extends Activite{
     Monde m;
     public SasSortie(){
-        super("Sortie");
+        super("Sortie", FabriqueNumero.getInstance());
 
     }
 

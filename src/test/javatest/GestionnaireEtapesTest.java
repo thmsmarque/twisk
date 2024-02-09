@@ -4,6 +4,7 @@ import main.java.twisk.monde.Activite;
 import main.java.twisk.monde.Etape;
 import main.java.twisk.monde.GestionnaireEtapes;
 import main.java.twisk.monde.Guichet;
+import main.java.twisk.outils.FabriqueNumero;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,21 +19,23 @@ class GestionnaireEtapesTest {
 
     @Test
     void ajouterTest(){
+        FabriqueNumero fn = FabriqueNumero.getInstance();
         GestionnaireEtapes g = new GestionnaireEtapes();
-        Etape e = new Activite("Activite");
+        Etape e = new Activite("Activite",fn);
         g.ajouter(e);
 
         assertEquals(g.getListeetapes().get(0),e);
     }
     @Test
     void nbEtapes() {
+        FabriqueNumero fn = FabriqueNumero.getInstance();
         GestionnaireEtapes g = new GestionnaireEtapes();
-        Etape e = new Activite("Activite");
-        Etape e1 = new Activite("Activite");
-        Etape e2 = new Activite("Activite");
+        Etape e = new Activite("Activite",fn);
+        Etape e1 = new Activite("Activite",fn);
+        Etape e2 = new Activite("Activite",fn);
 
-        Etape e3 = new Guichet("Guichet");
-        Etape e4 = new Guichet("Guichet");
+        Etape e3 = new Guichet("Guichet",fn);
+        Etape e4 = new Guichet("Guichet",fn);
 
         assertEquals(g.nbEtapes(),0);
 
