@@ -1,4 +1,4 @@
-package main.java.twisk.monde;
+package javatest;
 
 import org.junit.jupiter.api.Test;
 
