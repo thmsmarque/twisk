@@ -17,6 +17,12 @@ public class GestionnaireEtapes implements Iterable<Etape>{
         listeetapes = new ArrayList<>();
     }
 
+    /**
+     * @return la liste des étapes
+     */
+    public ArrayList<Etape> getListeetapes() {
+        return listeetapes;
+    }
 
     /**
      * Méthode pour ajouter des étapes au gestionnaire
