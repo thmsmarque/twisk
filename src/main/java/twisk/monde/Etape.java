@@ -1,5 +1,7 @@
 package main.java.twisk.monde;
 
+import main.java.twisk.outils.FabriqueNumero;
+
 import java.lang.String;
 import java.util.Iterator;
 
@@ -13,9 +15,10 @@ public abstract class Etape implements Iterable<Etape>{
      * Constructeur de la classe etape
      * @param nom
      */
-    public Etape(String nom){
+    public Etape(String nom, FabriqueNumero fn){
         this.nom = nom;
         gestionnaire = new GestionnaireEtapes();
+        indiceEtape = fn.getNumeroEtape();
     }
 
     /**

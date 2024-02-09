@@ -1,6 +1,7 @@
 package main.java.twisk;
 
 import main.java.twisk.monde.*;
+import main.java.twisk.outils.FabriqueNumero;
 import main.java.twisk.simulation.Simulation;
 
 import java.util.Scanner;
@@ -32,12 +33,13 @@ public class ClientTwisk {
 
     static Monde zoo()
     {
+        FabriqueNumero fn = FabriqueNumero.getInstance();
         Monde m = new Monde();
-        Etape zoo = new Activite("Zoo");
-        Etape parking = new ActiviteRestreinte("Parking");
-        Etape guichet1 = new Guichet("guichet",2500);
-        Etape guichet2 = new Guichet("guichet",2);
-        Etape sortie = new ActiviteRestreinte("Sortie");
+        Etape zoo = new Activite("Zoo",fn);
+        Etape parking = new ActiviteRestreinte("Parking",fn);
+        Etape guichet1 = new Guichet("guichet",2500,fn);
+        Etape guichet2 = new Guichet("guichet",2,fn);
+        Etape sortie = new ActiviteRestreinte("Sortie",fn);
         guichet1.AjouterSuccesseur(zoo);
         parking.AjouterSuccesseur(zoo);
         m.ajouter(zoo,parking,guichet1,guichet2,sortie);
@@ -48,14 +50,15 @@ public class ClientTwisk {
 
     static Monde gare()
     {
+        FabriqueNumero fn = FabriqueNumero.getInstance();
         Monde m = new Monde();
-        Etape hallGare = new Activite("Gare");
-        Etape parking = new ActiviteRestreinte("Parking");
-        Etape quai1 = new Activite("Quai 1");
-        Etape quai2 = new Activite("Quai 2");
-        Etape guichet1 = new Guichet("guichet",40);
-        Etape guichet2 = new Guichet("guichet",2);
-        Etape sortie = new ActiviteRestreinte("Sortie");
+        Etape hallGare = new Activite("Gare",10,20,fn);
+        Etape parking = new ActiviteRestreinte("Parking",20,30,fn);
+        Etape quai1 = new Activite("Quai 1",fn);
+        Etape quai2 = new Activite("Quai 2",fn);
+        Etape guichet1 = new Guichet("guichet",30,fn);
+        Etape guichet2 = new Guichet("guichet",2,fn);
+        Etape sortie = new ActiviteRestreinte("Sortie",fn);
         guichet1.AjouterSuccesseur(quai1);
         guichet2.AjouterSuccesseur(quai2);
         parking.AjouterSuccesseur(hallGare);

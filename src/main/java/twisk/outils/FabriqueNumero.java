@@ -2,12 +2,13 @@ package main.java.twisk.outils;
 
 public class FabriqueNumero {
 
-    int cptEtape;
+    int cptEtape, cptSemaphore;
 
     private final static FabriqueNumero instance = new FabriqueNumero();
     private FabriqueNumero()
     {
         cptEtape = 0;
+        cptSemaphore = 1;
     }
 
     static public FabriqueNumero getInstance()
@@ -17,7 +18,13 @@ public class FabriqueNumero {
 
     public int getNumeroEtape()
     {
-        return cptEtape;
+        cptEtape++;
+        return cptEtape-1;
+    }
+    public int getNumeroSemaphore()
+    {
+        cptSemaphore++;
+        return cptSemaphore-1;
     }
 
     public void reset()

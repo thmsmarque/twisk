@@ -1,5 +1,7 @@
 package main.java.twisk.monde;
 
+import main.java.twisk.outils.FabriqueNumero;
+
 public class Activite extends Etape {
 
     int temps;
@@ -9,8 +11,8 @@ public class Activite extends Etape {
      * Constructeur de la classe Activite
      * @param nom
      */
-    public Activite(String nom) {
-        super(nom);
+    public Activite(String nom,FabriqueNumero fn) {
+        super(nom,fn);
 
         //Initialisation à 0 par défaut
         this.temps=0;
@@ -23,8 +25,8 @@ public class Activite extends Etape {
      * @param temps
      * @param ecartTemps
      */
-    public Activite(String nom, int temps, int ecartTemps){
-        super(nom);
+    public Activite(String nom, int temps, int ecartTemps, FabriqueNumero fn){
+        super(nom,fn);
 
         assert(temps>=0);
         assert(ecartTemps>=0);
