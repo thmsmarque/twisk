@@ -23,12 +23,14 @@ public class FabriqueNumero {
     }
     public int getNumeroSemaphore()
     {
-        cptSemaphore++;
-        return cptSemaphore-1;
+        int temp = cptSemaphore;
+        cptSemaphore += 1;
+        return temp;
     }
 
     public void reset()
     {
         cptEtape = 0;
+        cptSemaphore = 1;
     }
 }

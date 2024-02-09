@@ -9,13 +9,22 @@ public class Guichet extends Etape{
 
     public Guichet(String nom, FabriqueNumero fn) {
         super(nom,fn);
-        this.nbJetons=0;
         indiceGuichet = fn.getNumeroSemaphore();
+        this.nbJetons=0;
     }
     public Guichet(String nom, int nb,FabriqueNumero fn) {
         super(nom,fn);
         this.nbJetons = nb;
         indiceGuichet = fn.getNumeroSemaphore();
+    }
+
+    /**
+     * retourne l'entier represantant l'indice sémaphore du guichet
+     * @return l'indice sémaphore du guichet
+     */
+    public int getSemaphore()
+    {
+        return indiceGuichet;
     }
 
     /**

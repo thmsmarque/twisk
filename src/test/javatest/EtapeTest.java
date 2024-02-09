@@ -100,4 +100,27 @@ class EtapeTest {
         assertTrue(e1.estUnGuichet());
 
     }
+
+    @Test
+    void indicesTest()
+    {
+        FabriqueNumero fn = FabriqueNumero.getInstance();
+        Etape e = new Activite("Activite",fn);
+        Etape e1 = new Guichet("Guichet",fn);
+        Etape e2 = new Activite("Activite",fn);
+        Etape e3 = new Guichet("Guichet",fn);
+        Etape e4 = new Activite("Activite",fn);
+        Etape e5 = new Guichet("Guichet",fn);
+
+        assertEquals(0,e.getIndiceEtape());
+        assertEquals(1,e1.getIndiceEtape());
+        assertEquals(2,e2.getIndiceEtape());
+        assertEquals(3,e3.getIndiceEtape());
+        assertEquals(4,e4.getIndiceEtape());
+        assertEquals(5,e5.getIndiceEtape());
+
+        assertEquals(1,((Guichet)e1).getSemaphore());
+        assertEquals(2,((Guichet)e3).getSemaphore());
+        assertEquals(3,((Guichet)e5).getSemaphore());
+    }
 }

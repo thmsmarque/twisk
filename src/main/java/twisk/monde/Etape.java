@@ -76,5 +76,14 @@ public abstract class Etape implements Iterable<Etape>{
                 '}';
     }
 
+    /**
+     * retourne l'entier represantant l'indice de l'étape
+     * @return l'indice de l'étape
+     */
+    public int getIndiceEtape()
+    {
+        return indiceEtape;
+    }
+
 
 }
