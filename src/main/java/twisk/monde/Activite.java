@@ -59,7 +59,8 @@ public class Activite extends Etape {
     @Override
     public String toString() {
         return "Activite{" +
-                "temps=" + temps +
+                " nom= " + getNom() +
+                " temps=" + temps +
                 ", ecartTemps=" + ecartTemps +
                 ", gestionnaire=" + gestionnaire +
                 '}';

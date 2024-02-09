@@ -26,7 +26,8 @@ public class Guichet extends Etape{
     @Override
     public String toString() {
         return "Guichet{" +
-                "nbJetons=" + nbJetons +
+                " nom= " + getNom() +
+                " nbJetons=" + nbJetons +
                 ", gestionnaire=" + gestionnaire +
                 '}';
     }
