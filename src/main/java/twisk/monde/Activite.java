@@ -7,6 +7,13 @@ public class Activite extends Etape {
     int temps;
     int ecartTemps;
 
+    public Activite(String nom){
+        super(nom);
+        this.temps=0;
+        this.ecartTemps=0;
+    }
+
+
     /**
      * Constructeur de la classe Activite
      * @param nom
@@ -34,6 +41,17 @@ public class Activite extends Etape {
         this.temps = temps;
         this.ecartTemps = ecartTemps;
     }
+
+    public Activite(String nom, int temps, int ecartTemps){
+        super(nom);
+
+        assert(temps>=0);
+        assert(ecartTemps>=0);
+
+        this.temps = temps;
+        this.ecartTemps = ecartTemps;
+    }
+
 
     /**
      * @return l'écart temp de l'activité

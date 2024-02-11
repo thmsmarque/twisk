@@ -18,6 +18,16 @@ public class Guichet extends Etape{
         indiceGuichet = fn.getNumeroSemaphore();
     }
 
+    public Guichet(String nom) {
+        super(nom);
+        this.nbJetons = 0;
+    }
+
+    public Guichet(String nom, int nb) {
+        super(nom);
+        this.nbJetons = nb;
+    }
+
     /**
      * retourne l'entier represantant l'indice sémaphore du guichet
      * @return l'indice sémaphore du guichet

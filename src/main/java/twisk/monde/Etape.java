@@ -15,6 +15,15 @@ public abstract class Etape implements Iterable<Etape>{
      * Constructeur de la classe etape
      * @param nom
      */
+    public Etape(String nom){
+        this.nom = nom;
+        gestionnaire = new GestionnaireEtapes();
+    }
+
+    /**
+     * Constructeur de la classe etape
+     * @param nom
+     */
     public Etape(String nom, FabriqueNumero fn){
         this.nom = nom;
         gestionnaire = new GestionnaireEtapes();
