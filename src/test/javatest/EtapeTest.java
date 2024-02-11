@@ -48,8 +48,8 @@ class EtapeTest {
         Etape e4 = new Activite("Activite",fn);
         Etape e5 = new Activite("Activite",fn);
 
-        e.AjouterSuccesseur(e3,e1,e2);
-        e4.AjouterSuccesseur(e5);
+        e.ajouterSuccesseur(e3,e1,e2);
+        e4.ajouterSuccesseur(e5);
         Iterator<Etape> ite = e.iterator();
         Iterator<Etape> ite4 = e4.iterator();
         Iterator<Etape> ite5 = e5.iterator();

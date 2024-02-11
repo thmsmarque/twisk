@@ -40,7 +40,7 @@ public abstract class Etape implements Iterable<Etape>{
      *Ajoute un successeur au gestionnaire d'étape
      * @param successeur
      */
-    public void AjouterSuccesseur(Etape...successeur){
+    public void ajouterSuccesseur(Etape...successeur){
         this.gestionnaire.ajouter(successeur);
     }
 
