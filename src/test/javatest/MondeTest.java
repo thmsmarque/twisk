@@ -11,12 +11,12 @@ class MondeTest {
 
     @Test
     void nbGuichets() {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
-        Etape e = new Guichet("Guichet",fn);
-        Etape e1 = new Guichet("Guichet",fn);
-        Etape e2 = new Guichet("Guichet",fn);
-        Etape e3 = new Activite("Activite",fn);
+        Etape e = new Guichet("Guichet");
+        Etape e1 = new Guichet("Guichet");
+        Etape e2 = new Guichet("Guichet");
+        Etape e3 = new Activite("Activite");
 
         m.ajouter(e,e1,e2,e3);
 
@@ -26,10 +26,10 @@ class MondeTest {
 
     @Test
     void nbEtapes() {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
         assertTrue(m.getLesEtapes().estVide());
-        Etape e = new Activite("Activite",fn);
+        Etape e = new Activite("Activite");
         m.ajouter(e);
         assertEquals(m.getLesEtapes().nbEtapes(),1);
 
@@ -37,11 +37,11 @@ class MondeTest {
 
     @Test
     void aCommeEntree() {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
-        Etape e = new Guichet("Guichet",fn);
-        Etape e1 = new Guichet("Guichet",fn);
-        Etape e2 = new Guichet("Guichet",fn);
+        Etape e = new Guichet("Guichet");
+        Etape e1 = new Guichet("Guichet");
+        Etape e2 = new Guichet("Guichet");
         m.aCommeEntree(e);
         GestionnaireEtapes g = m.getEntree().getGestionnaire();
         assertEquals(g.nbEtapes(),1);
@@ -51,11 +51,11 @@ class MondeTest {
 
     @Test
     void aCommeSortie() {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
-        Etape e = new Guichet("Guichet",fn);
-        Etape e1 = new Guichet("Guichet",fn);
-        Etape e2 = new Guichet("Guichet",fn);
+        Etape e = new Guichet("Guichet");
+        Etape e1 = new Guichet("Guichet");
+        Etape e2 = new Guichet("Guichet");
         m.aCommeSortie(e);
         GestionnaireEtapes g = m.getSortie().getGestionnaire();
         assertEquals(g.nbEtapes(),1);

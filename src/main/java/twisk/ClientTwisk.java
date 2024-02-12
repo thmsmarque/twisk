@@ -33,13 +33,13 @@ public class ClientTwisk {
 
     static Monde zoo()
     {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
-        Etape zoo = new Activite("Zoo",fn);
-        Etape parking = new ActiviteRestreinte("Parking",fn);
-        Etape guichet1 = new Guichet("guichet",2500,fn);
-        Etape guichet2 = new Guichet("guichet",2,fn);
-        Etape sortie = new ActiviteRestreinte("Sortie",fn);
+        Etape zoo = new Activite("Zoo");
+        Etape parking = new ActiviteRestreinte("Parking");
+        Etape guichet1 = new Guichet("guichet",2500);
+        Etape guichet2 = new Guichet("guichet",2);
+        Etape sortie = new ActiviteRestreinte("Sortie");
         guichet1.ajouterSuccesseur(zoo);
         parking.ajouterSuccesseur(zoo);
         m.ajouter(zoo,parking,guichet1,guichet2,sortie);
@@ -50,15 +50,15 @@ public class ClientTwisk {
 
     static Monde gare()
     {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         Monde m = new Monde();
-        Etape hallGare = new Activite("Gare",10,20,fn);
-        Etape parking = new ActiviteRestreinte("Parking",20,30,fn);
-        Etape quai1 = new Activite("Quai 1",fn);
-        Etape quai2 = new Activite("Quai 2",fn);
-        Etape guichet1 = new Guichet("guichet",30,fn);
-        Etape guichet2 = new Guichet("guichet",2,fn);
-        Etape sortie = new ActiviteRestreinte("Sortie",fn);
+        Etape hallGare = new Activite("Gare",10,20);
+        Etape parking = new ActiviteRestreinte("Parking",20,30);
+        Etape quai1 = new Activite("Quai 1");
+        Etape quai2 = new Activite("Quai 2");
+        Etape guichet1 = new Guichet("guichet",30);
+        Etape guichet2 = new Guichet("guichet",2);
+        Etape sortie = new ActiviteRestreinte("Sortie");
         guichet1.ajouterSuccesseur(quai1);
         guichet2.ajouterSuccesseur(quai2);
         parking.ajouterSuccesseur(hallGare);

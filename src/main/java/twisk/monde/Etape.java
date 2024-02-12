@@ -11,6 +11,7 @@ public abstract class Etape implements Iterable<Etape>{
 
     int indiceEtape;
 
+
     /**
      * Constructeur de la classe etape
      * @param nom
@@ -18,16 +19,7 @@ public abstract class Etape implements Iterable<Etape>{
     public Etape(String nom){
         this.nom = nom;
         gestionnaire = new GestionnaireEtapes();
-    }
-
-    /**
-     * Constructeur de la classe etape
-     * @param nom
-     */
-    public Etape(String nom, FabriqueNumero fn){
-        this.nom = nom;
-        gestionnaire = new GestionnaireEtapes();
-        indiceEtape = fn.getNumeroEtape();
+        indiceEtape = FabriqueNumero.getInstance().getNumeroEtape();
     }
 
     /**

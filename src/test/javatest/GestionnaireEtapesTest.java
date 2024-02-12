@@ -19,23 +19,23 @@ class GestionnaireEtapesTest {
 
     @Test
     void ajouterTest(){
-        FabriqueNumero fn = FabriqueNumero.getInstance();
+
         GestionnaireEtapes g = new GestionnaireEtapes();
-        Etape e = new Activite("Activite",fn);
+        Etape e = new Activite("Activite");
         g.ajouter(e);
 
         assertEquals(g.getListeetapes().get(0),e);
     }
     @Test
     void nbEtapes() {
-        FabriqueNumero fn = FabriqueNumero.getInstance();
-        GestionnaireEtapes g = new GestionnaireEtapes();
-        Etape e = new Activite("Activite",fn);
-        Etape e1 = new Activite("Activite",fn);
-        Etape e2 = new Activite("Activite",fn);
 
-        Etape e3 = new Guichet("Guichet",fn);
-        Etape e4 = new Guichet("Guichet",fn);
+        GestionnaireEtapes g = new GestionnaireEtapes();
+        Etape e = new Activite("Activite");
+        Etape e1 = new Activite("Activite");
+        Etape e2 = new Activite("Activite");
+
+        Etape e3 = new Guichet("Guichet");
+        Etape e4 = new Guichet("Guichet");
 
         assertEquals(g.nbEtapes(),0);
 

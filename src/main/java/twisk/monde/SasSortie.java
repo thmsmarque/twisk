@@ -5,7 +5,7 @@ import twisk.outils.FabriqueNumero;
 public class SasSortie extends Activite{
     Monde m;
     public SasSortie(){
-        super("Sortie", FabriqueNumero.getInstance());
+        super("Sortie");
 
     }
 

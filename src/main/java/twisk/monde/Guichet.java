@@ -7,24 +7,16 @@ public class Guichet extends Etape{
 
     int indiceGuichet;
 
-    public Guichet(String nom, FabriqueNumero fn) {
-        super(nom,fn);
-        indiceGuichet = fn.getNumeroSemaphore();
-        this.nbJetons=0;
-    }
-    public Guichet(String nom, int nb,FabriqueNumero fn) {
-        super(nom,fn);
-        this.nbJetons = nb;
-        indiceGuichet = fn.getNumeroSemaphore();
-    }
-
     public Guichet(String nom) {
         super(nom);
-        this.nbJetons = 0;
+        indiceGuichet = FabriqueNumero.getInstance().getNumeroSemaphore();
+        this.nbJetons=0;
     }
+
 
     public Guichet(String nom, int nb) {
         super(nom);
+        indiceGuichet = FabriqueNumero.getInstance().getNumeroSemaphore();
         this.nbJetons = nb;
     }
 
