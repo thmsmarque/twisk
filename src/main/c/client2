@@ -1,10 +1,14 @@
+/*Client2,
+ *Monde avec 4 etapes
+ *1 activité et 1 guichet
+ */
+
 
 #include "../ressource/codeC/def.h"
 #define sasEntree 0
 #define guichet 2
 #define activite 3
 #define sasSortie 1
-
 void simulation(int ids)
 {
 
@@ -13,13 +17,13 @@ void simulation(int ids)
     delai(6,3);
     //Guichet
     transfert(sasEntree,guichet);
-    P(ids,1);
+    delai(3,1);
     //Activite restreinte
-    transfert(guichet,activite);
-    delai(4,2);
-    V(ids,1);
+    delai(4,2)
     //SasSortie
-    transfert(activite,sasSortie);
+    transfert(guichet,sasSortie);
+    etapeActuelle = destination;
+
 
 }
 
