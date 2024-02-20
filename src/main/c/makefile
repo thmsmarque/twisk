@@ -1,22 +1,22 @@
 CC = gcc
 CFLAGS = -Wall -fPIC
-LDFLAGS = -shared
-C_SRC = main.c
-CLIENT_SRC = client.c
-OBJ = main.o client.o
-LIB = libTwisk.so
+LDFLAGS = -Wall -L. -lTwisk
+RES = ../ressource/codeC/programmeC.o
+all: main
 
-all: $(LIB)
+main: main.c libTwisk.so
+	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
-$(LIB): $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ) -o $(LIB)
+libTwisk.so: $(RES) client.o
+	$(CC) -shared $^ -o $@
 
-main.o: $(C_SRC)
-	$(CC) $(CFLAGS) -c $(C_SRC) -o main.o
-
-client.o: $(CLIENT_SRC)
-	$(CC) $(CFLAGS) -c $(CLIENT_SRC) -o client.o
+client.o: client.c
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+.PHONY: all clean
 
 clean:
-	rm -f $(OBJ) $(LIB)
+	rm -f main.o main libTwisk.so client.o
+
+
 
