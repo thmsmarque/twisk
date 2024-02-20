@@ -1,25 +1,19 @@
+#include <stdio.h>
 
 #include "../ressource/codeC/def.h"
 #define sasEntree 0
-#define guichet 2
-#define activite 3
+#define activite 2
 #define sasSortie 1
-
 void simulation(int ids)
 {
-
     //SasEntree
     entrer(sasEntree);
     delai(6,3);
-    //Guichet
-    transfert(sasEntree,guichet);
-    P(ids,1);
-    //Activite restreinte
-    transfert(guichet,activite);
-    delai(4,2);
-    V(ids,1);
+    //Activite
+    transfert(sasEntree,activite);
+    delai(3,1);
     //SasSortie
-    transfert(activite,sasSortie);
+    transfert(activite,sasEntree);
 
 }
 
