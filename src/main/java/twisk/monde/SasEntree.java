@@ -8,7 +8,7 @@ public class SasEntree extends Activite {
 
     public String toC()
     {
-
+        return null;
     }
     public SasEntree(){
         super("Entree");

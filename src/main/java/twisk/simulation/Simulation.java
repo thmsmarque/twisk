@@ -14,7 +14,7 @@ public class Simulation {
 
     public void simuler(Monde monde)
     {
-        System.out.println("Notre monde possède :\n" +
+        /*System.out.println("Notre monde possède :\n" +
                 "\t\tNombre étapes   : " + monde.nbEtapes()+"\n" +
                 "\t\tNombre guichets : "+monde.nbGuichets()+"\n");
         Iterator<Etape> it = monde.iterator();
@@ -22,7 +22,11 @@ public class Simulation {
         {
             Etape etape = it.next();
             System.out.println(etape.toString());
-        }
+        }*/
+
+        String fichierC = monde.toC();
+        System.out.println(fichierC);
+
     }
 
 }

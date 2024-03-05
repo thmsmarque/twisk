@@ -107,14 +107,14 @@ public class Monde implements Iterable<Etape> {
      */
     public String toC()
     {
+        Etape et = this.getLesEtapes().getListeetapes().iterator().next();
         String res = "#include \"../ressource/codeC/def.h\"\n" +
             "void simulation(int ids)\n{" +
                 "entrer(0);\n" +
                 "delai"+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +
-                "transfert(0,2);\n";
+                "transfert(0,"+et.getIndiceEtape() +");\n";
         StringBuilder build = new StringBuilder();
-        build.append(res).append(this.getLesEtapes().getListeetapes().get(2).toC());
-
+        build.append(res).append(et.toC());
         return res;
     }
 
