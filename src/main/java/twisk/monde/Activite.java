@@ -66,8 +66,11 @@ public class Activite extends Etape {
 
     @Override
     public String toC() {
-        String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
-                "transfert("+this.getIndiceEtape()+","+this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).getNom()+");\n";
+        String res =
+                "delai("+this.temps+","+this.ecartTemps+");\n" +
+                "transfert("+this.getIndiceEtape()+","+this.getGestionnaire().getListeetapes().get(this.getIndiceEtape() + 1).getIndiceEtape()+");\n";
+        StringBuilder build =  new StringBuilder();
+        build.append(res).append(this.getGestionnaire().getListeetapes().get(this.getIndiceEtape() + 1).toC());
         return res;
     }
 }

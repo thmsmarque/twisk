@@ -111,7 +111,7 @@ public class Monde implements Iterable<Etape> {
             "void simulation(int ids)\n{" +
                 "entrer(0);\n" +
                 "delai"+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +
-                "transfert(0,";
+                "transfert(0,2);\n";
         StringBuilder build = new StringBuilder();
         build.append(res).append(this.getLesEtapes().getListeetapes().get(2).toC());
 
