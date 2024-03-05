@@ -11,4 +11,8 @@ public class ActiviteRestreinte extends Activite{
         super(nom,temps,ecartTemps);
     }
 
+    public String toC()
+    {
+
+    }
 }

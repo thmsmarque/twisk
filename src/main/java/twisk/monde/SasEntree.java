@@ -5,6 +5,11 @@ import twisk.outils.FabriqueNumero;
 public class SasEntree extends Activite {
 
     Monde m;
+
+    public String toC()
+    {
+
+    }
     public SasEntree(){
         super("Entree");
     }

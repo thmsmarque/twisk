@@ -86,5 +86,7 @@ public abstract class Etape implements Iterable<Etape>{
         return indiceEtape;
     }
 
+    public abstract String toC();
+
 
 }

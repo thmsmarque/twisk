@@ -40,6 +40,7 @@ public class Guichet extends Etape{
         return true;
     }
 
+
     @Override
     public String toString() {
         return "Guichet{" +
@@ -47,5 +48,10 @@ public class Guichet extends Etape{
                 " nbJetons=" + nbJetons +
                 ", gestionnaire=" + gestionnaire +
                 '}';
+    }
+
+    @Override
+    public String toC() {
+        return null;
     }
 }

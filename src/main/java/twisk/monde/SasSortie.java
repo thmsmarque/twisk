@@ -9,6 +9,11 @@ public class SasSortie extends Activite{
 
     }
 
+    public String toC()
+    {
+
+    }
+
     @Override
     public String toString() {
         return "SasSortie{" +
