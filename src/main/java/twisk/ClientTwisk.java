@@ -59,15 +59,18 @@ public class ClientTwisk {
         Etape guichet1 = new Guichet("guichet",30);
         Etape guichet2 = new Guichet("guichet",2);
         Etape sortie = new ActiviteRestreinte("Sortie");
+        m.getEntree().ajouterSuccesseur(guichet1);
         guichet1.ajouterSuccesseur(quai1);
         guichet2.ajouterSuccesseur(quai2);
         parking.ajouterSuccesseur(hallGare);
-        hallGare.ajouterSuccesseur(quai1,quai2);
-        quai1.ajouterSuccesseur(sortie);
-        quai2.ajouterSuccesseur(sortie);
+        hallGare.ajouterSuccesseur(/*quai1*/quai2);
+        //quai1.ajouterSuccesseur(sortie);
+        quai2.ajouterSuccesseur(m.getSortie());
         m.ajouter(hallGare,parking,guichet1,guichet2,sortie,quai1,quai2);
-        m.aCommeEntree(hallGare,parking);
-        m.aCommeSortie(sortie);
+
+        //m.aCommeEntree(hallGare,parking);
+        //m.aCommeSortie(sortie);
+
         return m;
     }
 }
