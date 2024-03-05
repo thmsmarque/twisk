@@ -100,6 +100,14 @@ public class Monde implements Iterable<Etape> {
         return nbGuichet;
     }
 
+    /**
+     * Méthode qui permet de générer le fichier client.c de ce Monde
+     * @return contenu du fichier client.c
+     */
+    public String toC()
+    {
+
+    }
 
     /**
      * Crée l'iterator de la classe monde
