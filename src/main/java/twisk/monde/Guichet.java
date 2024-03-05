@@ -55,12 +55,13 @@ public class Guichet extends Etape{
         //ids à vérifier
         String res = "P("+ "ids"+ ","+"1"+"); \n" +
                 "transfert("+this.getIndiceEtape()+","
-                + this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).toC() +");\n" +
-                "V("+ "ids"+ this.getSemaphore()+");";
+                + this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).getIndiceEtape()  +");\n" +
+                this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).toC() +
+                "V("+ "ids"+ this.getSemaphore()+");" ;
 
                 //chaque guichet est suivi d'une activité restreinte
 
 
-        return null;
+        return res + this.gestionnaire.iterator().next();
     }
 }

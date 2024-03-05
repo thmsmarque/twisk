@@ -14,8 +14,9 @@ public class ActiviteRestreinte extends Activite{
     public String toC()
     {
         String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
-                "transfert("+this.getIndiceEtape()+","
-                + this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()-1).toC() + ");\n" ;
+                "transfert("+ this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()-1).getIndiceEtape()
+                + "," + this.getIndiceEtape() + ");\n" +
+                this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()-1).toC();
         return res;
 
     }
