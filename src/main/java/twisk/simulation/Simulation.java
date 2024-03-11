@@ -8,10 +8,12 @@ import java.util.Iterator;
 
 public class Simulation {
 
+    KitC kit;
+
     public Simulation()
     {
-        KitC kit = new KitC();
-        kit.creerEnvironnement();
+        this.kit = new KitC();
+        this.kit.creerEnvironnement();
     }
 
     public void simuler(Monde monde)
@@ -27,8 +29,12 @@ public class Simulation {
         }*/
 
         String fichierC = monde.toC();
-        System.out.println(fichierC);
-
+        System.out.println(fichierC); // a supprimer quand ça sera bon
+        this.kit.creerFichier(fichierC);
+        // A faire quand on aura bien /tmp/...
+        // this.kit.compiler();
+        //this.kit.construireLaBibliothese();
     }
+
 
 }
