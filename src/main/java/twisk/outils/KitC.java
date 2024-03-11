@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.lang.Process;
 
 public class KitC {
     /**
@@ -54,6 +55,30 @@ public class KitC {
             System.out.println("erreur lors de la creation de fichier");
         }
 
+    }
+
+    /**
+     * Automatise la compilation du fichier client.c
+     */
+    public void compiler(){
+        ProcessBuilder pb = new ProcessBuilder("gcc","-Wall","-ansi","-pedantic","-fPIC","-c","/tmp/twisk/client.c","-o","/tmp/twisk/client.o");
+        try {
+            pb.inheritIO().start().waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Automatise la construction de la bibliothèque libTwisk.so
+     */
+    public void construireLaBibliothese(){
+        ProcessBuilder pb = new ProcessBuilder("gcc","-shared","/tmp/twist/programmeC.o","/tmp/twisk/client.o","-o","/tmp/twisk/libTwisk.so");
+        try {
+            pb.inheritIO().start().waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

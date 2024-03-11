@@ -31,7 +31,10 @@ public class Simulation {
         String fichierC = monde.toC();
         System.out.println(fichierC); // a supprimer quand ça sera bon
         this.kit.creerFichier(fichierC);
-
+        // A faire quand on aura bien /tmp/...
+        // this.kit.compiler();
+        //this.kit.construireLaBibliothese();
     }
+
 
 }
