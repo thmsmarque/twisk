@@ -13,18 +13,20 @@ public class ClientTwisk {
                 "\t0 : Quitter l'application\n" +
                 "\t1 : Zoo\n" +
                 "\t2 : Gare\n" +
+                "\t3 : Fac\n" +
                 "Ton choix :\t");
         Scanner scan = new Scanner(System.in);
         int choix;
         do {
             choix = scan.nextInt();
-        }while(choix < 0 || choix > 2);
+        }while(choix < 0 || choix > 3);
         Simulation sim = new Simulation();
         switch(choix)
         {
             case 0 : System.out.println("Au revoir!"); break;
             case 1 : System.out.println("Simulation du zoo :\n"); sim.simuler(zoo());break;
             case 2 : System.out.println("Simulation de la gare :\n"); sim.simuler(gare());break;
+            case 3 : System.out.println("Simulation de la fac :\n"); sim.simuler(fac());break;
             default: System.out.println("Au revoir!"); break;
         }
 
@@ -70,6 +72,20 @@ public class ClientTwisk {
 
         //m.aCommeEntree(hallGare,parking);
         //m.aCommeSortie(sortie);
+
+        return m;
+    }
+
+    static Monde fac()
+    {
+        Monde m = new Monde();
+        Etape salle1 = new Activite("Salle de classe 1",10,20);
+        Etape fileRU = new Guichet("File d'attente du RU", 30);
+        Etape RU = new ActiviteRestreinte("RU",30,40);
+        m.getEntree().ajouterSuccesseur(salle1);
+        salle1.ajouterSuccesseur(fileRU);
+        fileRU.ajouterSuccesseur(RU);
+        RU.ajouterSuccesseur(m.getSortie());
 
         return m;
     }

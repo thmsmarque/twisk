@@ -66,7 +66,7 @@ public class Activite extends Etape {
 
     @Override
     public String toC() {
-        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next().iterator().next();
         String res = "délai("+this.temps+","+this.ecartTemps+");\n" +
                 "transfert("+this.getNom()+","+et.getIndiceEtape()+");\n";
         StringBuilder build = new StringBuilder();

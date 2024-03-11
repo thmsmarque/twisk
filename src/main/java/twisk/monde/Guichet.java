@@ -53,15 +53,20 @@ public class Guichet extends Etape{
     @Override
     public String toC() {
         //ids à vérifier
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next().iterator().next();
+
         String res = "P("+ "ids"+ ","+"1"+"); \n" +
                 "transfert("+this.getIndiceEtape()+","
-                + this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).getIndiceEtape()  +");\n" +
-                this.getGestionnaire().getListeetapes().get(this.getIndiceEtape()+1).toC() +
+                + et.getIndiceEtape()  +");\n" +
+                et.toC() +
                 "V("+ "ids"+ this.getSemaphore()+");" ;
 
                 //chaque guichet est suivi d'une activité restreinte
+        StringBuilder build = new StringBuilder();
+
+        build.append(res).append(et.iterator().next().toC());
 
 
-        return res + this.gestionnaire.iterator().next();
+        return res;
     }
 }
