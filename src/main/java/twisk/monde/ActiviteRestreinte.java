@@ -13,11 +13,10 @@ public class ActiviteRestreinte extends Activite{
 
     public String toC()
     {
-        Etape et = this.getGestionnaire().getListeetapes().iterator().next().iterator().next();
-        String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
-                "transfert("+ et.getIndiceEtape()
-                + "," + this.getIndiceEtape() + ");\n" +
-                et.toC();
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+        //System.out.println("Est ici (activite restreinte) "+ et);
+        String res = "delai("+this.temps+","+this.ecartTemps+");\n"
+                /*La suite est écrite via le guichet*/;
         return res;
 
     }
