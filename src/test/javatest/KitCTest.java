@@ -8,8 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class KitCTest {
 
     @Test
-    void creerEnvironnement() {
+    void creerEnvironnementtest() {
         KitC kit = new KitC();
-        kit.creerEnvironnement();
+        kit.creerEnvironnement(); //il se passe rien
+    }
+
+    @Test
+    void creerFichiertest(){
+        KitC kit = new KitC();
+        kit.creerFichier("test\n test2 \n test3");
     }
 }
