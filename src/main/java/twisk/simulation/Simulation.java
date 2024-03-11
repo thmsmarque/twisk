@@ -2,6 +2,7 @@ package twisk.simulation;
 
 import twisk.monde.Monde;
 import twisk.monde.Etape;
+import twisk.outils.KitC;
 
 import java.util.Iterator;
 
@@ -9,7 +10,8 @@ public class Simulation {
 
     public Simulation()
     {
-
+        KitC kit = new KitC();
+        kit.creerEnvironnement();
     }
 
     public void simuler(Monde monde)

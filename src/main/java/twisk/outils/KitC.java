@@ -15,15 +15,17 @@ public class KitC {
     public void creerEnvironnement(){
         Path directory = Paths.get("/tmp/twisk");
         try {
+// création du répertoire twisk sous /tmp.
+// Ne déclenche pas d’erreur si le répertoire existe déjà
             Files.createDirectories(directory);
-            //Copie des fichiers programmeC.o et def.h sous /tmp/twisk
-            String[] liste = {"programmeC.o","def.h"};
-            for(String nom : liste){
-                InputStream src = getClass().getResourceAsStream("/codeC/"+ nom);
+// copie des fichiers programmeC.o et def.h sous /tmp/twisk
+            String[] liste = {"programmeC.o", "def.h"};
+            for (String nom : liste) {
+                InputStream src = getClass().getResourceAsStream("/codeC/" + nom);
                 Path dest = directory.resolve(nom);
-                Files.copy(src,dest, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
