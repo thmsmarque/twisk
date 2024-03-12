@@ -1,5 +1,5 @@
 
-#include "../ressource/codeC/def.h"
+#include "../ressources/codeC/def.h"
 #define sasEntree 0
 #define guichet 2
 #define activite 3

@@ -1,4 +1,4 @@
-#include "../ressource/codeC/def.h"
+#include "../ressources/codeC/def.h"
 
 /* main du client1
 int main(int argc, char** argv) {

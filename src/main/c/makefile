@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -fPIC
 LDFLAGS = -Wall -L. -lTwisk
-RES = ../ressource/codeC/programmeC.o
+RES = ../ressources/codeC/programmeC.o
 all: main
 
 main: main.c libTwisk.so
