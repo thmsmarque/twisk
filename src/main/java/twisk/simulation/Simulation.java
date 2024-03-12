@@ -34,6 +34,9 @@ public class Simulation {
         // A faire quand on aura bien /tmp/...
         this.kit.compiler();
         this.kit.construireLaBibliothese();
+
+        //Chargement de la bibliothèque où sont définies les fonctions
+        System.load("/tmp/twisk/libTwisk.so") ;
     }
 
     public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);
