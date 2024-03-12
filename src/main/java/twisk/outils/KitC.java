@@ -47,7 +47,7 @@ public class KitC {
         FileWriter flot;
         BufferedWriter flotfiltre;
         try{
-            flot = new FileWriter("client.c"); //remettre le bon chemin quand ^ fonctionnera
+            flot = new FileWriter("/tmp/twisk/client.c"); //remettre le bon chemin quand ^ fonctionnera
             flotfiltre = new BufferedWriter(flot);
             flotfiltre.write(codeC);
             flotfiltre.close();
