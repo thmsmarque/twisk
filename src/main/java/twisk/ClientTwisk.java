@@ -86,6 +86,7 @@ public class ClientTwisk {
         salle1.ajouterSuccesseur(fileRU);
         fileRU.ajouterSuccesseur(RU);
         RU.ajouterSuccesseur(m.getSortie());
+        m.ajouter(salle1,fileRU,RU);
 
         return m;
     }
