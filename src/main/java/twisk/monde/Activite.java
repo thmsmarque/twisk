@@ -69,9 +69,23 @@ public class Activite extends Etape {
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
         //System.out.println("Est ici (activite) "+ et);
         String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
-                "transfert("+this.getIndiceEtape()+","+et.getIndiceEtape()+");\n" + et.toC();
+                "transfert("+this.getDefineName()+","+et.getDefineName()+");\n" + et.toC();
         /*StringBuilder build = new StringBuilder();
         build.append(res).append(et.toC());*/
         return res;
     }
+
+    @Override
+    public String defineName() {
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+        return "\n#define ACTIVITE_"+this.getNom()+" "+this.getIndiceEtape()
+                +et.defineName();
+    }
+
+    @Override
+    public String getDefineName() {
+        return "ACTIVITE_"+this.getNom();
+    }
+
+
 }

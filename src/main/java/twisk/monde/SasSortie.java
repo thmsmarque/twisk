@@ -9,6 +9,16 @@ public class SasSortie extends Activite{
 
     }
 
+    public String defineName()
+    {
+        return "\n#define SORTIE "+ this.getIndiceEtape();
+    }
+
+    public String getDefineName()
+    {
+        return "SORTIE";
+    }
+
     public String toC()
     {
         return "\n}";

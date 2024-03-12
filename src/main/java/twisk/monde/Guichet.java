@@ -56,12 +56,12 @@ public class Guichet extends Etape{
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
         //System.out.println("Est ici (guichet) "+ et);
         String res = "P("+ "ids"+ ","+"1"+"); \n" +
-                "transfert("+this.getIndiceEtape()+","
-                + et.getIndiceEtape()  +");\n" +
+                "transfert("+this.getDefineName()+","
+                + et.getDefineName()  +");\n" +
                 et.toC() +
-                "V("+ "ids,"+ this.getSemaphore()+");\n"
-                +"transfert("+ et.getIndiceEtape()
-                + "," + et.iterator().next().getIndiceEtape() + ");\n" + et.iterator().next().toC();
+                "V("+ "ids,"+ this.getSemaphoreName()+");\n"
+                +"transfert("+ et.getDefineName()
+                + "," + et.iterator().next().getDefineName() + ");\n" + et.iterator().next().toC();
 
                 //chaque guichet est suivi d'une activité restreinte
         //StringBuilder build = new StringBuilder();
@@ -70,5 +70,24 @@ public class Guichet extends Etape{
 
 
         return res;
+    }
+
+    @Override
+    public String defineName() {
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+
+        return "\n#define SEM_GUICHET_"+this.getNom()+" "+this.getSemaphore() +
+                "\n#define GUICHET_"+this.getNom()+" "+this.getIndiceEtape() +
+                et.getDefineName();
+    }
+
+    @Override
+    public String getDefineName() {
+        return "GUICHET_"+this.getNom();
+    }
+
+    public String getSemaphoreName()
+    {
+        return "SEM_GUICHET_"+this.getNom();
     }
 }

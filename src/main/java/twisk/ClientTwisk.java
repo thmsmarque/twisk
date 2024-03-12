@@ -79,8 +79,8 @@ public class ClientTwisk {
     static Monde fac()
     {
         Monde m = new Monde();
-        Etape salle1 = new Activite("Salle de classe 1",10,20);
-        Etape fileRU = new Guichet("File d'attente du RU", 30);
+        Etape salle1 = new Activite("Salle_de_classe_1",10,20);
+        Etape fileRU = new Guichet("File_attente_du_RU", 30);
         Etape RU = new ActiviteRestreinte("RU",30,40);
         m.getEntree().ajouterSuccesseur(salle1);
         salle1.ajouterSuccesseur(fileRU);

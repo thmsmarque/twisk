@@ -88,5 +88,8 @@ public abstract class Etape implements Iterable<Etape>{
 
     public abstract String toC();
 
+    public abstract String defineName();
+    public abstract String getDefineName();
+
 
 }

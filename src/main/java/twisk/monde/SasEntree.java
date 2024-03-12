@@ -10,6 +10,15 @@ public class SasEntree extends Activite {
     {
         return null;
     }
+    public String getDefineName()
+    {
+        return "ENTREE";
+    }
+    public String defineName()
+    {
+        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+        return "\n#define ENTREE "+ this.getIndiceEtape() + et.defineName();
+    }
     public SasEntree(){
         super("Entree");
     }
