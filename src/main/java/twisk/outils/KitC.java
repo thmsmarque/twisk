@@ -28,7 +28,7 @@ public class KitC {
 // Ne déclenche pas d’erreur si le répertoire existe déjà
             Files.createDirectories(directory);
 // copie des fichiers programmeC.o et def.h sous /tmp/twisk
-            String[] liste = {"programmeC.o", "def.h"};
+            String[] liste = {"programmeC.o", "def.h","codeNatif.o"};
             for (String nom : liste) {
                 InputStream src = getClass().getResourceAsStream("/codeC/" + nom);
                 Path dest = directory.resolve(nom);
@@ -73,7 +73,7 @@ public class KitC {
      * Automatise la construction de la bibliothèque libTwisk.so
      */
     public void construireLaBibliothese(){
-        ProcessBuilder pb = new ProcessBuilder("gcc","-shared","/tmp/twisk/programmeC.o","/tmp/twisk/client.o","-o","/tmp/twisk/libTwisk.so");
+        ProcessBuilder pb = new ProcessBuilder("gcc","-shared","/tmp/twisk/programmeC.o","/tmp/twisk/codeNatif.o","/tmp/twisk/client.o","-o","/tmp/twisk/libTwisk.so");
         try {
             pb.inheritIO().start().waitFor();
         } catch (InterruptedException | IOException e) {
