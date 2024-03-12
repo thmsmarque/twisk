@@ -68,7 +68,7 @@ public class Activite extends Etape {
     public String toC() {
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
         //System.out.println("Est ici (activite) "+ et);
-        String res = "délai("+this.temps+","+this.ecartTemps+");\n" +
+        String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
                 "transfert("+this.getIndiceEtape()+","+et.getIndiceEtape()+");\n" + et.toC();
         /*StringBuilder build = new StringBuilder();
         build.append(res).append(et.toC());*/
