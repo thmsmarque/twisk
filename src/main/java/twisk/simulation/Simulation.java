@@ -32,8 +32,8 @@ public class Simulation {
         System.out.println(fichierC); // a supprimer quand ça sera bon
         this.kit.creerFichier(fichierC);
         // A faire quand on aura bien /tmp/...
-        // this.kit.compiler();
-        //this.kit.construireLaBibliothese();
+        this.kit.compiler();
+        this.kit.construireLaBibliothese();
     }
 
     public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);
