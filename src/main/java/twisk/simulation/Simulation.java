@@ -36,5 +36,8 @@ public class Simulation {
         //this.kit.construireLaBibliothese();
     }
 
+    public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);
+    public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
+    public native void nettoyage();
 
 }
