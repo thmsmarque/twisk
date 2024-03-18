@@ -78,7 +78,7 @@ public class Guichet extends Etape{
 
         return "\n#define SEM_GUICHET_"+this.getNom()+" "+this.getSemaphore() +
                 "\n#define GUICHET_"+this.getNom()+" "+this.getIndiceEtape() +
-                et.getDefineName();
+                et.defineName();
     }
 
     @Override

@@ -28,6 +28,8 @@ public class Simulation {
         }*/
 
         String fichierC = monde.toC();
+        System.out.println(fichierC);
+
         this.kit.creerFichier(fichierC);
         // A faire quand on aura bien /tmp/...
         this.kit.compiler();
