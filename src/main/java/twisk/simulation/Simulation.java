@@ -64,14 +64,14 @@ public class Simulation {
         do {
             posClients = ou_sont_les_clients(nbEtapes,nbClients);
             try {
-                Thread.sleep(1);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             int etapeActuel = 0;
             for(int i =0;i<nbEtapes;i++) {
                 if (etapeActuel != 1) {
-                    System.out.println("Etape " + i + "Clients" + posClients[i + nbClients * i]);
+                    System.out.print("Etape " + i + "Clients" + posClients[i + nbClients * i]);
                     int nbClientDansAct = posClients[i + nbClients * i];
                     for (int j = i + nbClients * i + 1; j < i + nbClients * i + 1 + nbClientDansAct; j++) {
                         //j est initié à la position dans le tableau posClients où se trouve le premier client de l'étape
