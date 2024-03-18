@@ -43,7 +43,7 @@ public class Simulation {
         System.out.println(monde.nbGuichets());
         int nbEtapes = monde.nbEtapes();
         int nbGuichets = monde.nbGuichets();
-        int nbClients = 10; // TEMPORAIRE
+        int nbClients = 3; // TEMPORAIRE
         int[] tabJetonsGuichet = new int[nbGuichets];
         tabJetonsGuichet[0] = 2;
 
@@ -70,8 +70,8 @@ public class Simulation {
             }
             int etapeActuel = 0;
             for(int i =0;i<nbEtapes;i++) {
-                if (etapeActuel != 1) {
-                    System.out.print("Etape " + i + "Clients" + posClients[i + nbClients * i]);
+                if (etapeActuel != monde.getSortie().getIndiceEtape()) {
+                    System.out.print("Etape " + monde.getLesEtapes().getListeetapes().get(i).getNom() + " | Nombre de personnes : " + posClients[i + nbClients * i] + "  => ");
                     int nbClientDansAct = posClients[i + nbClients * i];
                     for (int j = i + nbClients * i + 1; j < i + nbClients * i + 1 + nbClientDansAct; j++) {
                         //j est initié à la position dans le tableau posClients où se trouve le premier client de l'étape
@@ -83,8 +83,10 @@ public class Simulation {
                 etapeActuel++;
             }
 
-            System.out.println("Etape 1 client(s) :" + posClients[nbClients+1]);
-            int nbClientDansAct = posClients[nbClients+1];
+            System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
+            int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
+            //System.out.println("Nb clients act" + nbClientDansAct);
+            //System.out.println("Boucle : " + nbClients+2+nbClientDansAct);
             for(int j = nbClients+2; j<nbClients+2+nbClientDansAct;j++){
 
                 //j est initié à la position dans le tableau posClients où se trouve le premier client de l'étape
@@ -93,9 +95,9 @@ public class Simulation {
             }
             System.out.println(" ");
             etapeActuel++;
-            System.out.println("\n \n \n");
-        }while(posClients[nbClients+1] != nbClients); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
-
+            System.out.println("\n");
+        }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
+        System.out.println("La simulation est terminée");
         nettoyage();
     }
 
