@@ -111,7 +111,7 @@ public class Monde implements Iterable<Etape> {
     {
         Etape et = this.getLesEtapes().getListeetapes().iterator().next().iterator().next();
         Etape etDef = this.getLesEtapes().getListeetapes().iterator().next();
-        System.out.println(et);
+        //System.out.println(et);
         String res = "#include \"def.h\"\n" +
             etDef.defineName() +
             "\n\nvoid simulation(int ids)\n{\n" +
