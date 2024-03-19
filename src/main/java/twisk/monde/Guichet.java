@@ -2,6 +2,8 @@ package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
 
+import java.util.Iterator;
+
 public class Guichet extends Etape{
     private int nbJetons;
 
@@ -52,7 +54,8 @@ public class Guichet extends Etape{
 
     @Override
     public String toC() {
-        //ids à vérifier
+        //ids à vérifiere
+        Iterator<Etape> etapes = this.gestionnaire.getListeetapes().iterator();
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
         //System.out.println("Est ici (guichet) "+ et);
         String res = "P("+ "ids"+ ","+"1"+"); \n" +
@@ -63,11 +66,23 @@ public class Guichet extends Etape{
                 +"transfert("+ et.getDefineName()
                 + "," + et.iterator().next().getDefineName() + ");\n" + et.iterator().next().toC();
 
-                //chaque guichet est suivi d'une activité restreinte
-        //StringBuilder build = new StringBuilder();
-
-        //build.append(res).append(et.iterator().next().toC());
-
+        StringBuilder build;
+        int nb = gestionnaire.nbEtapes();
+        if(nb>1) {
+            build = new StringBuilder(res + "\n");
+            build.append("int nb = (int) ((rand()/(float)RAND_MAX)*"+nb+"); \n" +
+                    "switch(nb) { \n");
+            for(int i = 0; i< nb;i++){
+                build.append("case "+i+" : \n" +
+                        etapes.next().toC()+"\n"+
+                        "break; \n");
+            }
+            build.append("default : \n" +
+                    "perror(\"Erreur lors de la création\"); \n" +
+                    "break;" +
+                    "} \n");
+            res = build.toString();
+        }
 
         return res;
     }

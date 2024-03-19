@@ -43,4 +43,5 @@ class GestionnaireEtapesTest {
         g.ajouter(e,e1,e2,e3,e4);
         assertEquals(g.nbEtapes(),5);
     }
+
 }
