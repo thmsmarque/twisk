@@ -2,6 +2,8 @@ package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
 
+import java.util.Iterator;
+
 public class Activite extends Etape {
 
     int temps;
@@ -66,12 +68,35 @@ public class Activite extends Etape {
 
     @Override
     public String toC() {
-        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
-        //System.out.println("Est ici (activite) "+ et);
-        String res = "delai("+this.temps+","+this.ecartTemps+");\n" +
-                "transfert("+this.getDefineName()+","+et.getDefineName()+");\n" + et.toC();
-        /*StringBuilder build = new StringBuilder();
-        build.append(res).append(et.toC());*/
+        Iterator<Etape> it = this.getGestionnaire().iterator();
+        Etape et = it.next();
+        String res;
+        if(!it.hasNext())
+        {
+            //Dans le cas où l'étape actuelle n'a qu'un seul successeur
+            res = "delai("+this.temps+","+this.ecartTemps+");\n" +
+                    "transfert("+this.getDefineName()+","+et.getDefineName()+");\n" + et.toC();
+        }else
+        {
+            //Dans le cas où l'étape actuelle a plusieurs successeurs
+            res = "int nb = (int) ((rand() / (float) RAND_MAX)*" + this.getGestionnaire().nbEtapes() + ");\n" +
+                    "switch(nb){\n";
+            StringBuilder build = new StringBuilder(res);
+
+            int i = 0;
+            while(it.hasNext())
+            {
+                build.append("\tcase " + i +":" + et.toC() + "break;\n");
+                i++;
+                et = it.next();
+            }
+            build.append("perror(\"Erreur lors de la création\"); \n" +
+                    "break;" +
+                    "} \n");
+            res = build.toString();
+
+        }
+
         return res;
     }
 

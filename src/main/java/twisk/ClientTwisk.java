@@ -20,7 +20,7 @@ public class ClientTwisk {
         int choix;
         do {
             choix = scan.nextInt();
-        }while(choix < 0 || choix > 3);
+        }while(choix < 0 || choix > 4);
         Simulation sim = new Simulation();
         switch(choix)
         {
@@ -106,6 +106,8 @@ public class ClientTwisk {
 
         fileH.ajouterSuccesseur(salle1,salle2);
         salle2.ajouterSuccesseur(angoisse);
+        salle1.ajouterSuccesseur(m.getSortie());
+        angoisse.ajouterSuccesseur(m.getSortie());
 
         m.aCommeEntree(entree);
         m.aCommeSortie(angoisse);
