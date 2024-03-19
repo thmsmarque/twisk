@@ -20,7 +20,7 @@ public class ClientTwisk {
         int choix;
         do {
             choix = scan.nextInt();
-        }while(choix < 0 || choix > 3);
+        }while(choix < 0 || choix > 4);
         Simulation sim = new Simulation();
         switch(choix)
         {
