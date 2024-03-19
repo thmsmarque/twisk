@@ -96,15 +96,21 @@ public class ClientTwisk {
     static Monde enfer()
     {
         Monde m = new Monde();
+        Etape entree = new Activite("Parking");
+        Etape fileH = new Guichet("Bureau_Regulateur", 2);
         Etape salle1 = new Activite("Salle_de_classe_1",10,5);
         Etape salle2 = new Activite("Bureau_de_Martine",8,3);
-        Etape fileH = new Guichet("Bureau_Regulateur", 2);
         Etape angoisse = new ActiviteRestreinte("TD_outils_Systeme",10,4);
-        m.getEntree().ajouterSuccesseur(salle1);
-        salle1.ajouterSuccesseur(fileH);
-        fileH.ajouterSuccesseur(angoisse);
-        angoisse.ajouterSuccesseur(m.getSortie());
-        m.ajouter(salle1,fileH,angoisse,salle2);
+
+        entree.ajouterSuccesseur(fileH);
+
+        fileH.ajouterSuccesseur(salle1,salle2);
+        salle2.ajouterSuccesseur(angoisse);
+
+        m.aCommeEntree(entree);
+        m.aCommeSortie(angoisse);
+
+        m.ajouter(entree,salle1,fileH,angoisse,salle2);
 
         return m;
     }
