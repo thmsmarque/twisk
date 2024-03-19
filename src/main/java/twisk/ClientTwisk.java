@@ -14,6 +14,7 @@ public class ClientTwisk {
                 "\t1 : Zoo\n" +
                 "\t2 : Gare\n" +
                 "\t3 : Fac\n" +
+                "\t4 : Route des enfers" +
                 "Ton choix :\t");
         Scanner scan = new Scanner(System.in);
         int choix;
@@ -27,6 +28,7 @@ public class ClientTwisk {
             case 1 : System.out.println("Simulation du zoo :\n"); sim.simuler(zoo());break;
             case 2 : System.out.println("Simulation de la gare :\n"); sim.simuler(gare());break;
             case 3 : System.out.println("Simulation de la fac :\n"); sim.simuler(fac());break;
+            case 4 : System.out.println("Simulation de la route des enfers :\n"); sim.simuler(enfer());break;
             default: System.out.println("Au revoir!"); break;
         }
 
@@ -87,6 +89,22 @@ public class ClientTwisk {
         fileRU.ajouterSuccesseur(RU);
         RU.ajouterSuccesseur(m.getSortie());
         m.ajouter(salle1,fileRU,RU);
+
+        return m;
+    }
+
+    static Monde enfer()
+    {
+        Monde m = new Monde();
+        Etape salle1 = new Activite("Salle_de_classe_1",10,5);
+        Etape salle2 = new Activite("Bureau_de_Martine",8,3);
+        Etape fileH = new Guichet("Bureau_Regulateur", 2);
+        Etape angoisse = new ActiviteRestreinte("TD_outils_Systeme",10,4);
+        m.getEntree().ajouterSuccesseur(salle1);
+        salle1.ajouterSuccesseur(fileH);
+        fileH.ajouterSuccesseur(angoisse);
+        angoisse.ajouterSuccesseur(m.getSortie());
+        m.ajouter(salle1,fileH,angoisse,salle2);
 
         return m;
     }

@@ -22,6 +22,7 @@ public class Monde implements Iterable<Etape> {
     /**
      * Méthode qui définit les entrées
      * @param etapes etapes à définir comme entrées
+     *
      */
     public void aCommeEntree(Etape... etapes)
     {
