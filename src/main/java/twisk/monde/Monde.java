@@ -14,9 +14,7 @@ public class Monde implements Iterable<Etape> {
     {
 
         lesEtapes = new GestionnaireEtapes();
-        this.entree = new SasEntree();
-        this.sortie = new SasSortie();
-        lesEtapes.ajouter(entree,sortie);
+
     }
 
     /**
@@ -26,7 +24,7 @@ public class Monde implements Iterable<Etape> {
      */
     public void aCommeEntree(Etape... etapes)
     {
-        this.entree.ajouterSuccesseur(etapes);
+        this.entree =(SasEntree)etapes[0];
     }
 
     /**
@@ -36,7 +34,7 @@ public class Monde implements Iterable<Etape> {
      */
     public void aCommeSortie(Etape... etapes)
     {
-        this.sortie.ajouterSuccesseur(etapes);
+        this.sortie = (SasSortie)etapes[0];
     }
 
     /**
