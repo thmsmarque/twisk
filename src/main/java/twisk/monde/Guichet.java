@@ -66,24 +66,6 @@ public class Guichet extends Etape{
                 +"transfert("+ et.getDefineName()
                 + "," + et.iterator().next().getDefineName() + ");\n" + et.iterator().next().toC();
 
-        StringBuilder build;
-        int nb = gestionnaire.nbEtapes();
-        if(nb>1) {
-            build = new StringBuilder(res + "\n");
-            build.append("int nb = (int) ((rand()/(float)RAND_MAX)*"+nb+"); \n" +
-                    "switch(nb) { \n");
-            for(int i = 0; i< nb;i++){
-                build.append("case "+i+" : \n" +
-                        etapes.next().toC()+"\n"+
-                        "break; \n");
-            }
-            build.append("default : \n" +
-                    "perror(\"Erreur lors de la création\"); \n" +
-                    "break;" +
-                    "} \n");
-            res = build.toString();
-        }
-
         return res;
     }
 
@@ -91,18 +73,34 @@ public class Guichet extends Etape{
     public String defineName() {
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
 
-        return "\n#define SEM_GUICHET_"+this.getNom()+" "+this.getSemaphore() +
-                "\n#define GUICHET_"+this.getNom()+" "+this.getIndiceEtape() +
+        return "\n#define " +getSemaphoreName() + this.getSemaphore() +
+                "\n#define "+ getDefineName() + getIndiceEtape() +
                 et.defineName();
     }
 
     @Override
     public String getDefineName() {
-        return "GUICHET_"+this.getNom();
+        String res = this.getNom();
+        res = res.replace(" ","_");
+        res = res.replace("é","e");
+        res = res.replace("è","e");
+        res = res.replace("à","a");
+        res = res.replace("ê","e");
+        res = res.replace("ë","e");
+        res = res.replace("-","_");
+        return "GUICHET_" + res + " ";
     }
 
     public String getSemaphoreName()
     {
-        return "SEM_GUICHET_"+this.getNom();
+        String res = this.getNom();
+        res = res.replace(" ","_");
+        res = res.replace("é","e");
+        res = res.replace("è","e");
+        res = res.replace("à","a");
+        res = res.replace("ê","e");
+        res = res.replace("ë","e");
+        res = res.replace("-","_");
+        return "GUICHET_SEMAPHORE_"+res + " ";
     }
 }

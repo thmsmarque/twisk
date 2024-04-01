@@ -9,11 +9,13 @@ import java.util.Iterator;
 public class Simulation {
 
     KitC kit;
+    private int nbClients;
 
     public Simulation()
     {
         this.kit = new KitC();
         this.kit.creerEnvironnement();
+        this.nbClients=5; //de base
     }
 
     public void simuler(Monde monde) {
@@ -43,7 +45,7 @@ public class Simulation {
         System.out.println(monde.nbGuichets());
         int nbEtapes = monde.nbEtapes();
         int nbGuichets = monde.nbGuichets();
-        int nbClients = 3; // TEMPORAIRE
+        int nbClients = this.nbClients;
         int[] tabJetonsGuichet = new int[nbGuichets];
         tabJetonsGuichet[0] = 2;
 
@@ -99,6 +101,10 @@ public class Simulation {
         }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
         System.out.println("La simulation est terminée");
         nettoyage();
+    }
+
+    public void setNbClients(int nbClients){
+        this.nbClients=5; //de base
     }
 
     public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);

@@ -37,7 +37,10 @@ public class Monde implements Iterable<Etape> {
      */
     public void aCommeSortie(Etape... etapes)
     {
-        this.sortie.ajouterSuccesseur(etapes);
+        for(Etape et : etapes)
+        {
+            et.ajouterSuccesseur(this.sortie);
+        }
     }
 
     /**

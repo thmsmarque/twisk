@@ -66,7 +66,6 @@ public class Activite extends Etape {
                 '}';
     }
 
-    @Override
     public String toC() {
         Iterator<Etape> it = this.getGestionnaire().iterator();
         Etape et = it.next();
@@ -100,16 +99,25 @@ public class Activite extends Etape {
         return res;
     }
 
+
     @Override
     public String defineName() {
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
-        return "\n#define ACTIVITE_"+this.getNom()+" "+this.getIndiceEtape()
+        return "\n#define "+this.getDefineName() + this.getIndiceEtape()
                 +et.defineName();
     }
 
     @Override
     public String getDefineName() {
-        return "ACTIVITE_"+this.getNom();
+        String res = this.getNom();
+        res = res.replace(" ","_");
+        res = res.replace("é","e");
+        res = res.replace("è","e");
+        res = res.replace("à","a");
+        res = res.replace("ê","e");
+        res = res.replace("ë","e");
+        res = res.replace("-","_");
+        return "ACTIVITE_"+res + " ";
     }
 
 
