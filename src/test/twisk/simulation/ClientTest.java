@@ -11,11 +11,12 @@ class ClientTest {
 
     @Test
     public void testConstructeur(){
-        Monde m = new Monde();
         Etape e = new Activite("Activite",5,5);
         Client c = new Client(5);
         c.allerA(e,0);
-        assertTrue();
+        assertSame(c.getEtape(),e);
+        assertSame(c.getNumeroClient(),5);
+        assertSame(c.getRang(),0);
     }
 
 }

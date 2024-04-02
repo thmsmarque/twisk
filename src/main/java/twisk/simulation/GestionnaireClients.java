@@ -46,8 +46,23 @@ public class GestionnaireClients implements Iterable<Client> {
     public void nettoyer(){
         mapclient.clear();
     }
+
+    public Client getClient(int numeroClient){
+        return mapclient.get(numeroClient);
+    }
     @Override
     public Iterator<Client> iterator() {
         return mapclient.values().iterator();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Gestionnaire : \n");
+        for(Client c : mapclient.values()){
+            s.append(c);
+            s.append("\n");
+        }
+        return s.toString();
     }
 }

@@ -1,5 +1,6 @@
 package twisk.simulation;
 
+import twisk.monde.Activite;
 import twisk.monde.Etape;
 
 public class Client {
@@ -11,7 +12,8 @@ public class Client {
     public Client(int numero){
         this.numeroClient=numero;
         rang = 0;
-        etape= null;
+        Etape fantome = new Activite("temporaire"); // A voir pour la suite
+        etape= fantome;
     }
 
     public void allerA(Etape etape, int rang){
