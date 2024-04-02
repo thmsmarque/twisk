@@ -23,7 +23,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return " Client : " + numeroClient + " Rang : " + rang + " Etape : \n" + etape.getIndiceEtape();
+        return " Client : " + numeroClient + " Rang : " + rang + " Etape : "+ etape.getIndiceEtape() + " \n";
     }
 
     public Etape getEtape() {
