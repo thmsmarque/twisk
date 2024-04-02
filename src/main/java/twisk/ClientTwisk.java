@@ -1,55 +1,97 @@
 package twisk;
 
 import twisk.monde.*;
+import twisk.outils.ClassLoaderPerso;
 import twisk.outils.FabriqueNumero;
 import twisk.simulation.Simulation;
 
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 public class ClientTwisk {
 
     public static void main(String[] args) {
-        System.out.println("Bienvenu dans cette première ébauche du simmulateur\nQue voulez-vous simuler?\n" +
-                "\t0 : Quitter l'application\n" +
-                "\t1 : Zoo\n" +
-                "\t2 : Gare\n" +
-                "\t3 : Fac\n" +
-                "\t4 : Route des enfers" +
-                "Ton choix :\t");
-        Scanner scan = new Scanner(System.in);
-        int choix;
-        do {
-            choix = scan.nextInt();
-        }while(choix < 0 || choix > 4);
-        Simulation sim = new Simulation();
-        switch(choix)
-        {
-            case 0 : System.out.println("Au revoir!"); break;
-            case 1 : System.out.println("Simulation du zoo :\n"); sim.simuler(zoo());break;
-            case 2 : System.out.println("Simulation de la gare :\n"); sim.simuler(gare());break;
-            case 3 : System.out.println("Simulation de la fac :\n"); sim.simuler(fac());break;
-            case 4 : System.out.println("Simulation de la route des enfers :\n"); sim.simuler(enfer());break;
-            default: System.out.println("Au revoir!"); break;
-        }
 
+        int choix = 0;
+
+        do {
+            System.out.println("Bienvenu dans cette première ébauche du simmulateur\nQue voulez-vous simuler?\n" +
+                    "\t0 : Quitter l'application\n" +
+                    "\t1 : Zoo\n" +
+                    "\t2 : Gare\n" +
+                    "\t3 : Fac\n" +
+                    "\t4 : Route des enfers" +
+                    "Ton choix :\t");
+            Scanner scan = new Scanner(System.in);
+            do {
+                choix = scan.nextInt();
+            } while (choix < 0 || choix > 4);
+            Simulation sim = new Simulation();
+            switch (choix) {
+                case 0:
+                    System.out.println("Au revoir!");
+                    break;
+                case 1:
+                    System.out.println("Simulation du zoo :\n");
+                    simulerMonde(zoo());
+                    break;
+                case 2:
+                    System.out.println("Simulation de la gare :\n");
+                    sim.simuler(gare());
+                    break;
+                case 3:
+                    System.out.println("Simulation de la fac :\n");
+                    simulerMonde(fac());
+                    break;
+                case 4:
+                    System.out.println("Simulation de la route des enfers :\n");
+                    sim.simuler(enfer());
+                    break;
+                default:
+                    System.out.println("Au revoir!");
+                    break;
+            }
+
+
+
+        }while(choix != 0);
 
     }
 
+    static void simulerMonde(Monde monde)
+    {
+        ClassLoaderPerso classLoader = new ClassLoaderPerso((ClientTwisk.class.getClassLoader()));
+        try{
+            Class<?> sim =  classLoader.loadClass("twisk.simulation.Simulation");
+
+            sim.getMethod("setNbClients",int.class).invoke(sim.newInstance(),6);
+            sim.getMethod("simuler",Monde.class).invoke(sim.newInstance(),monde);
+            System.gc();
+
+        }catch(ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InstantiationException | InvocationTargetException e)
+        {
+            System.out.println("Erreur : " + e.toString());
+        }
+    }
+
+
     static Monde zoo()
     {
+        Monde monde = new Monde();
 
-        Monde m = new Monde();
-        Etape zoo = new Activite("Zoo");
-        Etape parking = new ActiviteRestreinte("Parking");
-        Etape guichet1 = new Guichet("guichet",2500);
-        Etape guichet2 = new Guichet("guichet",2);
-        Etape sortie = new ActiviteRestreinte("Sortie");
-        guichet1.ajouterSuccesseur(zoo);
-        parking.ajouterSuccesseur(zoo);
-        m.ajouter(zoo,parking,guichet1,guichet2,sortie);
-        m.aCommeEntree(guichet1,zoo);
-        m.aCommeSortie(sortie);
-        return m;
+        Activite zoo = new Activite("balade au zoo", 3, 1);
+        Guichet guichet = new Guichet("accès au toboggan", 2);
+        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
+
+        zoo.ajouterSuccesseur(guichet);
+        guichet.ajouterSuccesseur(tob);
+
+        monde.ajouter(zoo, tob, guichet);
+
+        monde.aCommeEntree(zoo);
+        monde.aCommeSortie(tob);
+        return monde;
     }
 
     static Monde gare()
