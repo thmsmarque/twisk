@@ -19,20 +19,9 @@ public class Simulation {
     }
 
     public void simuler(Monde monde) {
-        /*System.out.println("Notre monde possède :\n" +
-                "\t\tNombre étapes   : " + monde.nbEtapes()+"\n" +
-                "\t\tNombre guichets : "+monde.nbGuichets()+"\n");
-        Iterator<Etape> it = monde.iterator();
-        while(it.hasNext())
-        {
-            Etape etape = it.next();
-            System.out.println(etape.toString());
-        }*/
-
         String fichierC = monde.toC();
 
         this.kit.creerFichier(fichierC);
-        // A faire quand on aura bien /tmp/...
         this.kit.compiler();
         this.kit.construireLaBibliothese();
 
@@ -47,9 +36,12 @@ public class Simulation {
         int[] tabJetonsGuichet = new int[nbGuichets];
         tabJetonsGuichet[0] = 2;
 
-        //lancement simulation :
+        //lancement simulation : -----------------------------
         int[] resSim;
         resSim = start_simulation(nbEtapes,nbGuichets,nbClients,tabJetonsGuichet);
+       //Gestionnaire de clients :
+        GestionnaireClients g = new GestionnaireClients();
+        g.setClients(resSim);
 
         //affichage des numéros de processus :
         System.out.println("Les clients :");
@@ -63,6 +55,11 @@ public class Simulation {
         //On affiche où sont les clients :
         do {
             posClients = ou_sont_les_clients(nbEtapes,nbClients);
+
+            // Déplacer les clients dans les gestionnaire :
+
+
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -72,16 +69,26 @@ public class Simulation {
             for(int i =0;i<nbEtapes;i++) {
                 if (etapeActuel != monde.getSortie().getIndiceEtape()) {
                     System.out.print("Etape " + monde.getLesEtapes().getListeetapes().get(i).getNom() + " | Nombre de personnes : " + posClients[i + nbClients * i] + "  => ");
+
+
+
                     int nbClientDansAct = posClients[i + nbClients * i];
+                    int rang = 0;
                     for (int j = i + nbClients * i + 1; j < i + nbClients * i + 1 + nbClientDansAct; j++) {
                         //j est initié à la position dans le tableau posClients où se trouve le premier client de l'étape
                         //S'il n'y a aucun client dans l'étape alors j >= à la condition qui sort de la boucle
                         System.out.print(posClients[j]+ " ");
+
+
+                        //On met à jour le gestionnaire de clients :
+                       g.allerA(posClients[j],monde.getLesEtapes().getListeetapes().get(i),rang);
+                       rang++;
                     }
                     System.out.println(" ");
                 }
                 etapeActuel++;
             }
+            System.out.println(g);
 
             System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
             int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
