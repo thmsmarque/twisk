@@ -104,7 +104,7 @@ public class Simulation {
     }
 
     public void setNbClients(int nbClients){
-        this.nbClients=5; //de base
+        this.nbClients=nbClients; //de base
     }
 
     public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);
