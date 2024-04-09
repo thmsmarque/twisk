@@ -58,10 +58,6 @@ public class Simulation {
         do {
             posClients = ou_sont_les_clients(nbEtapes,nbClients);
 
-            // Déplacer les clients dans les gestionnaire :
-
-
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -90,10 +86,12 @@ public class Simulation {
                 }
                 etapeActuel++;
             }
-            System.out.println(g);
 
             System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
             int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
+
+
+
             //System.out.println("Nb clients act" + nbClientDansAct);
             //System.out.println("Boucle : " + nbClients+2+nbClientDansAct);
             for(int j = nbClients+2; j<nbClients+2+nbClientDansAct;j++){
@@ -101,6 +99,8 @@ public class Simulation {
                 //j est initié à la position dans le tableau posClients où se trouve le premier client de l'étape
                 //S'il n'y a aucun client dans l'étape alors j >= à la condition qui sort de la boucle
                 System.out.print(posClients[j] + " ");
+                g.allerA(posClients[j],monde.getSortie(),monde.getSortie().getIndiceEtape());
+
             }
             System.out.println(" ");
             etapeActuel++;
