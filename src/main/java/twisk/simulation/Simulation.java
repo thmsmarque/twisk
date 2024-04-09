@@ -2,6 +2,7 @@ package twisk.simulation;
 
 import twisk.monde.Monde;
 import twisk.monde.Etape;
+import twisk.outils.FabriqueNumero;
 import twisk.outils.FabriqueNumeroLibTwisk;
 import twisk.outils.KitC;
 
@@ -108,6 +109,7 @@ public class Simulation {
         }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
         System.out.println("La simulation est terminée");
         nettoyage();
+        FabriqueNumero.getInstance().reset();
     }
 
     public void setNbClients(int nbClients){
