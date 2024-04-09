@@ -73,7 +73,7 @@ public class KitC {
      * Automatise la construction de la bibliothèque libTwisk.so
      */
     public void construireLaBibliothese(){
-        ProcessBuilder pb = new ProcessBuilder("gcc","-shared","/tmp/twisk/programmeC.o","/tmp/twisk/codeNatif.o","/tmp/twisk/client.o","-o","/tmp/twisk/libTwisk.so");
+        ProcessBuilder pb = new ProcessBuilder("gcc","-shared","/tmp/twisk/programmeC.o","/tmp/twisk/codeNatif.o","/tmp/twisk/client.o","-o","/tmp/twisk/libTwisk"+FabriqueNumeroLibTwisk.getInstance().getNumero()+".so");
         try {
             pb.inheritIO().start().waitFor();
         } catch (InterruptedException | IOException e) {

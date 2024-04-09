@@ -28,6 +28,7 @@ public class ClientTwisk {
                 choix = scan.nextInt();
             } while (choix < 0 || choix > 4);
             Simulation sim = new Simulation();
+
             switch (choix) {
                 case 0:
                     System.out.println("Au revoir!");
@@ -61,17 +62,19 @@ public class ClientTwisk {
 
     static void simulerMonde(Monde monde)
     {
-        ClassLoaderPerso classLoader = new ClassLoaderPerso((ClientTwisk.class.getClassLoader()));
         try{
-            Class<?> sim =  classLoader.loadClass("twisk.simulation.Simulation");
+            ClassLoaderPerso cl = new ClassLoaderPerso((ClientTwisk.class.getClassLoader()));
+            Class<?> sim =  cl.loadClass("twisk.simulation.Simulation");
 
-            sim.getMethod("setNbClients",int.class).invoke(sim.newInstance(),6);
-            sim.getMethod("simuler",Monde.class).invoke(sim.newInstance(),monde);
+            Object simulationInstance = sim.newInstance();
+            sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
+            sim.getMethod("simuler", Monde.class).invoke(simulationInstance, monde);
+
+
             System.gc();
 
-        }catch(ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InstantiationException | InvocationTargetException e)
-        {
-            System.out.println("Erreur : " + e.toString());
+        } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
+            System.out.println("Erreur : " + e.getCause().toString());
         }
     }
 

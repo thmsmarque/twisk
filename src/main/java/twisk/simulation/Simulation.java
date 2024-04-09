@@ -2,6 +2,7 @@ package twisk.simulation;
 
 import twisk.monde.Monde;
 import twisk.monde.Etape;
+import twisk.outils.FabriqueNumeroLibTwisk;
 import twisk.outils.KitC;
 
 import java.util.Iterator;
@@ -26,7 +27,8 @@ public class Simulation {
         this.kit.construireLaBibliothese();
 
         //Chargement de la bibliothèque où sont définies les fonctions
-        System.load("/tmp/twisk/libTwisk.so") ;
+        System.load("/tmp/twisk/libTwisk"+ FabriqueNumeroLibTwisk.getInstance().getNumero()+".so") ;
+        FabriqueNumeroLibTwisk.getInstance().incrementer();
 
 
         // Ecriture du main.c ---------------------------------
