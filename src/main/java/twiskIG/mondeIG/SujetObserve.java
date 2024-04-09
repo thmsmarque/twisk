@@ -1,5 +1,5 @@
 package twiskIG.mondeIG;;
-import twisk.vues.*;
+import twiskIG.vues.*;
 
 import java.util.ArrayList;
 

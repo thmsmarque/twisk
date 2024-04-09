@@ -1,6 +1,6 @@
 package twiskIG.vues;
 
-import twisk.mondeIG.SujetObserve;
+import twiskIG.mondeIG.SujetObserve;
 
 public interface Observateur {
     public SujetObserve sujet = null;

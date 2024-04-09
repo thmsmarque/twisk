@@ -2,9 +2,9 @@ package twiskIG.vues;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import twisk.mondeIG.MondeIG;
-import twisk.mondeIG.PointDeControleIG;
-import twisk.vues.ecouteur.EcouteurVuePointDeControleIG;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.mondeIG.PointDeControleIG;
+import twiskIG.vues.ecouteur.EcouteurVuePointDeControleIG;
 
 /**
  * Classe VuePointDeControle

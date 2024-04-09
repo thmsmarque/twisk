@@ -2,7 +2,7 @@ package twiskIG.vues.ecouteur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import twisk.mondeIG.MondeIG;
+import twiskIG.mondeIG.MondeIG;
 
 public class EcouteurDesactiverSelection implements EventHandler<ActionEvent> {
 

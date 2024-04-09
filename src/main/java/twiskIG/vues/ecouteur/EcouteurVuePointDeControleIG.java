@@ -5,9 +5,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
-import twisk.exceptions.TwiskException;
-import twisk.mondeIG.MondeIG;
-import twisk.mondeIG.PointDeControleIG;
+import twiskIG.exceptions.TwiskException;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.mondeIG.PointDeControleIG;
 
 public class EcouteurVuePointDeControleIG implements EventHandler<MouseEvent> {
 

@@ -1,7 +1,7 @@
 package twiskIG.mondeIG;
 
-import twisk.exceptions.TwiskException;
-import twisk.outils.TailleComposants;
+import twiskIG.exceptions.TwiskException;
+import twiskIG.outils.TailleComposants;
 
 import java.util.ArrayList;
 import java.util.HashMap;

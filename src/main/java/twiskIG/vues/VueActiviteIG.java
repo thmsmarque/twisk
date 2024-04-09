@@ -1,10 +1,10 @@
 package twiskIG.vues;
 
 import javafx.scene.layout.HBox;
-import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.MondeIG;
-import twisk.outils.TailleComposants;
-import twisk.vues.ecouteur.EcouteurSelection;
+import twiskIG.mondeIG.EtapeIG;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.outils.TailleComposants;
+import twiskIG.vues.ecouteur.EcouteurSelection;
 
 public class VueActiviteIG extends VueEtapeIG {
 

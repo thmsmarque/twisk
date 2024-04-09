@@ -3,8 +3,8 @@ package twiskIG.vues.ecouteur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
-import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.MondeIG;
+import twiskIG.mondeIG.EtapeIG;
+import twiskIG.mondeIG.MondeIG;
 
 import java.util.Optional;
 

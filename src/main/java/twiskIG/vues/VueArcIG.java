@@ -4,9 +4,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
-import twisk.mondeIG.ArcIG;
-import twisk.mondeIG.MondeIG;
-import twisk.vues.ecouteur.EcouteurSelection;
+import twiskIG.mondeIG.ArcIG;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.vues.ecouteur.EcouteurSelection;
 
 public class VueArcIG extends Pane implements Observateur {
     private MondeIG monde;

@@ -1,9 +1,9 @@
 package twiskIG.vues;
 
 import javafx.scene.layout.Pane;
-import twisk.mondeIG.*;
-import twisk.vues.ecouteur.EcouteurPanneauDragOver;
-import twisk.vues.ecouteur.EcouteurPanneauDropped;
+import twiskIG.mondeIG.*;
+import twiskIG.vues.ecouteur.EcouteurPanneauDragOver;
+import twiskIG.vues.ecouteur.EcouteurPanneauDropped;
 
 import java.util.ArrayList;
 import java.util.Iterator;

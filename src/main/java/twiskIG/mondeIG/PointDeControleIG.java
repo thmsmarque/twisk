@@ -1,6 +1,6 @@
 package twiskIG.mondeIG;
 
-import twisk.outils.FabriqueIdentifiant;
+import twiskIG.outils.FabriqueIdentifiant;
 
 /**
  * Classe Point DE Contrôle

@@ -2,7 +2,7 @@ package twiskIG.vues.ecouteur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
-import twisk.vues.VueEtapeIG;
+import twiskIG.vues.VueEtapeIG;
 
 public class EcouteurSource implements EventHandler<MouseEvent> {
 

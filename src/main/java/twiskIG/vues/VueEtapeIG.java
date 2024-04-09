@@ -6,10 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.MondeIG;
-import twisk.outils.TailleComposants;
-import twisk.vues.ecouteur.EcouteurSource;
+import twiskIG.mondeIG.EtapeIG;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.outils.TailleComposants;
+import twiskIG.vues.ecouteur.EcouteurSource;
 
 /**
  * Classe abstraite Vue etape IG
