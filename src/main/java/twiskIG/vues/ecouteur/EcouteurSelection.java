@@ -2,9 +2,9 @@ package twiskIG.vues.ecouteur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import twisk.mondeIG.ArcIG;
-import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.MondeIG;
+import twiskIG.mondeIG.ArcIG;
+import twiskIG.mondeIG.EtapeIG;
+import twiskIG.mondeIG.MondeIG;
 
 /**
  * Classe de l'écouteur de sélection

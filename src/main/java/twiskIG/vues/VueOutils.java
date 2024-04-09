@@ -4,8 +4,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.TilePane;
-import twisk.mondeIG.MondeIG;
-import twisk.vues.ecouteur.EcouteurOutils;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.vues.ecouteur.EcouteurOutils;
 
 /**
  * Classe VueOutils

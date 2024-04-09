@@ -2,9 +2,9 @@ package twiskIG.vues.ecouteur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
-import twisk.mondeIG.MondeIG;
-import twisk.vues.VueEtapeIG;
-import twisk.vues.VueMondeIG;
+import twiskIG.mondeIG.MondeIG;
+import twiskIG.vues.VueEtapeIG;
+import twiskIG.vues.VueMondeIG;
 
 public class EcouteurPanneauDropped implements EventHandler<DragEvent> {
 

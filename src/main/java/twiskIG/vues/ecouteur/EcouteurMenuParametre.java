@@ -10,9 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import twisk.exceptions.TwiskException;
-import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.MondeIG;
+import twiskIG.exceptions.TwiskException;
+import twiskIG.mondeIG.EtapeIG;
+import twiskIG.mondeIG.MondeIG;
 
 public class EcouteurMenuParametre implements EventHandler<ActionEvent> {
 
