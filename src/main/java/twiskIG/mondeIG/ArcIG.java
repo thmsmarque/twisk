@@ -7,7 +7,6 @@ public class ArcIG {
 
     private PointDeControleIG p1;
     private PointDeControleIG p2;
-
     private boolean selection;
 
 
@@ -20,8 +19,15 @@ public class ArcIG {
     public ArcIG(PointDeControleIG p1, PointDeControleIG p2){
         this.p1=p1;
         this.p2=p2;
-
         this.selection=false;
+
+        // ajout des etapes des points en successeurs / predecesseurs :
+
+        EtapeIG e1 = p1.getEtape();
+        EtapeIG e2 = p2.getEtape();
+
+        e1.ajouterSuccesseur(e2); //etape 1 = extrémité de la flèche, etape 2 =  pointe de la flèche
+        e2.ajouterPredeceseseur(e1);
     }
 
     /**

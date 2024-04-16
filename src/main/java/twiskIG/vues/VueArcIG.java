@@ -1,5 +1,6 @@
 package twiskIG.vues;
 
+import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -8,7 +9,7 @@ import twiskIG.mondeIG.ArcIG;
 import twiskIG.mondeIG.MondeIG;
 import twiskIG.vues.ecouteur.EcouteurSelection;
 
-public class VueArcIG extends Pane implements Observateur {
+public class VueArcIG extends Group implements Observateur {
     private MondeIG monde;
 
     private ArcIG arc;
