@@ -118,8 +118,13 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
 
     }
 
+    /**
+     * Supprimer tous les arcs reliés à une activité, car cette dernière sera supprimées
+     * @param etape
+     */
     public void supprimerArcMonde(EtapeIG etape){
         //Supprimer les arcs :
+        etape.clearAllSuccPrec();
         ArrayList<ArcIG> arctemp = new ArrayList<>();
         arctemp.addAll(arcs);
         for(ArcIG arc : arcs) {
@@ -131,11 +136,18 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
     }
 
     public void supprimerArc(){
+
+        //Suppression des arcs :
         ArrayList<ArcIG> arctemp = new ArrayList<>();
         arctemp.addAll(arcs);
         for(ArcIG arc : arcs)
         if(arc.getSelection()){
             arctemp.remove(arc);
+            //Mise à jour des predecesseurs / successeurs :
+            EtapeIG e1 = arc.getP1().getEtape();
+            EtapeIG e2 = arc.getP2().getEtape();
+            e1.supprimerSuccesseurs(e2);
+            e2.supprimerPredesseurs(e1);
         }
         arcs = arctemp;
     }

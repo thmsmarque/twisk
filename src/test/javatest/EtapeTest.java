@@ -124,4 +124,11 @@ class EtapeTest {
         assertEquals(2,((Guichet)e3).getSemaphore());
         assertEquals(3,((Guichet)e5).getSemaphore());
     }
+
+    public void testSuccesseurs(){
+
+    }
+    public void testPredecesseurs(){
+
+    }
 }

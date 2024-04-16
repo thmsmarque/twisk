@@ -5,6 +5,7 @@ import twiskIG.outils.FabriqueIdentifiant;
 import twiskIG.outils.TailleComposants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -18,16 +19,15 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private int posY;
     private int largeur;
     private int hauteur;
-
     private int delai;
-
     private int ecart;
     private boolean selection;
     private ArrayList<PointDeControleIG> pointsdeC;
-
     private boolean estUneEntree;
-
     private boolean estUneSortie;
+    HashMap<String,EtapeIG> predecesseurs;
+    HashMap<String,EtapeIG> successeurs;
+
 
     /**Constructeur de la classe abstraite EtapeIG
      * @param nom
@@ -65,6 +65,38 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.estUneEntree = false;
         this.estUneSortie = false;
 
+        // Initialisation des successeur / predecesseur
+        this.successeurs = new HashMap<>();
+        this.predecesseurs = new HashMap<>();
+    }
+
+    /**
+     * Ajoute des successeurs à la hashmap des successeurs de l'étape
+     * @param e
+     */
+    public void ajouterSuccesseur(EtapeIG e){
+    this.successeurs.put(e.getIdentifiant(),e);
+    }
+
+    /**
+     * Ajoute des predecesseurs à la hashmap des predecesseur de l'étape
+     * @param e
+     */
+    public void ajouterPredeceseseur(EtapeIG e){
+    this.predecesseurs.put(e.getIdentifiant(),e);
+    }
+
+    public void supprimerSuccesseurs(EtapeIG e){
+        this.successeurs.remove(e.getIdentifiant());
+    }
+
+    public void supprimerPredesseurs(EtapeIG e){
+        this.predecesseurs.remove(e.getIdentifiant());
+    }
+
+    public void clearAllSuccPrec(){
+        this.successeurs.clear();
+        this.predecesseurs.clear();
     }
 
     /**
@@ -175,7 +207,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     public String toString() {
         return "Etape : "+
                 nom + '\'' +
-                ", n°'" + identifiant + '\'' + "\n";
+                ", n°'" + identifiant + '\'' + "\n Successeurs :" + successeurs.size() + " \n Predecesseurs : " + predecesseurs.size() + "\n =================" ;
     }
 
     @Override

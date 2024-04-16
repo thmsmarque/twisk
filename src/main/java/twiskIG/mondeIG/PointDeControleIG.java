@@ -11,13 +11,14 @@ public class PointDeControleIG {
 
     private int posX;
     private int posY;
-
     private String identifiantEtape;
+    private EtapeIG etape;
 
     /**
      * Constructeur de la classe PointDeControle
      */
     public PointDeControleIG(int posX, int posY, EtapeIG etape){
+        this.etape = etape;
         this.identifiant= FabriqueIdentifiant.getInstance().getIdentifiantPointControle();
         this.posX=posX;
         this.posY=posY;
@@ -38,6 +39,10 @@ public class PointDeControleIG {
 
     public int getPosX() {
         return posX;
+    }
+
+    public EtapeIG getEtape() {
+        return etape;
     }
 
     /**
