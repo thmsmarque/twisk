@@ -51,8 +51,17 @@ private final MondeIG monde;
 
         int tmp = 10;
         for (EtapeIG etape : this.monde) {
-            VueEtapeIG vueetape = new VueActiviteIG(this.monde, etape);
-            getChildren().add(vueetape );
+            if(etape.estActivite())
+            {
+                VueEtapeIG vueetape = new VueActiviteIG(this.monde, etape);
+                getChildren().add(vueetape );
+            }
+            if(etape.estGuichet())
+            {
+                VueEtapeIG vueetape = new VueGuichetIG(this.monde, (GuichetIG)etape);
+                getChildren().add(vueetape );
+            }
+
             for(PointDeControleIG pc : etape){
                 //TEMP :
                 getChildren().add(new VuePointDeControle(this.monde,pc));

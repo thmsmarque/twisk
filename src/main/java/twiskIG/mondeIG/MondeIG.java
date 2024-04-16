@@ -67,13 +67,13 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
         {
             case "Activite" :
                 System.out.println("AJout théorique d'une activité : " + type + num);
-                EtapeIG m = new ActiviteIG(type+num, TailleComposants.getInstance().getTailleVBOX()*2,TailleComposants.getInstance().getTailleVBOX());
+                EtapeIG m = new ActiviteIG(type+num, TailleComposants.getInstance().gettailleVBOXActivite()*2,TailleComposants.getInstance().gettailleVBOXActivite());
                 map.put(m.getIdentifiant(),m);
                 this.notifierObservateurs();
                 break;
             case "Guichet" :
                 System.out.println("AJout théorique d'un guichet : " + type+num);
-                EtapeIG g = new GuichetIG(type+num, TailleComposants.getInstance().getTailleVBOX()*2,TailleComposants.getInstance().getTailleVBOX());
+                EtapeIG g = new GuichetIG(type+num, TailleComposants.getInstance().gettailleVBOXActivite()*2,TailleComposants.getInstance().gettailleVBOXActivite());
                 map.put(g.getIdentifiant(),g);
                 this.notifierObservateurs();
                 break;

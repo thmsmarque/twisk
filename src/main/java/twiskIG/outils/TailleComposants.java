@@ -7,8 +7,11 @@ public class TailleComposants {
 
     private static TailleComposants instance = null;
 
-    private final int tailleVBOX = 80;
-    private final int tailleHBOX = 50;
+    private final int tailleVBOXActivite = 80;
+    private final int tailleHBOXActivite = 50;
+
+    private final int tailleVBOXGuichet = 50;
+    private final int tailleCoteGuichetPlace = 20;
 
     private final int tailleFenetre = 700;
 
@@ -24,12 +27,21 @@ public class TailleComposants {
         return instance;
     }
 
-    public int getTailleHBOX() {
-        return tailleHBOX;
+    public int gettailleHBOXActivite() {
+        return tailleHBOXActivite;
     }
 
-    public int getTailleVBOX() {
-        return tailleVBOX;
+    public int gettailleVBOXActivite() {
+        return tailleVBOXActivite;
+    }
+
+    public int getTailleVBOXGuichet()
+    {
+        return tailleVBOXGuichet;
+    }
+
+    public int getTailleCoteGuichetPlace() {
+        return tailleCoteGuichetPlace;
     }
 
     public int getTailleFenetre() {

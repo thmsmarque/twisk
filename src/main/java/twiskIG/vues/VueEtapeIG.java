@@ -56,13 +56,22 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
 
         //REpositionner + style :
         relocate(etape.getPosX(), etape.getPosY());
-        if(etape.getSelection()){
-            setStyle("-fx-border-color: #1baae8;  -fx-border-radius: 8px; -fx-border-width: 2px; -fx-background-color: rgb(243,243,243); -fx-background-radius: 8px;");
-        } else {
-            setStyle("-fx-border-color: #1baae8; -fx-background-color: #ffffff ; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px;");
+        if(etape.estActivite()) {
+            if (etape.getSelection()) {
+                setStyle("-fx-border-color: #1baae8;  -fx-border-radius: 8px; -fx-border-width: 2px; -fx-background-color: rgb(108,108,108); -fx-background-radius: 8px;");
+            } else {
+                setStyle("-fx-border-color: #1baae8; -fx-background-color: #ffffff ; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px;");
+            }
+        }
+        if(etape.estGuichet()) {
+            if (etape.getSelection()) {
+                setStyle("-fx-border-color: #31bf0c;  -fx-border-radius: 8px; -fx-border-width: 2px; -fx-background-color: rgb(108,108,108); -fx-background-radius: 8px;");
+            } else {
+                setStyle("-fx-border-color: #31bf0c; -fx-background-color: #ffffff ; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-radius: 8px;");
+            }
         }
         TailleComposants taille = TailleComposants.getInstance();
-        setPrefSize(taille.getTailleVBOX()*2, taille.getTailleVBOX());
+        setPrefSize(taille.gettailleVBOXActivite()*2, taille.gettailleVBOXActivite());
 
         h.setStyle("-fx-alignment: CENTER");
         getChildren().add(h);
