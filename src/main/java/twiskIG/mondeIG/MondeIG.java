@@ -24,7 +24,7 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
         this.map = new HashMap<>();
         this.pointSauv=null;
         arcs = new ArrayList<>();
-        this.ajouter("Activite0");
+        //this.ajouter("Activite0");
     }
 
     /**
@@ -62,9 +62,22 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
      * Ajoute une étape définie par le type
      * @param type
      */
-    public void ajouter(String type){
-        ActiviteIG activite = new ActiviteIG(type, TailleComposants.getInstance().getTailleVBOX()*2,TailleComposants.getInstance().getTailleVBOX());
-        this.map.put(activite.getIdentifiant(),activite);
+    public void ajouter(String type, int num){
+        switch(type)
+        {
+            case "Activite" :
+                System.out.println("AJout théorique d'une activité : " + type + num);
+                EtapeIG m = new ActiviteIG(type+num, TailleComposants.getInstance().getTailleVBOX()*2,TailleComposants.getInstance().getTailleVBOX());
+                map.put(m.getIdentifiant(),m);
+                this.notifierObservateurs();
+                break;
+            case "Guichet" :
+                System.out.println("AJout théorique d'un guichet : " + type+num);
+                EtapeIG g = new GuichetIG(type+num, TailleComposants.getInstance().getTailleVBOX()*2,TailleComposants.getInstance().getTailleVBOX());
+                map.put(g.getIdentifiant(),g);
+                this.notifierObservateurs();
+                break;
+        }
     }
 
     /**
