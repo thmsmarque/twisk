@@ -38,7 +38,7 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
         HBox h = new HBox();
         h.getChildren().add(label);
        if(etape.getEstUneSortie()) {
-           Image imagesortie = new Image(getClass().getResourceAsStream("/sortie.jpg"));
+           Image imagesortie = new Image(getClass().getResourceAsStream("/images/sortie.jpg"));
            ImageView iconsortie = new ImageView(imagesortie);
            iconsortie.setFitHeight(10);
            iconsortie.setFitWidth(10);
@@ -46,7 +46,7 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
        }
 
         if(etape.getEstUneEntree()) {
-            Image imagesortie = new Image(getClass().getResourceAsStream("/entree.jpg"));
+            Image imagesortie = new Image(getClass().getResourceAsStream("/images/entree.jpg"));
             ImageView iconsortie = new ImageView(imagesortie);
             iconsortie.setFitHeight(10);
             iconsortie.setFitWidth(10);
