@@ -24,7 +24,7 @@ public class VueActiviteIG extends VueEtapeIG {
         this.box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
 
         TailleComposants taille = TailleComposants.getInstance();
-       this.box.setPrefSize(taille.getTailleHBOX() , taille.getTailleHBOX());
+       this.box.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
         this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
 
