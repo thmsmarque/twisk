@@ -161,6 +161,13 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         } else this.delai = delai;
     }
 
+    /**
+     * Méthode abstraite qui renvoi un booléen selon si l'étape est une sous-classe ActiviteIG ou non
+     * @return est une activite ou non
+     */
+    public abstract Boolean estActivite();
+    public abstract Boolean estGuichet();
+
     public int getDelai() {
         return delai;
     }

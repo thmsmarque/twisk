@@ -1,5 +1,7 @@
 package twiskIG.mondeIG;
 
+import twiskIG.exceptions.TwiskException;
+
 public class GuichetIG extends EtapeIG {
 
     int nbJeton;
@@ -16,6 +18,16 @@ public class GuichetIG extends EtapeIG {
         nbJeton = 5;
     }
 
+    @Override
+    public Boolean estActivite() {
+        return false;
+    }
+
+    @Override
+    public Boolean estGuichet() {
+        return true;
+    }
+
     /**
      * Renvoi le nombre de jetons de l'activité
      * @return nbJeton
@@ -28,7 +40,11 @@ public class GuichetIG extends EtapeIG {
      * Cette méthode permet de chager le nombre de jetons de l'activité
      * @param nbJeton nouveau nombre de jetons
      */
-    public void changerNbJeton(int nbJeton) {
+    public void changerNbJeton(int nbJeton) throws TwiskException {
+        if(nbJeton <=0)
+        {
+            throw new TwiskException("Le nombre de jeton ne peut pas être inférieur ou égal à 0");
+        }
         this.nbJeton = nbJeton;
     }
     @Override

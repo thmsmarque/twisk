@@ -15,6 +15,16 @@ public class ActiviteIG extends EtapeIG{
     }
 
     @Override
+    public Boolean estActivite() {
+        return true;
+    }
+
+    @Override
+    public Boolean estGuichet() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
