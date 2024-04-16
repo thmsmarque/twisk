@@ -86,17 +86,44 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     this.predecesseurs.put(e.getIdentifiant(),e);
     }
 
+    /**
+     * Supprimer un successeur à l'étape
+     * @param e
+     */
     public void supprimerSuccesseurs(EtapeIG e){
         this.successeurs.remove(e.getIdentifiant());
     }
 
-    public void supprimerPredesseurs(EtapeIG e){
+    /**
+     * Supprimer un prédecesseurs à l'étape
+     * @param e
+     */
+    public void supprimerPredecesseurs(EtapeIG e){
         this.predecesseurs.remove(e.getIdentifiant());
     }
 
+    /**
+     * Supprimer tous les successeurs et tous les predecesseurs
+     */
     public void clearAllSuccPrec(){
         this.successeurs.clear();
         this.predecesseurs.clear();
+    }
+
+    /**
+     * Donne le nombre de successeurs de l'étape
+     * @return nombre de successeurs
+     */
+    public int nbSuccesseurs(){
+        return this.successeurs.size();
+    }
+
+    /**
+     * Donne le nombre de prédecesseurs de l'étape
+     * @return nombre de prédecesseurs
+     */
+    public int nbPredecesseurs(){
+        return this.predecesseurs.size();
     }
 
     /**

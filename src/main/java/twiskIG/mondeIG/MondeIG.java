@@ -147,7 +147,7 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
             EtapeIG e1 = arc.getP1().getEtape();
             EtapeIG e2 = arc.getP2().getEtape();
             e1.supprimerSuccesseurs(e2);
-            e2.supprimerPredesseurs(e1);
+            e2.supprimerPredecesseurs(e1);
         }
         arcs = arctemp;
     }
@@ -174,3 +174,11 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
         return map;
     }
 }
+
+/*
+RAPPEL :
+Guichet ne epeut pas être une sortie
+On ne rentre pas dans une activité restreinte
+Si on a une étape, on doit pouvoir y avoir accès depuis une sortie
+Si on a une étape, il doit y avoir des successeurs menant à une sortie
+ */
