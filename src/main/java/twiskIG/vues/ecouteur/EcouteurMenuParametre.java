@@ -14,6 +14,7 @@ import twiskIG.exceptions.TwiskException;
 import twiskIG.mondeIG.EtapeIG;
 import twiskIG.mondeIG.GuichetIG;
 import twiskIG.mondeIG.MondeIG;
+import twiskIG.outils.TailleComposants;
 
 public class EcouteurMenuParametre implements EventHandler<ActionEvent> {
 
@@ -156,11 +157,16 @@ public class EcouteurMenuParametre implements EventHandler<ActionEvent> {
                         GuichetIG guich = (GuichetIG) this.etape;
                         try {
                             guich.changerNbJeton(value1);
+                            guich.setLargeur(TailleComposants.getInstance().getTailleCoteGuichetPlace()*value1);
+                            guich.setPointsdeC();
                         } catch (TwiskException ex) {
                             throw new RuntimeException(ex);
                         }
                 stage.close();
                 System.out.println("Nombre de jetons : " + value1);
+
+                monde.notifierObservateurs();
+
             });
             // mise en place du fond ------------------------
             root.setPadding(new Insets(20));
@@ -169,8 +175,9 @@ public class EcouteurMenuParametre implements EventHandler<ActionEvent> {
             stage.setScene(scene);
 
             stage.show();
-
             monde.notifierObservateurs();
         }
+
+
     }
 }

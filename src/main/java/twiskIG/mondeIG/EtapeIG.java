@@ -34,7 +34,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * @param larg
      * @param haut
      */
-    public EtapeIG(String nom, int larg, int haut) {
+    public EtapeIG(String nom, int larg, int haut)
+    {
         this.nom = nom;
         this.largeur = larg;
         this.hauteur = haut;
@@ -108,17 +109,23 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
     public void setPointsdeC(){
-        this.pointsdeC.get(0).setPosX(this.posX+this.largeur/2);
-        this.pointsdeC.get(0).setPosY(this.posY);
 
-        this.pointsdeC.get(1).setPosX(this.posX+this.largeur);
-        this.pointsdeC.get(1).setPosY(this.posY+this.hauteur/2);
+            //Point du haut
+            this.pointsdeC.get(0).setPosX(this.posX+this.largeur/2);
+            this.pointsdeC.get(0).setPosY(this.posY);
 
-        this.pointsdeC.get(2).setPosX(this.posX);
-        this.pointsdeC.get(2).setPosY(this.posY+this.hauteur/2);
+            //Point de droite
+            this.pointsdeC.get(1).setPosX(this.posX+this.largeur);
+            this.pointsdeC.get(1).setPosY(this.posY+this.hauteur/2);
 
-        this.pointsdeC.get(3).setPosX(this.posX+this.largeur/2);
-        this.pointsdeC.get(3).setPosY(this.posY+this.hauteur);
+            //Point de gauche
+            this.pointsdeC.get(2).setPosX(this.posX);
+            this.pointsdeC.get(2).setPosY(this.posY+this.hauteur/2);
+
+            //Point du bas
+            this.pointsdeC.get(3).setPosX(this.posX+this.largeur/2);
+            this.pointsdeC.get(3).setPosY(this.posY+this.hauteur);
+
 
 
     }
@@ -191,6 +198,15 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
             throw new TwiskException("La valeur du délai est invalide");
 
         } else this.delai = delai;
+    }
+
+    public void setLargeur(int larg)
+    {
+        this.largeur = larg;
+    }
+    public void setHauteur(int haut)
+    {
+        this.hauteur= haut;
     }
 
     /**

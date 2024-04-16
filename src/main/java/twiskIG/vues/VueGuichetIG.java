@@ -42,7 +42,8 @@ public class VueGuichetIG extends VueEtapeIG  {
 
         //Style et taille :
 
-        this.setPrefSize(taille.getTailleCoteGuichetPlace()* etape.getNbJeton(), (double) taille.getTailleVBOXGuichet());
+        //etape.setLargeur(taille.getTailleCoteGuichetPlace()* etape.getNbJeton());
+        this.setPrefSize(etape.getLargeur(), etape.getHauteur());
 
 
 
@@ -54,7 +55,6 @@ public class VueGuichetIG extends VueEtapeIG  {
         }
         this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
-
 
 
     }
