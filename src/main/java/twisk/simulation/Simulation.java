@@ -46,6 +46,11 @@ public class Simulation {
                 tabJetonsGuichet[guich.getSemaphore()-1] = guich.getNbJetons();
             }
         }
+
+        for(int i=0; i<tabJetonsGuichet.length;i++)
+        {
+            System.out.print((i+1) + " : "+tabJetonsGuichet[i]+ "\t");
+        }
         //lancement simulation : -----------------------------
         int[] resSim;
         resSim = start_simulation(nbEtapes,nbGuichets,nbClients,tabJetonsGuichet);
