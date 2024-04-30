@@ -1,12 +1,22 @@
 package twiskIG.mondeIG;
 
+import twisk.monde.CorrespondancesEtapes;
+import twisk.monde.Monde;
 import twiskIG.exceptions.MondeException;
 
 public class SimulationIG {
     private MondeIG monde;
+
+    private CorrespondancesEtapes correspondancesEtapes;
+
     public SimulationIG(MondeIG monde) {
         this.monde = monde;
     }
+
+    /**
+     * Cette méthode vérifie que le monde est possible à simuler
+     * @throws MondeException
+     */
     private void verifierMondeIG() throws MondeException {
         /*
 RAPPEL :
@@ -42,7 +52,18 @@ Toues les éléments sont accessibles :
         }
     }
 
+    /**
+     * Cette méthode simule le monde, elle fait appel à simuler de Simulation
+     */
     private void simuler(){
 
+    }
+
+    /**
+     * Créer le monde
+     */
+    private Monde creerMonde()
+    {
+        return null;
     }
 }
