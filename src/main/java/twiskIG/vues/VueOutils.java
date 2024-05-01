@@ -44,13 +44,13 @@ public class VueOutils extends TilePane implements Observateur {
         boutonGuichet.setTooltip(new Tooltip("Nouveau guichet"));
 
         this.monde=monde;
-        this.boutonLancement=new Button("+");
+        this.boutonLancement=new Button("|>");
         this.boutonLancement.setPrefSize(40,40);
         this.boutonLancement.setStyle("-fx-border-radius: 20px; " +
                 "-fx-background-radius: 20px; " +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 15px;" +
-                "-fx-background-color: lightgreen");
+                "-fx-background-color: darkgreen");
         boutonLancement.setTooltip(new Tooltip("Lancement Simulation"));
 
         setMargin(boutonGuichet, new Insets(5,5,5,5));

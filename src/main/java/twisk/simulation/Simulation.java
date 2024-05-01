@@ -23,7 +23,7 @@ public class Simulation {
 
     public void simuler(Monde monde) {
         String fichierC = monde.toC();
-
+        System.out.println(fichierC);
         this.kit.creerFichier(fichierC);
         this.kit.compiler();
         this.kit.construireLaBibliothese();

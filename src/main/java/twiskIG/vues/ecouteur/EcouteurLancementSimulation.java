@@ -14,6 +14,7 @@ public class EcouteurLancementSimulation implements EventHandler<ActionEvent> {
     }
     @Override
     public void handle(ActionEvent actionEvent) {
+        System.out.println("Lancement de la simulation...");
         SimulationIG sim = new SimulationIG(m);
     }
 }

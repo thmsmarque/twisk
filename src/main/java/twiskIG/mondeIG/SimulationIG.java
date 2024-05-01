@@ -3,6 +3,7 @@ package twiskIG.mondeIG;
 import twisk.ClientTwisk;
 import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
+import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +14,7 @@ public class SimulationIG {
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
+        this.simuler();
     }
 
     /**
@@ -58,23 +60,8 @@ Toues les éléments sont accessibles :
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
     private void simuler(){
-        try{
-            verifierMondeIG();
-
-            ClassLoaderPerso cl = new ClassLoaderPerso((ClientTwisk.class.getClassLoader()));
-            Class<?> sim =  cl.loadClass("twisk.simulation.Simulation");
-
-            Object simulationInstance = sim.newInstance();
-            sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
-            sim.getMethod("simuler", Monde.class).invoke(simulationInstance, creerMonde());
-
-
-            System.gc();
-
-        } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InstantiationException |
-                 InvocationTargetException | MondeException e ) {
-            System.out.println("Erreur : " + e.getCause().toString());
-        }
+        Simulation sim = new Simulation();
+        sim.simuler(creerMonde());
     }
 
     /**
@@ -106,12 +93,16 @@ Toues les éléments sont accessibles :
                 //Si elle l'est alors c'est une activité restreinte
                 if(succedeUnGuichet)
                 {
+                    System.out.println(etIG.getNom() + " est une activité restreinte");
+
                     ActiviteRestreinte activiteRestreinte = new ActiviteRestreinte(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,activiteRestreinte);
                     monde.ajouter(activiteRestreinte);
 
                 }else //Sinon quoi c'est une activité normale
                 {
+                    System.out.println(etIG.getNom() + " est une activité");
+
                     Activite etape = new Activite(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,etape);
                     monde.ajouter(etape);
@@ -121,6 +112,8 @@ Toues les éléments sont accessibles :
             }//Si ce n'est pas une activité mais un guichet
             else if(etIG.estGuichet())
             {
+                System.out.println(etIG.getNom() + " est un guichet");
+
                 GuichetIG guichetIG = (GuichetIG) etIG;
                 Guichet guichet = new Guichet(etIG.getNom(), guichetIG.getNbJeton());
                 correspondancesEtapes.ajouter(etIG,guichet);

@@ -42,7 +42,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
         //valeur par défaut
         this.delai = 5;
-        this.ecart=5;
+        this.ecart=3;
 
         FabriqueIdentifiant instanceIdentifiant = FabriqueIdentifiant.getInstance();
         this.identifiant = instanceIdentifiant.getIdentifiantEtape();
