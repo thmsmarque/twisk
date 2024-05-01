@@ -1,16 +1,18 @@
 package twiskIG.mondeIG;
 
-import twisk.monde.CorrespondancesEtapes;
-import twisk.monde.Monde;
+import twisk.ClientTwisk;
+import twisk.monde.*;
+import twisk.outils.ClassLoaderPerso;
 import twiskIG.exceptions.MondeException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
+
 public class SimulationIG {
-    private MondeIG monde;
+    private MondeIG mondeIG;
 
-    private CorrespondancesEtapes correspondancesEtapes;
-
-    public SimulationIG(MondeIG monde) {
-        this.monde = monde;
+    public SimulationIG(MondeIG mondeIG) {
+        this.mondeIG = mondeIG;
     }
 
     /**
@@ -30,7 +32,7 @@ Toues les éléments sont accessibles :
 - Pas deux activités après un guichet
 
  */
-        for(EtapeIG etape : this.monde){
+        for(EtapeIG etape : this.mondeIG){
             //Pas de Guichet sortie
             if(etape.estGuichet() && etape.getEstUneSortie()){
                 throw new MondeException("Un guichet est déclaré comme sortie : " + etape);
@@ -56,7 +58,23 @@ Toues les éléments sont accessibles :
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
     private void simuler(){
+        try{
+            verifierMondeIG();
 
+            ClassLoaderPerso cl = new ClassLoaderPerso((ClientTwisk.class.getClassLoader()));
+            Class<?> sim =  cl.loadClass("twisk.simulation.Simulation");
+
+            Object simulationInstance = sim.newInstance();
+            sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
+            sim.getMethod("simuler", Monde.class).invoke(simulationInstance, creerMonde());
+
+
+            System.gc();
+
+        } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InstantiationException |
+                 InvocationTargetException | MondeException e ) {
+            System.out.println("Erreur : " + e.getCause().toString());
+        }
     }
 
     /**
@@ -64,6 +82,80 @@ Toues les éléments sont accessibles :
      */
     private Monde creerMonde()
     {
-        return null;
+         Monde monde = new Monde();
+         CorrespondancesEtapes correspondancesEtapes = new CorrespondancesEtapes();
+         Iterator<EtapeIG> it = mondeIG.iterator();
+
+         //On parcourt toutes les étapes de l'interface graphiques et on les ajoute dans le monde logique
+        while(it.hasNext())
+        {
+            EtapeIG etIG = it.next();
+
+            if(etIG.estActivite())//Si l'étape est une activité
+            {
+                //On vérifie d'abord si elle n'est pas précédé d'un guichet
+                boolean succedeUnGuichet = false;
+                for(EtapeIG a : etIG.predecesseurs.values())
+                {
+                    if(a.estGuichet()) //c'est une activité restreinte
+                    {
+                        succedeUnGuichet = true;
+                    }
+                }
+
+                //Si elle l'est alors c'est une activité restreinte
+                if(succedeUnGuichet)
+                {
+                    ActiviteRestreinte activiteRestreinte = new ActiviteRestreinte(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
+                    correspondancesEtapes.ajouter(etIG,activiteRestreinte);
+                    monde.ajouter(activiteRestreinte);
+
+                }else //Sinon quoi c'est une activité normale
+                {
+                    Activite etape = new Activite(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
+                    correspondancesEtapes.ajouter(etIG,etape);
+                    monde.ajouter(etape);
+
+                }
+
+            }//Si ce n'est pas une activité mais un guichet
+            else if(etIG.estGuichet())
+            {
+                GuichetIG guichetIG = (GuichetIG) etIG;
+                Guichet guichet = new Guichet(etIG.getNom(), guichetIG.getNbJeton());
+                correspondancesEtapes.ajouter(etIG,guichet);
+                monde.ajouter(guichet);
+
+            }
+        }
+        //Une fois cela fait, on rajoute leurs successeurs et leurs prédécesseurs
+
+        it = mondeIG.iterator();
+
+        while(it.hasNext())
+        {
+            EtapeIG etIG = it.next();
+            Etape et = correspondancesEtapes.get(etIG);
+
+            //Si cette étape est définie comme entrée ou sortie :
+            if(etIG.getEstUneEntree())
+            {
+                monde.aCommeEntree(et);
+            }
+            if(etIG.getEstUneSortie())
+            {
+                monde.aCommeSortie(et);
+            }
+
+            //AJout de ses successeurs
+            for(EtapeIG a : etIG.successeurs.values())
+            {
+                et.ajouterSuccesseur(correspondancesEtapes.get(a));
+            }
+
+        }
+
+
+        return monde;
     }
 }

@@ -10,6 +10,8 @@ public class ActiviteIG extends EtapeIG{
      * @param larg
      * @param haut
      */
+
+
     public ActiviteIG(String nom, int larg, int haut) {
         super(nom, larg, haut);
     }
@@ -18,6 +20,9 @@ public class ActiviteIG extends EtapeIG{
     public Boolean estActivite() {
         return true;
     }
+
+
+
 
     @Override
     public Boolean estGuichet() {
