@@ -25,6 +25,8 @@ public class SimulationIG {
         test1();
         test2();
         test3();
+        test4();
+        test5();
         /*
 RAPPEL :
 Une entree et une sortie reliés.
@@ -33,7 +35,6 @@ Toues les éléments sont accessibles :
 - activite accessible a des successeurs qui mènent à une sortie
 - activite accessible par un predecesseur entree
 
-- PAs deux guichets qui se suivent
 - Pas deux activités après un guichet
 
  */
@@ -59,9 +60,9 @@ Toues les éléments sont accessibles :
         for (EtapeIG etape : this.mondeIG) {
             if (etape.nbPredecesseurs() == 0 && etape.nbSuccesseurs() == 0 && //pas de successeurs ni de prédecesseurs
                     (
-                            (!etape.getEstUneSortie() && !etape.getEstUneSortie()) || //ni une entrée ni une sortie
-                                    (!etape.getEstUneSortie() && etape.getEstUneSortie()) || //pas une entrée mais une sortie
-                                    (etape.getEstUneSortie() && !etape.getEstUneSortie())  // une entrée mais pas une sortie
+                            (!etape.getEstUneEntree() && !etape.getEstUneSortie()) || //ni une entrée ni une sortie
+                                    (!etape.getEstUneEntree() && etape.getEstUneSortie()) || //pas une entrée mais une sortie
+                                    (etape.getEstUneEntree() && !etape.getEstUneSortie())  // une entrée mais pas une sortie
                     )
             ) {
                 throw new MondeException("Erreur dans le test 2. Un élément n'est relié à rien dans le monde : " + etape);
@@ -77,6 +78,42 @@ Toues les éléments sont accessibles :
         for (EtapeIG etape : this.mondeIG) {
             if (etape.estActivite() && etape.nbPredecesseurs() == 0) {
                 throw new MondeException("Erreur dans le test 3. L'activité n'est pas reliée à une entrée : " + etape);
+            }
+        }
+    }
+
+    /**
+     * Vérifier qu'il n'y a pas deux guichets qui se suivent
+     * @throws MondeException
+     */
+    private void test4() throws MondeException {
+        for(EtapeIG etape : this.mondeIG) {
+            if (etape.estGuichet() && etape.nbSuccesseurs() > 0) { // etape est un guichet et possède des successeurs
+                for (EtapeIG etapesuccesseur : etape.getSuccesseurs().values()) { // on itère sur les successeurs de l'étape à analyser
+                    if (etapesuccesseur.estGuichet()) { //si l'un des successeurs est un guichet (=2 guichets se suivent)
+                        throw new MondeException("Erreur dans le test 4. Deux guichets se suivent :" + etape + " et" + etapesuccesseur);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Vérifier qu'il n'y a pas deux activités après un guichet
+     * @throws MondeException
+     */
+    private void test5() throws MondeException{
+        int nbActivite;
+        for(EtapeIG etape : this.mondeIG) {
+
+            if (etape.estGuichet() && etape.nbSuccesseurs() > 0) { // etape est un guichet et possède des successeurs
+                nbActivite=0;
+                for (EtapeIG etapesuccesseur : etape.getSuccesseurs().values()) { // on itère sur les successeurs de l'étape à analyser
+                    if (etapesuccesseur.estActivite()) { //l'un des successeurs est une activité
+                        nbActivite=+1;
+                        if(nbActivite>=2) throw new MondeException("Erreur dans le test 5. Deux activités suivent le guichet :" + etape);
+                    }
+                }
             }
         }
     }
