@@ -265,6 +265,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         return Collections.unmodifiableMap(successeurs);
     }
 
+    public Map<String,EtapeIG> getPredecesseurs(){
+        return Collections.unmodifiableMap(predecesseurs)
+    }
+
     @Override
     public Iterator<PointDeControleIG> iterator() {
         return pointsdeC.iterator();

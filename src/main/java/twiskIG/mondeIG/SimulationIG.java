@@ -7,7 +7,9 @@ import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class SimulationIG {
     private MondeIG mondeIG;
@@ -34,8 +36,6 @@ PAs d'activite restreinte entree
 Toues les éléments sont accessibles :
 - activite accessible a des successeurs qui mènent à une sortie
 - activite accessible par un predecesseur entree
-
-- Pas deux activités après un guichet
 
  */
     }
@@ -119,6 +119,49 @@ Toues les éléments sont accessibles :
     }
 
 
+    /**
+     * Parcours des predecesseurs d'une etape pour trouver une entree
+     * @param etape
+     * @return
+     */
+    private boolean estAccessibleDepuisEntree(EtapeIG etape) {
+        Stack<EtapeIG> stack = new Stack<>();
+        HashSet<EtapeIG> visited = new HashSet<>();
+        stack.push(etape); //l'etape qu'on traite est rentrée dans la pile
+        while (!stack.isEmpty()) { //tq la pile n'est pas vide
+            EtapeIG current = stack.pop(); //dépiler
+            if (visited.contains(current)) { //si on a déjà visité
+                continue;
+            }
+            visited.add(current); //on ajoute l'etape comme déjà visité
+            if (current.getEstUneEntree()) { //si il y a une entree on continue
+                return true;
+            }
+            for (EtapeIG pred : current.getPredecesseurs().values()) { //on ajoute les predecesseurs de l'étape à la pile
+                if (!visited.contains(pred)) {
+                    stack.push(pred);
+                }
+            }
+        }
+
+        return false; // Aucune entrée trouvée
+    }
+
+
+    /**
+     * Vérifier que l'activite est accessible par un predecesseur entree
+     * @throws MondeException
+     */
+    private void test6() throws MondeException {
+        for (EtapeIG etape : this.mondeIG) {
+            if (!etape.getEstUneEntree() && (etape.nbPredecesseurs() > 0)) {
+                boolean accessible = estAccessibleDepuisEntree(etape);
+                if (!accessible) {
+                    throw new MondeException("Erreur dans le test 5. L'étape n'est pas accessible par une entrée :" + etape);
+                }
+            }
+        }
+    }
     /**
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
