@@ -2,6 +2,7 @@ package twisk.simulation;
 
 import twisk.monde.Monde;
 import twisk.monde.Etape;
+import twisk.monde.Guichet;
 import twisk.outils.FabriqueNumero;
 import twisk.outils.FabriqueNumeroLibTwisk;
 import twisk.outils.KitC;
@@ -22,7 +23,7 @@ public class Simulation {
 
     public void simuler(Monde monde) {
         String fichierC = monde.toC();
-
+        System.out.println(fichierC);
         this.kit.creerFichier(fichierC);
         this.kit.compiler();
         this.kit.construireLaBibliothese();
@@ -37,8 +38,19 @@ public class Simulation {
         int nbGuichets = monde.nbGuichets();
         int nbClients = this.nbClients;
         int[] tabJetonsGuichet = new int[nbGuichets];
-        tabJetonsGuichet[0] = 2;
+        for(Etape et : monde.getLesEtapes())
+        {
+            if(et.estUnGuichet())
+            {
+                Guichet guich = (Guichet)et;
+                tabJetonsGuichet[guich.getSemaphore()-1] = guich.getNbJetons();
+            }
+        }
 
+        for(int i=0; i<tabJetonsGuichet.length;i++)
+        {
+            System.out.print((i+1) + " : "+tabJetonsGuichet[i]+ "\t");
+        }
         //lancement simulation : -----------------------------
         int[] resSim;
         resSim = start_simulation(nbEtapes,nbGuichets,nbClients,tabJetonsGuichet);

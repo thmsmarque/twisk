@@ -22,8 +22,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private ArrayList<PointDeControleIG> pointsdeC;
     private boolean estUneEntree;
     private boolean estUneSortie;
-    HashMap<String,EtapeIG> predecesseurs;
-    HashMap<String,EtapeIG> successeurs;
+    public HashMap<String,EtapeIG> predecesseurs;
+    public HashMap<String,EtapeIG> successeurs;
 
 
     /**Constructeur de la classe abstraite EtapeIG
@@ -39,7 +39,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
         //valeur par défaut
         this.delai = 5;
-        this.ecart=5;
+        this.ecart=3;
 
         FabriqueIdentifiant instanceIdentifiant = FabriqueIdentifiant.getInstance();
         this.identifiant = instanceIdentifiant.getIdentifiantEtape();
@@ -250,6 +250,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         } else this.ecart = ecart;
     }
 
+    public int getEcart()
+    {
+        return ecart;
+    }
     @Override
     public String toString() {
         return "Etape : "+

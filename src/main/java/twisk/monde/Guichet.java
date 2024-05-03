@@ -58,7 +58,7 @@ public class Guichet extends Etape{
         Iterator<Etape> etapes = this.gestionnaire.getListeetapes().iterator();
         Etape et = this.getGestionnaire().getListeetapes().iterator().next();
         //System.out.println("Est ici (guichet) "+ et);
-        String res = "P("+ "ids"+ ","+"1"+"); \n" +
+        String res = "P("+ "ids"+ ","+this.getSemaphoreName()+"); \n" +
                 "transfert("+this.getDefineName()+","
                 + et.getDefineName()  +");\n" +
                 et.toC() +

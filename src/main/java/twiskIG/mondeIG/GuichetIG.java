@@ -23,6 +23,8 @@ public class GuichetIG extends EtapeIG {
         return false;
     }
 
+
+
     @Override
     public Boolean estGuichet() {
         return true;

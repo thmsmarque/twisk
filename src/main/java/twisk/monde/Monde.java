@@ -3,7 +3,7 @@ package twisk.monde;
 import java.util.Iterator;
 
 public class Monde implements Iterable<Etape> {
-    GestionnaireEtapes lesEtapes;
+    public GestionnaireEtapes lesEtapes;
     SasEntree entree;
     SasSortie sortie;
 
