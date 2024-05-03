@@ -22,6 +22,9 @@ public class SimulationIG {
      * @throws MondeException
      */
     private void verifierMondeIG() throws MondeException {
+        test1();
+        test2();
+        test3();
         /*
 RAPPEL :
 Une entree et une sortie reliés.
@@ -34,28 +37,50 @@ Toues les éléments sont accessibles :
 - Pas deux activités après un guichet
 
  */
-        for(EtapeIG etape : this.mondeIG){
-            //Pas de Guichet sortie
-            if(etape.estGuichet() && etape.getEstUneSortie()){
-                throw new MondeException("Un guichet est déclaré comme sortie : " + etape);
-            }
-            //pas d'éléments isolés
-            if(etape.nbPredecesseurs()==0 && etape.nbSuccesseurs()==0 && //pas de successeurs ni de prédecesseurs
-                    (
-                            (!etape.getEstUneSortie() && !etape.getEstUneSortie()) || //ni une entrée ni une sortie
-                            (!etape.getEstUneSortie() && etape.getEstUneSortie()) || //pas une entrée mais une sortie
-                            (etape.getEstUneSortie() && !etape.getEstUneSortie())  // une entrée mais pas une sortie
-                    )
-            ){
-                throw new MondeException("Un élément n'est relié à rien dans le monde : " + etape);
-            }
-            // activité sans predecesseurs qui n'est pas une entrée
-            if(etape.estActivite() && etape.nbPredecesseurs()==0){
-                throw new MondeException("L'activité n'est pas relié à une entrée : " + etape);
-            }
+    }
 
+    /**
+     * Vérifier qu'il n'y a pas de guichet assigné comme sortie
+     * @throws MondeException
+     */
+    private void test1() throws MondeException {
+        for (EtapeIG etape : this.mondeIG) {
+            if (etape.estGuichet() && etape.getEstUneSortie()) {
+                throw new MondeException("Erreur dans le test 1. Un guichet est déclaré comme sortie : " + etape);
+            }
         }
     }
+
+    /**
+     * Vérifier qu'il n'y a pas d'éléments isolés dans le monde
+     * @throws MondeException
+     */
+    private void test2() throws MondeException {
+        for (EtapeIG etape : this.mondeIG) {
+            if (etape.nbPredecesseurs() == 0 && etape.nbSuccesseurs() == 0 && //pas de successeurs ni de prédecesseurs
+                    (
+                            (!etape.getEstUneSortie() && !etape.getEstUneSortie()) || //ni une entrée ni une sortie
+                                    (!etape.getEstUneSortie() && etape.getEstUneSortie()) || //pas une entrée mais une sortie
+                                    (etape.getEstUneSortie() && !etape.getEstUneSortie())  // une entrée mais pas une sortie
+                    )
+            ) {
+                throw new MondeException("Erreur dans le test 2. Un élément n'est relié à rien dans le monde : " + etape);
+            }
+        }
+    }
+
+    /**
+     * Vérifier qu'il n'y a pas d'activité sans predecesseurs qui n'est pas une entrée
+     * @throws MondeException
+     */
+    private void test3() throws MondeException {
+        for (EtapeIG etape : this.mondeIG) {
+            if (etape.estActivite() && etape.nbPredecesseurs() == 0) {
+                throw new MondeException("Erreur dans le test 3. L'activité n'est pas reliée à une entrée : " + etape);
+            }
+        }
+    }
+
 
     /**
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation

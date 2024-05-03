@@ -261,7 +261,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
                 ", n°'" + identifiant + '\'' + "\n Successeurs :" + successeurs.size() + " \n Predecesseurs : " + predecesseurs.size() + "\n =================" ;
     }
     //A REVOIRR========================================= POUR RENVOYER EN LECTURE SEULE
-    public HashMap<String,EtapeIG> getSuccesseurs(){
+    public Map<String,EtapeIG> getSuccesseurs(){
         return Collections.unmodifiableMap(successeurs);
     }
 
