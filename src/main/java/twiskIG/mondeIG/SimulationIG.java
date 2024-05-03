@@ -39,6 +39,7 @@ Toues les éléments sont accessibles :
             if(etape.estActivite() && etape.nbPredecesseurs()==0){
                 throw new MondeException("L'activité n'est pas relié à une entrée : " + etape);
             }
+
         }
     }
 

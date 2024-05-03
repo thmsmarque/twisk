@@ -4,10 +4,7 @@ import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.FabriqueIdentifiant;
 import twiskIG.outils.TailleComposants;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Classe abstraite ActiviteIG
@@ -258,6 +255,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         return "Etape : "+
                 nom + '\'' +
                 ", n°'" + identifiant + '\'' + "\n Successeurs :" + successeurs.size() + " \n Predecesseurs : " + predecesseurs.size() + "\n =================" ;
+    }
+    //A REVOIRR========================================= POUR RENVOYER EN LECTURE SEULE
+    public HashMap<String,EtapeIG> getSuccesseurs(){
+        return Collections.unmodifiableMap(successeurs);
     }
 
     @Override
