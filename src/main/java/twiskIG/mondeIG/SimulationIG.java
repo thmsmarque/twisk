@@ -119,7 +119,7 @@ PAs d'activite restreinte entree
     /**
      * Parcours des predecesseurs d'une etape pour trouver une entree
      * @param etape
-     * @return
+     * @return true si une entrée est accessible depuis l'étape
      */
     private boolean estAccessibleDepuisEntree(EtapeIG etape) {
         Stack<EtapeIG> stack = new Stack<>();
@@ -140,7 +140,6 @@ PAs d'activite restreinte entree
                 }
             }
         }
-
         return false; // Aucune entrée trouvée
     }
 
@@ -163,7 +162,7 @@ PAs d'activite restreinte entree
     /**
      * Parcours des successeurs d'une etape pour trouver une sortie
      * @param etape
-     * @return
+     * @return true si une sortie est accessible depuis l'étape
      */
     private boolean estAccessibleJusquaSortie(EtapeIG etape) {
         Stack<EtapeIG> stack = new Stack<>();
