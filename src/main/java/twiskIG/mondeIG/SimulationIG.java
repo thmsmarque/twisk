@@ -20,10 +20,20 @@ public class SimulationIG {
     }
 
     /**
+     * SimulationIG pour les tests, ne lance pas la simulation du monde.
+     * @param mondeIG
+     * @param test
+     * @throws MondeException
+     */
+    public SimulationIG(MondeIG mondeIG,String test) throws MondeException {
+        this.mondeIG = mondeIG;
+    }
+
+    /**
      * Cette méthode vérifie que le monde est possible à simuler
      * @throws MondeException
      */
-    private void verifierMondeIG() throws MondeException {
+    public void verifierMondeIG() throws MondeException {
         test1();
         test2();
         test3();
@@ -41,7 +51,7 @@ PAs d'activite restreinte entree
      * Vérifier qu'il n'y a pas de guichet assigné comme sortie
      * @throws MondeException
      */
-    private void test1() throws MondeException {
+    public void test1() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
             if (etape.estGuichet() && etape.getEstUneSortie()) {
                 throw new MondeException("Erreur dans le test 1. Un guichet est déclaré comme sortie : " + etape);
@@ -53,7 +63,7 @@ PAs d'activite restreinte entree
      * Vérifier qu'il n'y a pas d'éléments isolés dans le monde
      * @throws MondeException
      */
-    private void test2() throws MondeException {
+    public void test2() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
             if (etape.nbPredecesseurs() == 0 && etape.nbSuccesseurs() == 0 && //pas de successeurs ni de prédecesseurs
                     (
@@ -71,9 +81,9 @@ PAs d'activite restreinte entree
      * Vérifier qu'il n'y a pas d'activité sans predecesseurs qui n'est pas une entrée
      * @throws MondeException
      */
-    private void test3() throws MondeException {
+    public void test3() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
-            if (etape.estActivite() && etape.nbPredecesseurs() == 0) {
+            if (etape.estActivite() && etape.nbPredecesseurs() == 0 && !etape.getEstUneEntree()) {
                 throw new MondeException("Erreur dans le test 3. L'activité n'est pas reliée à une entrée : " + etape);
             }
         }
@@ -83,7 +93,7 @@ PAs d'activite restreinte entree
      * Vérifier qu'il n'y a pas deux guichets qui se suivent
      * @throws MondeException
      */
-    private void test4() throws MondeException {
+    public void test4() throws MondeException {
         for(EtapeIG etape : this.mondeIG) {
             if (etape.estGuichet() && etape.nbSuccesseurs() > 0) { // etape est un guichet et possède des successeurs
                 for (EtapeIG etapesuccesseur : etape.getSuccesseurs().values()) { // on itère sur les successeurs de l'étape à analyser
@@ -99,15 +109,16 @@ PAs d'activite restreinte entree
      * Vérifier qu'il n'y a pas deux activités après un guichet
      * @throws MondeException
      */
-    private void test5() throws MondeException{
+    public void test5() throws MondeException{
         int nbActivite;
         for(EtapeIG etape : this.mondeIG) {
+            nbActivite=0;
 
             if (etape.estGuichet() && etape.nbSuccesseurs() > 0) { // etape est un guichet et possède des successeurs
-                nbActivite=0;
                 for (EtapeIG etapesuccesseur : etape.getSuccesseurs().values()) { // on itère sur les successeurs de l'étape à analyser
                     if (etapesuccesseur.estActivite()) { //l'un des successeurs est une activité
-                        nbActivite=+1;
+
+                        nbActivite=nbActivite+1;
                         if(nbActivite>=2) throw new MondeException("Erreur dans le test 5. Deux activités suivent le guichet :" + etape);
                     }
                 }
@@ -121,7 +132,7 @@ PAs d'activite restreinte entree
      * @param etape
      * @return true si une entrée est accessible depuis l'étape
      */
-    private boolean estAccessibleDepuisEntree(EtapeIG etape) {
+    public boolean estAccessibleDepuisEntree(EtapeIG etape) {
         Stack<EtapeIG> stack = new Stack<>();
         HashSet<EtapeIG> visited = new HashSet<>();
         stack.push(etape); //l'etape qu'on traite est rentrée dans la pile
@@ -148,7 +159,7 @@ PAs d'activite restreinte entree
      * Vérifier que l'activite est accessible par un predecesseur entree
      * @throws MondeException
      */
-    private void test6() throws MondeException {
+    public void test6() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
             if (!etape.getEstUneEntree() && (etape.nbPredecesseurs() > 0)) {
                 boolean accessible = estAccessibleDepuisEntree(etape);
@@ -164,7 +175,7 @@ PAs d'activite restreinte entree
      * @param etape
      * @return true si une sortie est accessible depuis l'étape
      */
-    private boolean estAccessibleJusquaSortie(EtapeIG etape) {
+    public boolean estAccessibleJusquaSortie(EtapeIG etape) {
         Stack<EtapeIG> stack = new Stack<>();
         HashSet<EtapeIG> visited = new HashSet<>();
         stack.push(etape);
@@ -191,7 +202,7 @@ PAs d'activite restreinte entree
      * Vérifier que l'activite donne accès à une sortie
      * @throws MondeException
      */
-    private void test7() throws MondeException{
+    public void test7() throws MondeException{
         for (EtapeIG etape : this.mondeIG) {
             if (!estAccessibleJusquaSortie(etape)) {
                 throw new MondeException("Erreur dans le test 7. L'étape ne donne pas accès à une sortie :" + etape);

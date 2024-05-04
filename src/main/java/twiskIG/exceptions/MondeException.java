@@ -1,6 +1,6 @@
 package twiskIG.exceptions;
 
-public class MondeException extends TwiskException {
+public class MondeException extends Exception {
 
     public MondeException(String exception) {
         super(exception);
