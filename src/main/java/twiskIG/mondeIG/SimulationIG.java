@@ -29,14 +29,11 @@ public class SimulationIG {
         test3();
         test4();
         test5();
+        test6();
+        test7();
         /*
 RAPPEL :
-Une entree et une sortie reliés.
 PAs d'activite restreinte entree
-Toues les éléments sont accessibles :
-- activite accessible a des successeurs qui mènent à une sortie
-- activite accessible par un predecesseur entree
-
  */
     }
 
@@ -129,15 +126,15 @@ Toues les éléments sont accessibles :
         HashSet<EtapeIG> visited = new HashSet<>();
         stack.push(etape); //l'etape qu'on traite est rentrée dans la pile
         while (!stack.isEmpty()) { //tq la pile n'est pas vide
-            EtapeIG current = stack.pop(); //dépiler
-            if (visited.contains(current)) { //si on a déjà visité
+            EtapeIG etapeEnCours = stack.pop(); //dépiler
+            if (visited.contains(etapeEnCours)) { //si on a déjà visité
                 continue;
             }
-            visited.add(current); //on ajoute l'etape comme déjà visité
-            if (current.getEstUneEntree()) { //si il y a une entree on continue
+            visited.add(etapeEnCours); //on ajoute l'etape comme déjà visitée
+            if (etapeEnCours.getEstUneEntree()) { //si il y a une entree on s'arrête
                 return true;
             }
-            for (EtapeIG pred : current.getPredecesseurs().values()) { //on ajoute les predecesseurs de l'étape à la pile
+            for (EtapeIG pred : etapeEnCours.getPredecesseurs().values()) { //on ajoute les predecesseurs de l'étape à la pile
                 if (!visited.contains(pred)) {
                     stack.push(pred);
                 }
@@ -157,11 +154,52 @@ Toues les éléments sont accessibles :
             if (!etape.getEstUneEntree() && (etape.nbPredecesseurs() > 0)) {
                 boolean accessible = estAccessibleDepuisEntree(etape);
                 if (!accessible) {
-                    throw new MondeException("Erreur dans le test 5. L'étape n'est pas accessible par une entrée :" + etape);
+                    throw new MondeException("Erreur dans le test 6. L'étape n'est pas accessible par une entrée :" + etape);
                 }
             }
         }
     }
+
+    /**
+     * Parcours des successeurs d'une etape pour trouver une sortie
+     * @param etape
+     * @return
+     */
+    private boolean estAccessibleJusquaSortie(EtapeIG etape) {
+        Stack<EtapeIG> stack = new Stack<>();
+        HashSet<EtapeIG> visited = new HashSet<>();
+        stack.push(etape);
+
+        while (!stack.isEmpty()) { //on cherche jusqu'à trouver une sortie
+            EtapeIG etapeEnCours = stack.pop();
+            if (visited.contains(etapeEnCours)) {
+                continue;
+            }
+            visited.add(etapeEnCours);
+            if (etapeEnCours.getEstUneSortie()) {
+                return true;
+            }
+            for (EtapeIG succ : etapeEnCours.getSuccesseurs().values()) {
+                if (!visited.contains(succ)) {
+                    stack.push(succ);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Vérifier que l'activite donne accès à une sortie
+     * @throws MondeException
+     */
+    private void test7() throws MondeException{
+        for (EtapeIG etape : this.mondeIG) {
+            if (!estAccessibleJusquaSortie(etape)) {
+                throw new MondeException("Erreur dans le test 7. L'étape ne donne pas accès à une sortie :" + etape);
+            }
+        }
+    }
+
     /**
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
