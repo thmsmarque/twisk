@@ -247,6 +247,60 @@ public class SimulationIGTest {
         assertThrows(MondeException.class,simulationIG::test5);
     }
 
+    // TEST 6 ===========================================================
+    @Test
+    public void testEntreeDFS() throws TwiskException, MondeException {
+        MondeIG mondeIG = new MondeIG();
+        mondeIG.ajouter("Activite",0);
+        mondeIG.ajouter("Guichet",1);
+        mondeIG.ajouter("Activite",2);
+        Iterator<EtapeIG> iterator = mondeIG.iterator();
+
+        //  pas d'entrée activite 2 = sortie -------------------
+        List<EtapeIG> etapes = new ArrayList<>();
+        mondeIG.iterator().forEachRemaining(etapes::add);
+        EtapeIG activite2 = etapes.get(2);
+        activite2.setEstUneSortie(true);
+        // ------------------------------------------------------------
+
+        PointDeControleIG p0 = new PointDeControleIG(0,0,iterator.next());
+        PointDeControleIG p1 = new PointDeControleIG(0,0,iterator.next());
+        PointDeControleIG p2 = new PointDeControleIG(0,0,iterator.next());
+        mondeIG.ajouter(p0,p1);
+        mondeIG.ajouter(p1,p2);
+
+        SimulationIG simulationIG = new SimulationIG(mondeIG,"test");
+        assertThrows(MondeException.class,simulationIG::test6);
+    }
+
+    // TEST 7 =============================================================
+    @Test
+    public void testSortieDFS() throws TwiskException, MondeException {
+        MondeIG mondeIG = new MondeIG();
+        mondeIG.ajouter("Activite",0);
+        mondeIG.ajouter("Guichet",1);
+        mondeIG.ajouter("Activite",2);
+
+        Iterator<EtapeIG> iterator = mondeIG.iterator();
+
+        //  activite 1 = entree et pas de sortie  -------------------
+        List<EtapeIG> etapes = new ArrayList<>();
+        mondeIG.iterator().forEachRemaining(etapes::add);
+        EtapeIG activite1 = etapes.get(0);
+        activite1.setEstUneEntree(true);
+
+        // ------------------------------------------------------------
+
+        PointDeControleIG p0 = new PointDeControleIG(0,0,iterator.next());
+        PointDeControleIG p1 = new PointDeControleIG(0,0,iterator.next());
+        PointDeControleIG p2 = new PointDeControleIG(0,0,iterator.next());
+
+        mondeIG.ajouter(p0,p1);
+        mondeIG.ajouter(p1,p2);
+
+        SimulationIG simulationIG = new SimulationIG(mondeIG,"test");
+        assertThrows(MondeException.class,simulationIG::test7);
+    }
 }
 
 /* MONDE SIMPLE FONCTIONNEL: act - guichet - act
