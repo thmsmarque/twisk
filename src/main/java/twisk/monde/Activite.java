@@ -96,7 +96,7 @@ public class Activite extends Etape {
                 if(i==0) {
                     build.append("\n if (nb==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n");
                 } else {
-                    build.append("} \nelse if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n } \n");
+                    build.append("\nelse if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n } \n");
                 }
                 i++;
 
