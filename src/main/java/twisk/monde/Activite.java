@@ -84,7 +84,7 @@ public class Activite extends Etape {
         }else if(nbSuccesseur>1)
         {
             //Dans le cas où l'étape actuelle a plusieurs successeurs
-            res = "int nb = (int) ((rand() / (float) RAND_MAX)*" + this.getGestionnaire().nbEtapes() + ");\n";
+            res = "nb = (int) ((rand() / (float) RAND_MAX)*" + this.getGestionnaire().nbEtapes() + ");\n";
             StringBuilder build = new StringBuilder(res);
 
             int i = 0;
@@ -96,7 +96,7 @@ public class Activite extends Etape {
                 if(i==0) {
                     build.append("\n if (nb==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n");
                 } else {
-                    build.append("else if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n } \n");
+                    build.append("} \n else if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n } \n");
                 }
                 i++;
 
