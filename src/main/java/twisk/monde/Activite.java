@@ -158,10 +158,11 @@ public class Activite extends Etape {
     public String defineName() {
 
         Iterator<Etape> it = this.getGestionnaire().getListeetapes().iterator();
-        String res ="";
+        String res ="\n#define "+this.getDefineName() + this.getIndiceEtape();
+        while(it.hasNext()){
             Etape et = it.next();
-            res = res + "\n#define "+et.getDefineName() + et.getIndiceEtape()
-                    +et.defineName();
+            res = res + et.defineName();
+        };
 
 
         return res;
