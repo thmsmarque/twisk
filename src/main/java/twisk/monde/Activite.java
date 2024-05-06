@@ -156,9 +156,15 @@ public class Activite extends Etape {
 
     @Override
     public String defineName() {
-        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
-        return "\n#define "+this.getDefineName() + this.getIndiceEtape()
-                +et.defineName();
+
+        Iterator<Etape> it = this.getGestionnaire().getListeetapes().iterator();
+        String res ="";
+            Etape et = it.next();
+            res = res + "\n#define "+et.getDefineName() + et.getIndiceEtape()
+                    +et.defineName();
+
+
+        return res;
     }
 
     @Override

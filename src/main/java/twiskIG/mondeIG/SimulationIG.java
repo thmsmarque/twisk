@@ -214,8 +214,13 @@ PAs d'activite restreinte entree
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
     private void simuler(){
-        Simulation sim = new Simulation();
-        sim.simuler(creerMonde());
+        try {
+            verifierMondeIG();
+            Simulation sim = new Simulation();
+            sim.simuler(creerMonde());
+        } catch (MondeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
