@@ -118,6 +118,7 @@ public class Monde implements Iterable<Etape> {
         String res = "#include \"def.h\"\n" +
             etDef.defineName() +
             "\n\nvoid simulation(int ids)\n{\n" +
+                "int nb; \n" +
                 "entrer(0);\n" +
                 "delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +
                 "transfert(0,"+et.getIndiceEtape() +");\n" + et.toC();
