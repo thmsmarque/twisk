@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import twiskIG.mondeIG.MondeIG;
+import twiskIG.outils.TailleComposants;
 import twiskIG.vues.VueActiviteIG;
 import twiskIG.vues.VueMenu;
 import twiskIG.vues.VueMondeIG;
@@ -26,13 +27,11 @@ public class MainTwisk extends Application {
         root.setTop(new VueMenu(monde));
 
         //pour récupérer la taille de l'écran :
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-
+        TailleComposants taille = TailleComposants.getInstance();
         stage.setScene(new Scene(root));
-        stage.setX(screenBounds.getMinX());
-        stage.setY(screenBounds.getMinY());
-        stage.setWidth(screenBounds.getWidth());
-        stage.setHeight(screenBounds.getHeight());
+
+        stage.setWidth(taille.getTailleFenetreX());
+        stage.setHeight(taille.getTailleFenetreY());
 
         stage.show();
     }

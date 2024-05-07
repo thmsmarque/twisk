@@ -53,11 +53,11 @@ public class TailleComposants {
     }
 
     public int getTailleFenetreX() {
-        return tailleFenetreX;
+        return tailleFenetreX-500;
     }
 
     public int getTailleFenetreY() {
-        return tailleFenetreY;
+        return tailleFenetreY-300;
     }
 
     public int getMarge() {

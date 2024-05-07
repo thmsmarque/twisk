@@ -50,11 +50,11 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
         Random random = new Random();
         do {
-            this.posX = random.nextInt(taille.getTailleFenetreX() - taille.getMarge());
-        }while(posX<=taille.getMarge());
+            this.posX = random.nextInt(taille.getTailleFenetreX());
+        }while(posX<=taille.getMarge() || posX>= (taille.getTailleFenetreX()-taille.getMarge()));
         do{
-            this.posY = random.nextInt(taille.getTailleFenetreY() - taille.getMarge());
-        } while(posY<=taille.getMarge());
+            this.posY = random.nextInt(taille.getTailleFenetreY());
+        } while(posY<=taille.getMarge() || posY>=(taille.getTailleFenetreY()- taille.getMarge()));
 
         this.pointsdeC = new ArrayList<>();
         System.out.println(taille.getTailleFenetreX() + " " + taille.getTailleFenetreY());
