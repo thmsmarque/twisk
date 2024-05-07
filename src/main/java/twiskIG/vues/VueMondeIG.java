@@ -63,10 +63,14 @@ private final MondeIG monde;
             }
 
             for(PointDeControleIG pc : etape){
-                //TEMP :
                 getChildren().add(new VuePointDeControle(this.monde,pc));
             }
-
+//AJOUTER LES CLIENTS :------------------------------
+            for(EtapeIG etapeIG : monde){
+                for(ClientIG client : etapeIG.getClientsDansEtape()){
+                    getChildren().add(new VueClientIG(client,monde,etapeIG));
+                }
+            }
 
         }
 

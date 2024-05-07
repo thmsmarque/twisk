@@ -57,7 +57,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         } while(posY<=taille.getMarge() || posY>=(taille.getTailleFenetreY()- taille.getMarge()));
 
         this.pointsdeC = new ArrayList<>();
-        System.out.println(taille.getTailleFenetreX() + " " + taille.getTailleFenetreY());
 
 
         for(int i =0;i<4;i++){

@@ -9,10 +9,12 @@ import twiskIG.vues.ecouteur.EcouteurVuePointDeControleIG;
 
 public class VueClientIG extends Circle implements Observateur{
 
-    public ClientIG client;
+    private ClientIG client;
+    private EtapeIG etape;
 
-    public VueClientIG(ClientIG client, MondeIG monde) {
+    public VueClientIG(ClientIG client, MondeIG monde,EtapeIG etape) {
         this.client = client;
+        this.etape = etape;
 
         setCenterX(client.getPosx());
         setCenterY(client.getPosy());
