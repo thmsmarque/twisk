@@ -21,7 +21,17 @@ public class ActiviteIG extends EtapeIG{
         return true;
     }
 
-
+    @Override
+    public Boolean estActiviteRestreinte() {
+        for(EtapeIG e : this.predecesseurs.values())
+        {
+            if(e.estGuichet())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     @Override

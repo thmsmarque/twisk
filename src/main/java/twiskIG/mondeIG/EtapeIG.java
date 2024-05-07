@@ -238,6 +238,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * @return est une activite ou non
      */
     public abstract Boolean estActivite();
+    public abstract Boolean estActiviteRestreinte();
     public abstract Boolean estGuichet();
 
     public int getDelai() {
