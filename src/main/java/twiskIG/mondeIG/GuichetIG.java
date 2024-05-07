@@ -57,4 +57,12 @@ public class GuichetIG extends EtapeIG {
     public String toString() {
         return super.toString();
     }
+
+    public static class ClientIG {
+
+
+        public ClientIG(){
+
+        }
+    }
 }

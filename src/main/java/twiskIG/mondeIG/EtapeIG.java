@@ -24,7 +24,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private boolean estUneSortie;
     public HashMap<String,EtapeIG> predecesseurs;
     public HashMap<String,EtapeIG> successeurs;
-
+    public ArrayList<ClientIG> clientsDansEtape;
 
     /**Constructeur de la classe abstraite EtapeIG
      * @param nom
@@ -66,6 +66,9 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         // Initialisation des successeur / predecesseur
         this.successeurs = new HashMap<>();
         this.predecesseurs = new HashMap<>();
+
+        // Initialisation de la liste des clients :
+        this.clientsDansEtape = new ArrayList<>();
     }
 
     /**
@@ -261,13 +264,41 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
                 nom + '\'' +
                 ", n°'" + identifiant + '\'' + "\n Successeurs :" + successeurs.size() + " \n Predecesseurs : " + predecesseurs.size() + "\n =================" ;
     }
-    //A REVOIRR========================================= POUR RENVOYER EN LECTURE SEULE
+
+    /**
+     * Renvoie la collection des étapes suivantes d'une étape
+     * @return
+     */
     public Map<String,EtapeIG> getSuccesseurs(){
         return Collections.unmodifiableMap(successeurs);
     }
 
+    /**
+     * Renvoie la collection des étapes précédents d'une étape
+     * @return
+     */
     public Map<String,EtapeIG> getPredecesseurs(){
         return Collections.unmodifiableMap(predecesseurs);
+    }
+
+    /**
+     * Ajoute un client dans l'étape
+     * @param client
+     */
+    public void ajouterClients(ClientIG client){
+        clientsDansEtape.add(client);
+    }
+
+    /**
+     * Supprime un client présent dans l'étape
+     * @param client
+     */
+    public void supprimerClients(ClientIG client){
+        clientsDansEtape.remove(client);
+    }
+
+    public ArrayList<ClientIG> getClientsDansEtape() {
+        return clientsDansEtape;
     }
 
     @Override
