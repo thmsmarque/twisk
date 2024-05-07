@@ -88,9 +88,11 @@ public class Activite extends Etape {
             StringBuilder build = new StringBuilder(res);
 
             int i = 0;
+            Iterator<Etape> it2 = this.getGestionnaire().iterator();
 
-            for(Etape e : gestionnaire){
-                String suivant = e.toC();
+            while(it2.hasNext()){
+                et = it2.next();
+                String suivant = et.toC();
                 String actuel = "delai("+this.temps+","+this.ecartTemps+");\n" +
                         "transfert("+this.getDefineName()+","+et.getDefineName()+");\n" ;
                 if(i==0) {
