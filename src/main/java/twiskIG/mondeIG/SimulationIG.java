@@ -13,6 +13,7 @@ import java.util.Stack;
 
 public class SimulationIG {
     private MondeIG mondeIG;
+    public CorrespondancesEtapes ce;
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
@@ -41,6 +42,7 @@ public class SimulationIG {
         test5();
         test6();
         test7();
+        test8();
         /*
 RAPPEL :
 PAs d'activite restreinte entree
@@ -211,6 +213,24 @@ PAs d'activite restreinte entree
     }
 
     /**
+     * Vérifie que chaque activité qui suit un guichet est une activité restreinte
+     */
+    public void test8() throws MondeException
+    {
+        for(EtapeIG etape : this.mondeIG) {
+            if(etape.estGuichet())
+            {
+                for(EtapeIG e : etape.successeurs.values())
+                {
+                    if(!e.estActiviteRestreinte())
+                        throw new MondeException("Erreur dans le test 8. L'étape qui succède un des guichets n'est pas une activité restreinte");
+                }
+            }
+
+        }
+    }
+
+    /**
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
     private void simuler(){
@@ -307,7 +327,7 @@ PAs d'activite restreinte entree
 
         }
 
-
+        this.ce = correspondancesEtapes;
         return monde;
     }
 }

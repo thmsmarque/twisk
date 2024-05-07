@@ -23,6 +23,10 @@ public class GuichetIG extends EtapeIG {
         return false;
     }
 
+    @Override
+    public Boolean estActiviteRestreinte() {
+        return false;
+    }
 
 
     @Override
