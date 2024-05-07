@@ -28,7 +28,6 @@ public class VueActiviteIG extends VueEtapeIG {
         this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
 
-
     }
 
     @Override

@@ -115,9 +115,10 @@ public class Activite extends Etape {
                     "} \n");
             res = build.toString();
 */
+
             res = build.toString();
         }
-
+        res.replaceAll("}\n}\n","}\n");
         return res;
     }
 
