@@ -1,5 +1,8 @@
 package twiskIG.outils;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+
 /**
  * Singleton pour définir la taille des différents composants graphiques
  */
@@ -7,14 +10,19 @@ public class TailleComposants {
 
     private static TailleComposants instance = null;
 
+
+
     private final int tailleVBOXActivite = 80;
     private final int tailleHBOXActivite = 50;
 
     private final int tailleVBOXGuichet = 50;
     private final int tailleCoteGuichetPlace = 20;
 
-    private final int tailleFenetre = 700;
+    private final int tailleFenetreX = (int) Screen.getPrimary().getVisualBounds().getWidth();
+    private final int tailleFenetreY = (int) Screen.getPrimary().getVisualBounds().getHeight();
 
+
+    private final int marge = 200;
 
     private TailleComposants(){
 
@@ -44,7 +52,15 @@ public class TailleComposants {
         return tailleCoteGuichetPlace;
     }
 
-    public int getTailleFenetre() {
-        return tailleFenetre;
+    public int getTailleFenetreX() {
+        return tailleFenetreX;
+    }
+
+    public int getTailleFenetreY() {
+        return tailleFenetreY;
+    }
+
+    public int getMarge() {
+        return marge;
     }
 }
