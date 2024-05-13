@@ -2,6 +2,7 @@ package twiskIG.mondeIG;
 
 import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.TailleComposants;
+import twiskIG.vues.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 /**
  * Classe MondeIG
  */
-public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
+public class MondeIG  extends SujetObserve implements Observateur, Iterable<EtapeIG>{
     private HashMap<String,EtapeIG> map;
 
     private ArrayList<ArcIG> arcs;
@@ -172,6 +173,11 @@ public class MondeIG  extends SujetObserve implements Iterable<EtapeIG>{
      */
     public HashMap<String, EtapeIG> getMap() {
         return map;
+    }
+
+    @Override
+    public void reagir() {
+        
     }
 }
 
