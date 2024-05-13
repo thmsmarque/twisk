@@ -332,8 +332,17 @@ PAs d'activite restreinte entree
         return monde;
     }
 
+    /**
+     * Propage les modifications de Simulation à MondeIG
+     */
     @Override
     public void reagir() {
+        for(EtapeIG etapeIG : mondeIG){
+            Etape e = ce.get(etapeIG):
+            e.
+            etapeIG.getClientsDansEtape();
+        }
+
 
     }
 }

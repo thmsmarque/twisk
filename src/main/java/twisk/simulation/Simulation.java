@@ -15,7 +15,7 @@ public class Simulation {
 
     KitC kit;
     private int nbClients;
-
+    private GestionnaireClients g;
     public Simulation()
     {
         this.kit = new KitC();
@@ -29,9 +29,10 @@ public class Simulation {
 
 
         Task<Void> task = new Task<Void>() {
+
             @Override
             protected Void call() throws Exception {
-
+                GestionnaireClients g = monde.getG();
                 KitC kit = new KitC();
                 String fichierC = monde.toC();
                 System.out.println(fichierC);
@@ -66,7 +67,6 @@ public class Simulation {
                 int[] resSim;
                 resSim = start_simulation(nbEtapes,nbGuichets,nbClients,tabJetonsGuichet);
                 //Gestionnaire de clients :
-                GestionnaireClients g = new GestionnaireClients();
                 g.setClients(resSim);
 
                 //affichage des numéros de processus :
@@ -243,6 +243,10 @@ public class Simulation {
 
     public void setNbClients(int nbClients){
         this.nbClients=nbClients; //de base
+    }
+
+    public GestionnaireClients getG() {
+        return g;
     }
 
     public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet);

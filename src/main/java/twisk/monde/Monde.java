@@ -1,12 +1,14 @@
 package twisk.monde;
 
+import twisk.simulation.GestionnaireClients;
+
 import java.util.Iterator;
 
 public class Monde implements Iterable<Etape> {
-    public GestionnaireEtapes lesEtapes;
-    SasEntree entree;
-    SasSortie sortie;
-
+    private GestionnaireEtapes lesEtapes;
+    private SasEntree entree;
+    private SasSortie sortie;
+    private GestionnaireClients g;
     /**
      * Constructeur de la classe Monde
      */
@@ -17,6 +19,7 @@ public class Monde implements Iterable<Etape> {
         this.entree = new SasEntree();
         this.sortie = new SasSortie();
         lesEtapes.ajouter(entree,sortie);
+        this.g = new GestionnaireClients();
 
     }
 
@@ -134,6 +137,10 @@ public class Monde implements Iterable<Etape> {
     public Iterator<Etape> iterator()
     {
         return lesEtapes.iterator();
+    }
+
+    public GestionnaireClients getG() {
+        return g;
     }
 
     @Override
