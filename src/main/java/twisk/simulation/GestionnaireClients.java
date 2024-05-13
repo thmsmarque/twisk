@@ -37,7 +37,15 @@ public class GestionnaireClients implements Iterable<Client> {
      * @param rang  visualise un ordre dans une file d’attente
      */
     public void allerA(int numeroClient, Etape etape, int rang){
-    mapclient.get(numeroClient).allerA(etape,rang);
+        //mise  à jour des clients dans les étapes concernés :
+        Etape ancienneEtape = mapclient.get(numeroClient).getEtape();
+        ancienneEtape.retirerClient(numeroClient);
+
+        // ----------------------------------------------
+        mapclient.get(numeroClient).allerA(etape,rang);
+        //-----------------------------------------------
+        //Ajout du client dans la nouvelle étape :
+        etape.ajouterClient(getClient(numeroClient));
     }
 
     /**
