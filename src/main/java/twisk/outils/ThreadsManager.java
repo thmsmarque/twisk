@@ -36,6 +36,7 @@ public class ThreadsManager {
      */
     public void detruireTout()
     {
+        //!! Se contente d'interronpre sans tuer les threads !!
         for(Thread thread : threads)
         {
             thread.interrupt();

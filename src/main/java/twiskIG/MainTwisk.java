@@ -22,6 +22,7 @@ public class MainTwisk extends Application {
         BorderPane root = new BorderPane();
         MondeIG monde = new MondeIG();
 
+
         root.setCenter(new VueMondeIG(monde));
         root.setBottom(new VueOutils(monde));
         root.setTop(new VueMenu(monde));

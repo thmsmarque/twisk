@@ -18,6 +18,8 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     private PointDeControleIG pointSauv;
 
+    private boolean enCoursDeSim;
+
     /**
      * Constructeur de MondeIG
      */
@@ -25,6 +27,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
         this.map = new HashMap<>();
         this.pointSauv=null;
         arcs = new ArrayList<>();
+        enCoursDeSim = false;
         //this.ajouter("Activite0");
     }
 
@@ -52,6 +55,27 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
         }
         arcs.add(new ArcIG(pt1, pt2));
         this.pointSauv = null;
+    }
+
+    /**
+     * Renvoi l'état de la simulation
+     * @return état de la simulation
+     */
+    public boolean getEnCoursDeSim()
+    {
+        return enCoursDeSim;
+    }
+
+    /**
+     * Inverse l'état de la simulation
+     * @return le nouvel état de la simulation
+     */
+    public boolean switchEtatSim()
+    {
+        enCoursDeSim = !enCoursDeSim;
+        System.out.println("L'état de la sim est passée à"+enCoursDeSim);
+        this.notifierObservateurs();
+        return enCoursDeSim;
     }
 
 

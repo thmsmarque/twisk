@@ -130,6 +130,9 @@ public class Monde implements Iterable<Etape> {
         return res;
     }
 
+
+
+
     /**
      * Crée l'iterator de la classe monde
      * @return l'iterator de la classe monde
