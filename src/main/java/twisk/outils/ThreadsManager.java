@@ -15,19 +15,31 @@ public class ThreadsManager {
         threads = new ArrayList<>();
     }
 
-    static ThreadsManager getInstance()
+    public static ThreadsManager getInstance()
     {
         return instance;
     }
 
+    /**
+     * Lance l'execution d'une tâche via un nouveau thread
+     * @param task tâche à éxecuter
+     */
     public void lancer(Task task)
     {
-
+        Thread thread = new Thread(task);
+        this.threads.add(thread);
+        thread.start();
     }
 
+    /**
+     * Détruit tous les threads existants
+     */
     public void detruireTout()
     {
-
+        for(Thread thread : threads)
+        {
+            thread.interrupt();
+        }
     }
 
 
