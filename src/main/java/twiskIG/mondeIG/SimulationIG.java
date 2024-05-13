@@ -5,13 +5,14 @@ import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
 import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
+import twiskIG.vues.Observateur;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
 
-public class SimulationIG {
+public class SimulationIG implements Observateur {
     private MondeIG mondeIG;
     public CorrespondancesEtapes ce;
 
@@ -329,5 +330,10 @@ PAs d'activite restreinte entree
 
         this.ce = correspondancesEtapes;
         return monde;
+    }
+
+    @Override
+    public void reagir() {
+
     }
 }
