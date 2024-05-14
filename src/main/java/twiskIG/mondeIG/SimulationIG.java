@@ -338,13 +338,13 @@ PAs d'activite restreinte entree
      */
     @Override
     public void reagir() {
-        /*
+
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
-            e.
+
             etapeIG.getClientsDansEtape();
         }
 
-*/
+
     }
 }

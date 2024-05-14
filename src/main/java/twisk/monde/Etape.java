@@ -1,14 +1,17 @@
 package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
+import twisk.simulation.Client;
+import twisk.simulation.GestionnaireClients;
 
 import java.lang.String;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public abstract class Etape implements Iterable<Etape>{
     private String nom;
     GestionnaireEtapes gestionnaire;
-
+    private HashMap<Integer, Client> clientDansLetape;
     private int indiceEtape;
 
 
@@ -18,9 +21,19 @@ public abstract class Etape implements Iterable<Etape>{
      */
     public Etape(String nom){
         this.nom = nom;
-        gestionnaire = new GestionnaireEtapes();
+        this.gestionnaire = new GestionnaireEtapes();
         indiceEtape = FabriqueNumero.getInstance().getNumeroEtape();
+        this.clientDansLetape = new HashMap<>();
     }
+
+    public void ajouterClient(Client c){
+        this.clientDansLetape.put(c.getNumeroClient(),c);
+    }
+
+    public void retirerClient(int numprocessus){
+        this.clientDansLetape.remove(numprocessus);
+    }
+
 
     /**
      *
