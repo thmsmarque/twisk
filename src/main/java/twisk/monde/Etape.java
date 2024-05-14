@@ -90,6 +90,10 @@ public abstract class Etape implements Iterable<Etape>{
                 '}';
     }
 
+    public int getNbClientDansEtape(){
+        return this.clientDansLetape.size();
+    }
+
     /**
      * retourne l'entier represantant l'indice de l'étape
      * @return l'indice de l'étape

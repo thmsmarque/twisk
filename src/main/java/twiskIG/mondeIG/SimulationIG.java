@@ -3,6 +3,7 @@ package twiskIG.mondeIG;
 import twisk.ClientTwisk;
 import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
+import twisk.simulation.Client;
 import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
 import twiskIG.vues.Observateur;
@@ -19,6 +20,7 @@ public class SimulationIG implements Observateur {
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
         this.simuler();
+
     }
 
     /**
@@ -335,14 +337,24 @@ PAs d'activite restreinte entree
 
     /**
      * Propage les modifications de Simulation à MondeIG
+     * Met à jour le nombre de client dans chaque activité ig
      */
     @Override
     public void reagir() {
-
+    System.out.println("aaaaaaaaaaaaaaaa");
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
-
-            etapeIG.getClientsDansEtape();
+            int nbclientsdansletape = e.getNbClientDansEtape();
+            int nbclientsdansletapeIG = etapeIG.getClientsDansEtape().size();
+            Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
+            while(nbclientsdansletapeIG!=nbclientsdansletape) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
+                //mise à jour de l'ig
+                if (nbclientsdansletapeIG > nbclientsdansletape) { //il y a plus de client dans l'ig que dans l'etape
+                        etapeIG.supprimerClients(c.next());
+                } else if(nbclientsdansletapeIG<nbclientsdansletape) { //il y a plus de client dans l'étape que dans l'IG
+                    etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
+                }
+            }
         }
 
 
