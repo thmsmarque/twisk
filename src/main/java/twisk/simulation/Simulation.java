@@ -80,6 +80,12 @@ public class Simulation extends SujetObserve {
 
                 //On affiche où sont les clients :
                 do {
+
+                    if(!mondeIG.getEnCoursDeSim())
+                    {
+                        kit.detruireLesProcessus(resSim);
+                    }
+
                     posClients = ou_sont_les_clients(nbEtapes,nbClients);
                     try {
                         Thread.sleep(1000);
