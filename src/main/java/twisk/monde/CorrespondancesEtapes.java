@@ -11,6 +11,7 @@ public class CorrespondancesEtapes {
 
     public CorrespondancesEtapes()
     {
+
         etapes = new HashMap<EtapeIG,Etape>();
     }
 

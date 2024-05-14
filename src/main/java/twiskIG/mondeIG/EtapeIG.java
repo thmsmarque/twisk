@@ -1,5 +1,6 @@
 package twiskIG.mondeIG;
 
+import twisk.simulation.Client;
 import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.FabriqueIdentifiant;
 import twiskIG.outils.TailleComposants;
@@ -292,7 +293,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * @param client
      */
     public void ajouterClients(ClientIG client){
-        clientsDansEtape.add(client);
+        ArrayList<ClientIG> clientsDansEtapetemp = clientsDansEtape;
+        clientsDansEtapetemp.add(client);
+        clientsDansEtape=clientsDansEtapetemp;
+
     }
 
     /**
@@ -300,7 +304,9 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * @param client
      */
     public void supprimerClients(ClientIG client){
-        clientsDansEtape.remove(client);
+        ArrayList<ClientIG> clientsDansEtapetemp = clientsDansEtape;
+        clientsDansEtapetemp.remove(client);
+        clientsDansEtape=clientsDansEtapetemp;
     }
 
     public ArrayList<ClientIG> getClientsDansEtape() {

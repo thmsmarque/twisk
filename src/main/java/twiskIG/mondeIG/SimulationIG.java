@@ -341,7 +341,6 @@ PAs d'activite restreinte entree
      */
     @Override
     public void reagir() {
-    System.out.println("aaaaaaaaaaaaaaaa");
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
             int nbclientsdansletape = e.getNbClientDansEtape();
@@ -356,7 +355,6 @@ PAs d'activite restreinte entree
                 }
             }
         }
-
     mondeIG.reagir();
     }
 }
