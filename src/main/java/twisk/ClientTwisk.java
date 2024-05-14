@@ -4,6 +4,7 @@ import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
 import twisk.outils.FabriqueNumero;
 import twisk.simulation.Simulation;
+import twiskIG.mondeIG.MondeIG;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -28,7 +29,6 @@ public class ClientTwisk {
                 choix = scan.nextInt();
             } while (choix < 0 || choix > 4);
             Simulation sim = new Simulation();
-
             switch (choix) {
                 case 0:
                     System.out.println("Au revoir!");
@@ -39,7 +39,7 @@ public class ClientTwisk {
                     break;
                 case 2:
                     System.out.println("Simulation de la gare :\n");
-                    sim.simuler(gare());
+                    simulerMonde(gare());
                     break;
                 case 3:
                     System.out.println("Simulation de la fac :\n");
@@ -47,7 +47,7 @@ public class ClientTwisk {
                     break;
                 case 4:
                     System.out.println("Simulation de la route des enfers :\n");
-                    sim.simuler(enfer());
+                    simulerMonde(enfer());
                     break;
                 default:
                     System.out.println("Au revoir!");

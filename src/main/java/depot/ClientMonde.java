@@ -2,6 +2,7 @@ package depot;
 
 import twisk.monde.*;
 import twisk.simulation.Simulation;
+import twiskIG.mondeIG.MondeIG;
 
 public class ClientMonde {
 
@@ -28,7 +29,8 @@ public class ClientMonde {
 
         Simulation s = new Simulation();
         s.setNbClients(5);
-        s.simuler(monde);
+        MondeIG mondeIG = new MondeIG();
+        s.simuler(monde, mondeIG);
     }
 
 }

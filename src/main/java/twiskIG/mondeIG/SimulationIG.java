@@ -241,7 +241,7 @@ PAs d'activite restreinte entree
             verifierMondeIG();
             mondeIG.switchEtatSim();
             Simulation sim = new Simulation();
-            sim.simuler(creerMonde());
+            sim.simuler(creerMonde(),mondeIG);
         } catch (MondeException e) {
             throw new RuntimeException(e);
         }
