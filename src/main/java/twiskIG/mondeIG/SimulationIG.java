@@ -19,6 +19,7 @@ public class SimulationIG implements Observateur {
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
+        mondeIG.ajouterObservateur(this);
         this.simuler();
 
     }
@@ -241,7 +242,7 @@ PAs d'activite restreinte entree
         try {
             verifierMondeIG();
             mondeIG.switchEtatSim();
-            Simulation sim = new Simulation();
+            Simulation sim = new Simulation();    //faire une introspection
             sim.simuler(creerMonde(),mondeIG);
         } catch (MondeException e) {
             throw new RuntimeException(e);
