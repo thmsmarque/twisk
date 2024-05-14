@@ -357,6 +357,6 @@ PAs d'activite restreinte entree
             }
         }
 
-
+    mondeIG.reagir();
     }
 }

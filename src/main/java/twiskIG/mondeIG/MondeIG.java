@@ -201,7 +201,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     @Override
     public void reagir() {
-        
+        notifierObservateurs();
     }
 }
 
