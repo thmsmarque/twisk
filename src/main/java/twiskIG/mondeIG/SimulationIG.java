@@ -31,6 +31,7 @@ public class SimulationIG implements Observateur {
      */
     public SimulationIG(MondeIG mondeIG,String test) throws MondeException {
         this.mondeIG = mondeIG;
+        mondeIG.ajouterObservateur(this);
     }
 
     /**
@@ -341,6 +342,7 @@ PAs d'activite restreinte entree
      */
     @Override
     public void reagir() {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
             int nbclientsdansletape = e.getNbClientDansEtape();
