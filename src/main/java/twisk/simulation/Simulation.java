@@ -81,6 +81,12 @@ public class Simulation {
 
                 //On affiche où sont les clients :
                 do {
+
+                    if(!mondeIG.getEnCoursDeSim())
+                    {
+                        kit.detruireLesProcessus(resSim);
+                    }
+
                     posClients = ou_sont_les_clients(nbEtapes,nbClients);
 
                     try {

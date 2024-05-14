@@ -85,9 +85,22 @@ public class KitC {
      * Cette méthode détruit tous les processus (les clients, elle détruit les clients)
      * @param pid client à détruire
      */
-    public void detruireLesProcessus(int pid)
+    public void detruireLesProcessus(int... pid)
     {
 
+        for(int i : pid) {
+            String command = "kill -9 " + pid;
+
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", command);
+                Process process = processBuilder.start();
+                process.waitFor();
+                System.out.println("Process with PID " + pid + " has been killed.");
+
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
