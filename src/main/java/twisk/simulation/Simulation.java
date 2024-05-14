@@ -9,10 +9,11 @@ import twisk.outils.FabriqueNumeroLibTwisk;
 import twisk.outils.KitC;
 import twisk.outils.ThreadsManager;
 import twiskIG.mondeIG.MondeIG;
+import twiskIG.mondeIG.SujetObserve;
 
 import java.util.Iterator;
 
-public class Simulation {
+public class Simulation extends SujetObserve {
 
     KitC kit;
     private int nbClients;
@@ -25,10 +26,7 @@ public class Simulation {
     }
 
     public void simuler(Monde monde, MondeIG mondeIG) {
-
-
-
-
+        this.ajouterObservateur(mondeIG);
         Task<Void> task = new Task<Void>() {
 
             @Override
@@ -83,7 +81,6 @@ public class Simulation {
                 //On affiche où sont les clients :
                 do {
                     posClients = ou_sont_les_clients(nbEtapes,nbClients);
-
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -113,6 +110,7 @@ public class Simulation {
                         etapeActuel++;
                     }
 
+                    notifierObservateurs();
                     System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
                     int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
 

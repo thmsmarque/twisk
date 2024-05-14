@@ -31,7 +31,7 @@ public class SimulationIG implements Observateur {
      */
     public SimulationIG(MondeIG mondeIG,String test) throws MondeException {
         this.mondeIG = mondeIG;
-        //mondeIG.ajouterObservateur(this);
+        mondeIG.ajouterObservateur(this);
     }
 
     /**
