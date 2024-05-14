@@ -20,7 +20,7 @@ public class SimulationIG implements Observateur {
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
         this.simuler();
-
+        mondeIG.ajouterObservateur(this);
     }
 
     /**

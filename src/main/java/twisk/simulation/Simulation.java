@@ -116,7 +116,7 @@ public class Simulation extends SujetObserve {
                         etapeActuel++;
                     }
 
-                    notifierObservateurs();
+                    //notifierObservateurs();
                     System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
                     int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
 
