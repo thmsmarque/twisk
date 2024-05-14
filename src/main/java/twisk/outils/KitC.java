@@ -81,4 +81,13 @@ public class KitC {
         }
     }
 
+    /**
+     * Cette méthode détruit tous les processus (les clients, elle détruit les clients)
+     * @param pid client à détruire
+     */
+    public void detruireLesProcessus(int pid)
+    {
+
+    }
+
 }
