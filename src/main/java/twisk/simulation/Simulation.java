@@ -26,11 +26,9 @@ public class Simulation extends SujetObserve {
     }
 
     public void simuler(Monde monde, MondeIG mondeIG) {
-        this.ajouterObservateur(mondeIG);
-        Task<Void> task = new Task<Void>() {
 
-            @Override
-            protected Void call() throws Exception {
+        mondeIG.switchEtatSim();
+        System.out.println("Lancement de la simulation logique");
                 GestionnaireClients g = monde.getG();
                 KitC kit = new KitC();
                 String fichierC = monde.toC();
@@ -80,12 +78,6 @@ public class Simulation extends SujetObserve {
 
                 //On affiche où sont les clients :
                 do {
-
-                    if(!mondeIG.getEnCoursDeSim())
-                    {
-                        kit.detruireLesProcessus(resSim);
-                    }
-
                     posClients = ou_sont_les_clients(nbEtapes,nbClients);
                     try {
                         Thread.sleep(1000);
@@ -116,7 +108,7 @@ public class Simulation extends SujetObserve {
                         etapeActuel++;
                     }
 
-                    //notifierObservateurs();
+                    notifierObservateurs();
                     System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
                     int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
 
@@ -135,22 +127,27 @@ public class Simulation extends SujetObserve {
                     System.out.println(" ");
                     etapeActuel++;
                     System.out.println("\n");
-                }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
+                }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients && mondeIG.getEnCoursDeSim()); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
                 System.out.println("La simulation est terminée");
-                mondeIG.switchEtatSim();
+                if(mondeIG.getEnCoursDeSim()) {
+                    //La simulation n'a pas été interrompu en cours de sim
+                    mondeIG.switchEtatSim();
+                }else
+                {
+                    //La simulation a été interrompu avant la fin
+                        kit.detruireLesProcessus(resSim);
+                }
                 mondeIG.notifierObservateurs();
                 nettoyage();
                 FabriqueNumero.getInstance().reset();
-                return null;
-            }
-        };
 
-        ThreadsManager.getInstance().lancer(task);
+        ThreadsManager.getInstance().detruireTout();
 
 
     }
 
     public void setNbClients(int nbClients){
+        System.out.println("Le nombre de client est à : "+nbClients);
         this.nbClients=nbClients; //de base
     }
 

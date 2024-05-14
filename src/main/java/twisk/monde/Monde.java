@@ -122,9 +122,9 @@ public class Monde implements Iterable<Etape> {
             etDef.defineName() +
             "\n\nvoid simulation(int ids)\n{\n" +
                 "int nb; \n" +
-                "entrer(0);\n" +
+                "entrer("+getEntree().getDefineName()+");\n" +
                 "delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +
-                "transfert(0,"+et.getIndiceEtape() +");\n" + et.toC();
+                "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC();
         StringBuilder build = new StringBuilder();
         //build.append(res).append(et.toC());
         return res;

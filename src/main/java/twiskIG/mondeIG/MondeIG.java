@@ -74,7 +74,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     {
         enCoursDeSim = !enCoursDeSim;
         System.out.println("L'état de la sim est passée à"+enCoursDeSim);
-        this.notifierObservateurs();
+        //this.notifierObservateurs();
         return enCoursDeSim;
     }
 

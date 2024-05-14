@@ -24,10 +24,10 @@ public class ThreadsManager {
      * Lance l'execution d'une tâche via un nouveau thread
      * @param task tâche à éxecuter
      */
-    public void lancer(Task task)
-    {
+    public void lancer(Task<?> task) {
         Thread thread = new Thread(task);
-        this.threads.add(thread);
+        thread.setDaemon(true);
+        threads.add(thread);
         thread.start();
     }
 

@@ -19,8 +19,8 @@ public class EcouteurLancementSimulation implements EventHandler<ActionEvent> {
         if(!m.getEnCoursDeSim()) {
             //Si aucune simulation n'est en cours
             System.out.println("Lancement de la simulation...");
+            m.notifierObservateurs();
             SimulationIG sim = new SimulationIG(m);
-
         }else
         {
             //Si une simulation est en cours

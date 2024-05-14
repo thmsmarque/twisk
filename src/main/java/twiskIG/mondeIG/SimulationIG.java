@@ -1,8 +1,11 @@
 package twiskIG.mondeIG;
 
+import javafx.concurrent.Task;
 import twisk.ClientTwisk;
 import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
+import twisk.outils.FabriqueNumero;
+import twisk.outils.ThreadsManager;
 import twisk.simulation.Client;
 import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
@@ -16,12 +19,20 @@ import java.util.Stack;
 public class SimulationIG implements Observateur {
     private MondeIG mondeIG;
     public CorrespondancesEtapes ce;
+    ClassLoaderPerso cl;
+    Class<?> sim;
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
+        cl = new ClassLoaderPerso((SimulationIG.class.getClassLoader()));
+        try {
+            sim = cl.loadClass("twisk.simulation.Simulation");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         mondeIG.ajouterObservateur(this);
         this.simuler();
-        mondeIG.ajouterObservateur(this);
     }
 
     /**
@@ -239,14 +250,32 @@ PAs d'activite restreinte entree
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
     private void simuler(){
-        try {
-            verifierMondeIG();
-            mondeIG.switchEtatSim();
-            Simulation sim = new Simulation();    //faire une introspection
-            sim.simuler(creerMonde(),mondeIG);
-        } catch (MondeException e) {
-            throw new RuntimeException(e);
-        }
+
+
+        Task<Void> task = new Task<Void>() {
+            protected Void call() throws Exception {
+                try
+                {
+                    verifierMondeIG();
+                    Object simulationInstance = sim.newInstance();
+                    sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
+                    sim.getMethod("simuler", Monde.class, MondeIG.class).invoke(simulationInstance, creerMonde(), mondeIG);
+
+
+                    System.gc();
+                    //Simulation sim = new Simulation();    //faire une introspection
+                    //sim.simuler(creerMonde(),mondeIG);
+                } catch(MondeException | InstantiationException | IllegalAccessException |
+                        NoSuchMethodException |
+                        InvocationTargetException e)
+                {
+                    throw new RuntimeException(e);
+                }
+                return null;
+            }
+        };
+
+        ThreadsManager.getInstance().lancer(task);
     }
 
     /**
@@ -254,6 +283,7 @@ PAs d'activite restreinte entree
      */
     private Monde creerMonde()
     {
+        FabriqueNumero.getInstance().reset();
          Monde monde = new Monde();
          CorrespondancesEtapes correspondancesEtapes = new CorrespondancesEtapes();
          Iterator<EtapeIG> it = mondeIG.iterator();
