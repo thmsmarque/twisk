@@ -70,6 +70,7 @@ public class Simulation {
                 //Gestionnaire de clients :
                 g.setClients(resSim);
 
+
                 //affichage des numéros de processus :
                 System.out.println("Les clients :");
                 for(int i=0; i<nbClients;i++){
