@@ -258,6 +258,9 @@ PAs d'activite restreinte entree
                 {
                     verifierMondeIG();
                     Object simulationInstance = sim.newInstance();
+                    sim.getMethod("ajouterObservateur",SimulationIG.class).invoke(simulationInstance,this);
+                    //System.out.println(sim.getMethod("getListeobs").invoke(simulationInstance));
+                    Thread.sleep(10);
                     sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
                     sim.getMethod("simuler", Monde.class, MondeIG.class).invoke(simulationInstance, creerMonde(), mondeIG);
 

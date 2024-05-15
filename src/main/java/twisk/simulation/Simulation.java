@@ -18,6 +18,9 @@ public class Simulation extends SujetObserve {
     KitC kit;
     private int nbClients;
     private GestionnaireClients g;
+
+
+
     public Simulation()
     {
         this.kit = new KitC();
@@ -27,6 +30,7 @@ public class Simulation extends SujetObserve {
 
     public void simuler(Monde monde, MondeIG mondeIG) {
 
+        System.out.println(this.getListeobs().toString());
         mondeIG.switchEtatSim();
         System.out.println("Lancement de la simulation logique");
                 GestionnaireClients g = monde.getG();
@@ -40,7 +44,6 @@ public class Simulation extends SujetObserve {
                 //Chargement de la bibliothèque où sont définies les fonctions
                 System.load("/tmp/twisk/libTwisk"+ FabriqueNumeroLibTwisk.getInstance().getNumero()+".so") ;
                 FabriqueNumeroLibTwisk.getInstance().incrementer();
-
 
                 // Ecriture du main.c ---------------------------------
                 int nbEtapes = monde.nbEtapes();
@@ -128,18 +131,20 @@ public class Simulation extends SujetObserve {
                     etapeActuel++;
                     System.out.println("\n");
                 }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients && mondeIG.getEnCoursDeSim()); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
-                System.out.println("La simulation est terminée");
-                if(mondeIG.getEnCoursDeSim()) {
-                    //La simulation n'a pas été interrompu en cours de sim
-                    mondeIG.switchEtatSim();
-                }else
-                {
-                    //La simulation a été interrompu avant la fin
-                        kit.detruireLesProcessus(resSim);
-                }
-                mondeIG.notifierObservateurs();
-                nettoyage();
-                FabriqueNumero.getInstance().reset();
+
+        System.out.println("La simulation est terminée");
+        if(mondeIG.getEnCoursDeSim()) {
+            //La simulation n'a pas été interrompu en cours de sim
+            mondeIG.switchEtatSim();
+            mondeIG.notifierObservateurs();
+        }else
+        {
+            //La simulation a été interrompu avant la fin
+            kit.detruireLesProcessus(resSim);
+        }
+            mondeIG.notifierObservateurs();
+            nettoyage();
+            FabriqueNumero.getInstance().reset();
 
         ThreadsManager.getInstance().detruireTout();
 
