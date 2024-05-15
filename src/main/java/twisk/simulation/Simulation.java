@@ -137,7 +137,7 @@ public class Simulation extends SujetObserve {
                     //La simulation a été interrompu avant la fin
                         kit.detruireLesProcessus(resSim);
                 }
-                notifierObservateurs();
+               // mondeIG.notifierObservateurs();
                 nettoyage();
                 FabriqueNumero.getInstance().reset();
 
