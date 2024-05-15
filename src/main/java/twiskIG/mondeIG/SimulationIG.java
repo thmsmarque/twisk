@@ -20,17 +20,17 @@ public class SimulationIG implements Observateur {
     private MondeIG mondeIG;
     public CorrespondancesEtapes ce;
     ClassLoaderPerso cl;
-    Class<?> sim;
+    private Class<?> sim;
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
         cl = new ClassLoaderPerso((SimulationIG.class.getClassLoader()));
         try {
             sim = cl.loadClass("twisk.simulation.Simulation");
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         mondeIG.ajouterObservateur(this);
         this.simuler();
     }
