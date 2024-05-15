@@ -375,22 +375,23 @@ PAs d'activite restreinte entree
      * Met à jour le nombre de client dans chaque activité ig
      */
     @Override
-    public void reagir() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAA");/*
+    public void reagir() { // 0 dans l'ig, 3 dans l'etape
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOKKKKK");
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
-            int nbclientsdansletape = e.getNbClientDansEtape();
-            int nbclientsdansletapeIG = etapeIG.getClientsDansEtape().size();
             Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
-            while(nbclientsdansletapeIG!=nbclientsdansletape) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
+            while( etapeIG.getClientsDansEtape().size()!=e.getNbClientDansEtape()) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
                 //mise à jour de l'ig
-                if (nbclientsdansletapeIG > nbclientsdansletape) { //il y a plus de client dans l'ig que dans l'etape
+
+                System.out.println("IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape());
+
+                if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
                         etapeIG.supprimerClients(c.next());
-                } else if(nbclientsdansletapeIG<nbclientsdansletape) { //il y a plus de client dans l'étape que dans l'IG
+                } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
                 }
             }
-        }*/
+        }
     }
 
 
