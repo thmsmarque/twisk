@@ -15,4 +15,8 @@ public class SujetObserve {
             o.reagir();
         }
     }
+
+    public ArrayList<Observateur> getListeobs() {
+        return listeobs;
+    }
 }
