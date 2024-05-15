@@ -383,13 +383,18 @@ PAs d'activite restreinte entree
             while( etapeIG.getClientsDansEtape().size()!=e.getNbClientDansEtape()) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
                 //mise à jour de l'ig
 
-                System.out.println("IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape());
+                System.out.println("================\n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape() + "\n c.hasnext : " + c.hasNext() + "\n Etape : " + e.getNom());
 
                 if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
+                        //PROBLBEME ICI QUAND PLUS DE 3 CLIENTS A SUPPRIMER
                         etapeIG.supprimerClients(c.next());
+$
                 } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
                 }
+
+                System.out.println("APRÈS \n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape() + "\n ===========================");
+
             }
         }
     }
