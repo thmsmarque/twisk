@@ -21,6 +21,7 @@ public class SimulationIG implements Observateur {
     public CorrespondancesEtapes ce;
     ClassLoaderPerso cl;
     private Class<?> sim;
+    private SimulationIG simIG;
 
     public SimulationIG(MondeIG mondeIG) {
         this.mondeIG = mondeIG;
@@ -31,7 +32,7 @@ public class SimulationIG implements Observateur {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        mondeIG.ajouterObservateur(this);
+        this.simIG = this;
         this.simuler();
     }
 
@@ -258,9 +259,8 @@ PAs d'activite restreinte entree
                 {
                     verifierMondeIG();
                     Object simulationInstance = sim.newInstance();
-                    sim.getMethod("ajouterObservateur",SimulationIG.class).invoke(simulationInstance,this);
-                    //System.out.println(sim.getMethod("getListeobs").invoke(simulationInstance));
-                    Thread.sleep(10);
+                    sim.getMethod("ajOb",SimulationIG.class).invoke(simulationInstance,simIG);
+                    System.out.println(sim.getMethod("getListeobs").invoke(simulationInstance));
                     sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
                     sim.getMethod("simuler", Monde.class, MondeIG.class).invoke(simulationInstance, creerMonde(), mondeIG);
 

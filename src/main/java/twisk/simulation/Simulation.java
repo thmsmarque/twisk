@@ -9,7 +9,9 @@ import twisk.outils.FabriqueNumeroLibTwisk;
 import twisk.outils.KitC;
 import twisk.outils.ThreadsManager;
 import twiskIG.mondeIG.MondeIG;
+import twiskIG.mondeIG.SimulationIG;
 import twiskIG.mondeIG.SujetObserve;
+import twiskIG.vues.Observateur;
 
 import java.util.Iterator;
 
@@ -26,6 +28,11 @@ public class Simulation extends SujetObserve {
         this.kit = new KitC();
         this.kit.creerEnvironnement();
         this.nbClients=5; //de base
+    }
+
+    public void ajOb(SimulationIG ob)
+    {
+        this.ajouterObservateur(ob);
     }
 
     public void simuler(Monde monde, MondeIG mondeIG) {
@@ -111,7 +118,7 @@ public class Simulation extends SujetObserve {
                         etapeActuel++;
                     }
 
-                    notifierObservateurs();
+
                     System.out.print("Etape Sortie client(s) : " + " | Nombre de personnes : " + posClients[monde.getSortie().getIndiceEtape()*nbClients+1] + " => ");
                     int nbClientDansAct = posClients[monde.getSortie().getIndiceEtape()*nbClients+1];
 
@@ -130,6 +137,7 @@ public class Simulation extends SujetObserve {
                     System.out.println(" ");
                     etapeActuel++;
                     System.out.println("\n");
+                    notifierObservateurs();
                 }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients && mondeIG.getEnCoursDeSim()); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
 
         System.out.println("La simulation est terminée");
