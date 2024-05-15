@@ -387,8 +387,8 @@ PAs d'activite restreinte entree
 
                 if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
                         //PROBLBEME ICI QUAND PLUS DE 3 CLIENTS A SUPPRIMER
-                        etapeIG.supprimerClients(c.next());
-$
+                        etapeIG.supprimerClients(c.next()); //ne rentre même pas dans la fonction ??
+
                 } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
                 }
