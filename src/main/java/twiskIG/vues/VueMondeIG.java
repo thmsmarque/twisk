@@ -37,6 +37,8 @@ private final MondeIG monde;
 
     }
 
+
+
     public MondeIG getMonde() {
         return monde;
     }
@@ -44,7 +46,7 @@ private final MondeIG monde;
     @Override
     public void reagir() {
         this.getChildren().clear();
-
+        etapes.clear();
 
         Iterator<ArcIG> arcs = monde.iteratorarc();
         while(arcs.hasNext()){
@@ -57,6 +59,7 @@ private final MondeIG monde;
             if(etape.estActivite())
             {
                 VueEtapeIG vueetape = new VueActiviteIG(this.monde, etape);
+                etapes.add(vueetape);
                 getChildren().add(vueetape );
             }
             if(etape.estGuichet())
@@ -69,14 +72,22 @@ private final MondeIG monde;
                 getChildren().add(new VuePointDeControle(this.monde,pc));
             }
 //AJOUTER LES CLIENTS :------------------------------
+            System.out.println("les étapes :" + etapes);
             for(VueEtapeIG vueEtapeIG : etapes){
+                System.out.println("les étapes youpiiii");
+
                 if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
+                    System.out.println("les activité youpiiii");
+
                     VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                     for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
+                        System.out.println("lles clieeents youpiiiii");
                         ac.getBox().getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
                     }
                 }else if(vueEtapeIG.getEtape().estGuichet())
                 {
+                    System.out.println("les guichets youpiiii");
+
                     VueGuichetIG guich = (VueGuichetIG)vueEtapeIG;
                     for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
                         guich.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
