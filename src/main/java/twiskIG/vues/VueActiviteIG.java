@@ -35,6 +35,11 @@ public class VueActiviteIG extends VueEtapeIG {
 
     }
 
+    public HBox getBox()
+    {
+        return box;
+    }
+
     @Override
     public void reagir() {
 

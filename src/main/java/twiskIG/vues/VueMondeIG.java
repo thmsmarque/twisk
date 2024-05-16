@@ -73,7 +73,7 @@ private final MondeIG monde;
                 if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
                     VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                     for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                        ac.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                        ac.getBox().getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
                     }
                 }else if(vueEtapeIG.getEtape().estGuichet())
                 {

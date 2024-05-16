@@ -136,6 +136,15 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     public void supprimerEtapeSelecMonde(EtapeIG etape){
         // Supprimer les etapes :
+        for(EtapeIG et : etape.successeurs.values())
+        {
+            et.supprimerPredecesseurs(etape);
+        }
+        for(EtapeIG et : etape.predecesseurs.values())
+        {
+            et.supprimerSuccesseurs(etape);
+        }
+
         HashMap<String,EtapeIG> maptemp = new HashMap<>();
         maptemp.putAll(map);
         maptemp.remove(etape.getIdentifiant());
