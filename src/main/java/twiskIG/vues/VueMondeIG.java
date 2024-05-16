@@ -1,5 +1,7 @@
 package twiskIG.vues;
 
+import javafx.application.Platform;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import twiskIG.mondeIG.*;
 import twiskIG.vues.ecouteur.EcouteurPanneauDragOver;
@@ -73,7 +75,24 @@ private final MondeIG monde;
                 if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
                     VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                     for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                        ac.getBox().getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                        HBox box = ac.getBox();
+
+                        Runnable command = new Runnable()
+                        {
+                            public void run()
+                            {
+                                box.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                            }
+                        };
+
+                        if(Platform.isFxApplicationThread())
+                        {
+                            command.run();
+                        }else
+                        {
+                            Platform.runLater(command);
+                        }
+
                     }
                 }else if(vueEtapeIG.getEtape().estGuichet())
                 {
