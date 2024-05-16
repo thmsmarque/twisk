@@ -301,12 +301,19 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
     /**
      * Supprime un client présent dans l'étape
-     * @param client
+     * @param nbasupprimer
      */
-    public void supprimerClients(ClientIG client){
+    public void supprimerClients(int nbasupprimer){
         ArrayList<ClientIG> clientsDansEtapetemp = clientsDansEtape;
-        clientsDansEtapetemp.remove(client);
-        clientsDansEtape=clientsDansEtapetemp;
+        Iterator<ClientIG> iterator = clientsDansEtapetemp.iterator();
+        int nbSupprimes = 0;
+        while (iterator.hasNext() && nbSupprimes < nbasupprimer) {
+            iterator.next();
+            iterator.remove();
+            nbSupprimes++;
+        }
+
+        clientsDansEtape = clientsDansEtapetemp;
     }
 
     public ArrayList<ClientIG> getClientsDansEtape() {

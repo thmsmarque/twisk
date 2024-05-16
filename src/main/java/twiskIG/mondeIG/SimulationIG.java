@@ -376,18 +376,17 @@ PAs d'activite restreinte entree
      */
     @Override
     public void reagir() { // 0 dans l'ig, 3 dans l'etape
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOKKKKK");
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
             Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
             while( etapeIG.getClientsDansEtape().size()!=e.getNbClientDansEtape()) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
                 //mise à jour de l'ig
 
-                System.out.println("================\n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape() + "\n c.hasnext : " + c.hasNext() + "\n Etape : " + e.getNom());
+                System.out.println("================\n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape());
 
                 if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
-                        //PROBLBEME ICI QUAND PLUS DE 3 CLIENTS A SUPPRIMER
-                        etapeIG.supprimerClients(c.next()); //ne rentre même pas dans la fonction ??
+                    int nbclientasupprimer = etapeIG.getClientsDansEtape().size()- e.getNbClientDansEtape();
+                        etapeIG.supprimerClients(nbclientasupprimer); //ne rentre même pas dans la fonction ??
 
                 } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
