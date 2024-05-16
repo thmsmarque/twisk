@@ -141,15 +141,19 @@ public class Simulation extends SujetObserve {
                 }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients && mondeIG.getEnCoursDeSim()); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
 
         System.out.println("La simulation est terminée");
+
+        //affichage des numéros de processus :
+        System.out.println("Les clients :");
+        for(int i=0; i<nbClients;i++){
+            System.out.print(resSim[i]+ " ");
+            kit.detruireLesProcessus(resSim[i]);
+        }
+
         if(mondeIG.getEnCoursDeSim()) {
             //La simulation n'a pas été interrompu en cours de sim
             mondeIG.switchEtatSim();
-            mondeIG.notifierObservateurs();
-        }else
-        {
-            //La simulation a été interrompu avant la fin
-            kit.detruireLesProcessus(resSim);
         }
+
             mondeIG.notifierObservateurs();
             nettoyage();
             FabriqueNumero.getInstance().reset();

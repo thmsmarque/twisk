@@ -85,10 +85,9 @@ public class KitC {
      * Cette méthode détruit tous les processus (les clients, elle détruit les clients)
      * @param pid client à détruire
      */
-    public void detruireLesProcessus(int... pid)
+    public void detruireLesProcessus(int pid)
     {
 
-        for(int i : pid) {
             String command = "kill -9 " + pid;
 
             try {
@@ -100,7 +99,7 @@ public class KitC {
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
 }

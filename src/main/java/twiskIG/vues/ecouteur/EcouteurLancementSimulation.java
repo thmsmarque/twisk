@@ -25,7 +25,6 @@ public class EcouteurLancementSimulation implements EventHandler<ActionEvent> {
         {
             //Si une simulation est en cours
             m.switchEtatSim();
-            ThreadsManager.getInstance().detruireTout();
             m.notifierObservateurs();
         }
     }
