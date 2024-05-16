@@ -138,6 +138,7 @@ public class Simulation extends SujetObserve {
                     etapeActuel++;
                     System.out.println("\n");
                     notifierObservateurs();
+                    mondeIG.notifierObservateurs();
                 }while(posClients[monde.getSortie().getIndiceEtape()*nbClients+1] != nbClients && mondeIG.getEnCoursDeSim()); //while tous les clients ne sont pas dans le sasSortie donc posClient[nbAct-1 + nbClient * nbAct-1] == nbClient
 
         System.out.println("La simulation est terminée");

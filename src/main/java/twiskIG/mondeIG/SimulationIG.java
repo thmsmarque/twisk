@@ -6,8 +6,6 @@ import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
 import twisk.outils.FabriqueNumero;
 import twisk.outils.ThreadsManager;
-import twisk.simulation.Client;
-import twisk.simulation.Simulation;
 import twiskIG.exceptions.MondeException;
 import twiskIG.vues.Observateur;
 
@@ -376,6 +374,10 @@ PAs d'activite restreinte entree
      */
     @Override
     public void reagir() { // 0 dans l'ig, 3 dans l'etape
+        /*System.out.println("Avant notif");
+        mondeIG.notifierObservateurs();
+        System.out.println("Après notif");*/
+
         for(EtapeIG etapeIG : mondeIG){
             Etape e = ce.get(etapeIG);
             Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
