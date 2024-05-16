@@ -1,6 +1,7 @@
 package twiskIG.vues;
 
 import javafx.scene.layout.HBox;
+import twiskIG.mondeIG.ClientIG;
 import twiskIG.mondeIG.EtapeIG;
 import twiskIG.mondeIG.MondeIG;
 import twiskIG.outils.TailleComposants;
@@ -25,6 +26,10 @@ public class VueActiviteIG extends VueEtapeIG {
 
         TailleComposants taille = TailleComposants.getInstance();
        this.box.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
+       /*for(ClientIG c : etape.clientsDansEtape)
+       {
+           box.getChildren().add(new VueClientIG());
+       }*/
         this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
 

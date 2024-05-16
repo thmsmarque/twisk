@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class VueGuichetIG extends VueEtapeIG  {
 
-    private ArrayList<Pane> boxList;
+    private ArrayList<Pane> boxList; //Correspond aux emplacements pour accueillir les clients
     HBox box;
 
 

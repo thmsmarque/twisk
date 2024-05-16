@@ -15,16 +15,19 @@ import java.util.Iterator;
 public class VueMondeIG extends Pane implements Observateur  {
 
     private ArrayList<VueArcIG> arcs;
+    private ArrayList<VueEtapeIG> etapes;
 
 private final MondeIG monde;
     public VueMondeIG(MondeIG monde){
         super();
         this.monde=monde;
         this.arcs = new ArrayList<>();
+        this.etapes = new ArrayList<>();
 
         monde.ajouterObservateur(this);
         for(EtapeIG etape : monde){
             VueEtapeIG vueetape = new VueActiviteIG(monde,etape);
+            etapes.add(vueetape);
             getChildren().add(vueetape);
         }
         this.reagir();
@@ -66,10 +69,20 @@ private final MondeIG monde;
                 getChildren().add(new VuePointDeControle(this.monde,pc));
             }
 //AJOUTER LES CLIENTS :------------------------------
-            for(EtapeIG etapeIG : monde){
-                for(ClientIG client : etapeIG.getClientsDansEtape()){
-                    getChildren().add(new VueClientIG(client,monde,etapeIG));
+            for(VueEtapeIG vueEtapeIG : etapes){
+                if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
+                    VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
+                    for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
+                        ac.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                    }
+                }else if(vueEtapeIG.getEtape().estGuichet())
+                {
+                    VueGuichetIG guich = (VueGuichetIG)vueEtapeIG;
+                    for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
+                        guich.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                    }
                 }
+
             }
 
         }
