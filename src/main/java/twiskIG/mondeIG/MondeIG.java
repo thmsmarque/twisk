@@ -4,9 +4,7 @@ import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.TailleComposants;
 import twiskIG.vues.Observateur;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Classe MondeIG
@@ -53,6 +51,8 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
                 throw new TwiskException("Il y a déjà un arc reliant ses deux activités");
             }
         }
+
+        if(estAccessibleDepuis(pt1.getEtape(), pt2.getEtape())) throw new TwiskException("Il y a un cycle entre "+ pt1.getEtape().getNom() + " et " + pt2.getEtape().getNom());
         arcs.add(new ArcIG(pt1, pt2));
         this.pointSauv = null;
     }
@@ -197,6 +197,35 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     @Override
     public String toString() {
         return map.toString();
+    }
+
+    /**
+     * On vérifie si il existe un chemin en partant des successeurs de la racine, menant vers le candidat
+     * @param candidat
+     * @param racine
+     * @return true si il y a un cycle entre le candidat et la racine
+     */
+    public boolean estAccessibleDepuis(EtapeIG candidat, EtapeIG racine){
+        Stack<EtapeIG> stack = new Stack<>();
+        HashSet<EtapeIG> visited = new HashSet<>();
+        stack.push(racine);
+
+        while (!stack.isEmpty()) { //on cherche jusqu'à trouver la racine
+            EtapeIG etapeEnCours = stack.pop();
+            if (visited.contains(etapeEnCours)) {
+                continue;
+            }
+            visited.add(etapeEnCours);
+            if (etapeEnCours==candidat) {
+                return true;
+            }
+            for (EtapeIG succ : etapeEnCours.getSuccesseurs().values()) {
+                if (!visited.contains(succ)) {
+                    stack.push(succ);
+                }
+            }
+        }
+        return false;
     }
 
     /**
