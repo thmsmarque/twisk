@@ -43,7 +43,25 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
         if (estAccessibleDepuis(pt1.getEtape(), pt2.getEtape()))
             throw new TwiskException("Il y a un cycle entre " + pt1.getEtape().getNom() + " et " + pt2.getEtape().getNom());
+
+
         arcs.add(new ArcIG(pt1, pt2));
+        if(pt1.getEtape().estGuichet())
+        {
+            //Si l'entrée de cet arc est un guichet, alors définir le sens de la file
+            GuichetIG guich = (GuichetIG)pt1.getEtape();
+            if(pt1.equals(pt1.getEtape().getPointsdeC().get(0)))
+            {
+                //Si le point correspond au point de gauche
+                guich.setSens(false);
+            }else
+            {
+                //Si le point correspond au point de droite
+                guich.setSens(true);
+            }
+        }
+
+
         this.pointSauv = null;
     }
 

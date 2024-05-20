@@ -173,6 +173,11 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
     }
 
+    public ArrayList<PointDeControleIG> getPointsdeC()
+    {
+        return pointsdeC;
+    }
+
     public String getIdentifiant() {
         return identifiant;
     }

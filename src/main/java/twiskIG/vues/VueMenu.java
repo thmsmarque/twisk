@@ -46,7 +46,7 @@ public class VueMenu extends MenuBar implements Observateur {
 
         desactiver = new MenuItem("Effacer la selection");
         desactiver.setOnAction(new EcouteurDesactiverSelection(monde));
-        desactiver.setAccelerator(KeyCombination.keyCombination("Ctlr+x"));
+        //desactiver.setAccelerator(KeyCombination.keyCombination("Ctlr+x"));
 
         //entree sortie
         entree = new MenuItem("Entree");

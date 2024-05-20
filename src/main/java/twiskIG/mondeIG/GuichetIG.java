@@ -24,6 +24,10 @@ public class GuichetIG extends EtapeIG {
         this.sens=true; // de droite à gauche de base
     }
 
+    /**
+     * Définit le sens de la file
+     * @param sens true si Gauche->Droite false si Droite->Gauche
+     */
     public void setSens(boolean sens) {
         this.sens = sens;
     }

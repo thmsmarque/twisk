@@ -102,8 +102,16 @@ public class VueMondeIG extends Pane implements Observateur  {
                             System.out.println("les guichets youpiiii");
 
                             VueGuichetIG guich = (VueGuichetIG)vueEtapeIG;
+                            GuichetIG guichetEtape = (GuichetIG)guich.getEtape();
                             ArrayList<HBox> listBox = guich.getBoxList();
                             Iterator<HBox> it = listBox.iterator();
+                            if(guichetEtape.getSens())
+                            {
+                                for(int i = 0;i<15-vueEtapeIG.getEtape().getClientsDansEtape().size();i++)
+                                {
+                                    it.next();
+                                }
+                            }
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
                                 System.out.println("Le client : " + client.toString());
                                 if(it.hasNext()) {

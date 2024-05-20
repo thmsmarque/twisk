@@ -11,11 +11,13 @@ import javafx.scene.shape.Circle;
 import twiskIG.mondeIG.EtapeIG;
 import twiskIG.mondeIG.GuichetIG;
 import twiskIG.mondeIG.MondeIG;
+import twiskIG.mondeIG.PointDeControleIG;
 import twiskIG.outils.TailleComposants;
 import twiskIG.vues.ecouteur.EcouteurSelection;
 import twiskIG.vues.ecouteur.EcouteurSource;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class VueGuichetIG extends VueEtapeIG  {
 
@@ -76,14 +78,7 @@ public class VueGuichetIG extends VueEtapeIG  {
         return nombreDePlacesDansLafile;
     }
 
-    /**
-     * Methode qui définit dans quel sens va la file
-     * @return -1 si erreur, 0 si gauche->droite, 1 si droite->gauche
-     */
-    public int sensFile()
-    {
-        return 0;
-    }
+
 
     @Override
     public void reagir() {
