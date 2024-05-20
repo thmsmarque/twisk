@@ -19,7 +19,8 @@ import java.util.ArrayList;
 public class VueGuichetIG extends VueEtapeIG  {
 
     private ArrayList<Pane> boxList; //Correspond aux emplacements pour accueillir les clients
-    HBox box;
+    private HBox box;
+    private boolean simEnCours = false;
 
 
     /**
@@ -57,6 +58,10 @@ public class VueGuichetIG extends VueEtapeIG  {
         this.getChildren().add(box);
 
 
+    }
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
     }
 
     @Override

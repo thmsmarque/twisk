@@ -18,8 +18,10 @@ public class VueMondeIG extends Pane implements Observateur  {
 
     private ArrayList<VueArcIG> arcs;
     private ArrayList<VueEtapeIG> etapes;
+    private boolean simEnCours = false;
 
-private final MondeIG monde;
+
+    private final MondeIG monde;
     public VueMondeIG(MondeIG monde){
         super();
         this.monde=monde;
@@ -36,7 +38,6 @@ private final MondeIG monde;
         monde.notifierObservateurs();
         setOnDragOver(new EcouteurPanneauDragOver());
         setOnDragDropped(new EcouteurPanneauDropped(monde,this));
-
     }
 
     public MondeIG getMonde() {
@@ -45,6 +46,7 @@ private final MondeIG monde;
 
     @Override
     public void reagir() {
+
         Pane pane = this;
         Runnable command = new Runnable() {
             @Override
@@ -115,5 +117,13 @@ private final MondeIG monde;
         }
 
 
+    }
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
+    }
+
+    public boolean getSimEnCours(){
+        return this.simEnCours;
     }
 }

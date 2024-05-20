@@ -14,6 +14,9 @@ public class VueArcIG extends Group implements Observateur {
 
     private ArcIG arc;
 
+    private boolean simEnCours = false;
+
+
     public VueArcIG(MondeIG monde , ArcIG arc){
         this.monde = monde;
 
@@ -64,6 +67,10 @@ public class VueArcIG extends Group implements Observateur {
 
     }
 
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
+    }
 
 
     @Override

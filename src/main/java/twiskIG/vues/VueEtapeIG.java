@@ -22,6 +22,9 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
 
     private MondeIG monde;
 
+    private boolean simEnCours = false;
+
+
 
 
     /**
@@ -80,6 +83,10 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
         this.setId(etape.getIdentifiant());
         setOnDragDetected(new EcouteurSource(this));
 
+    }
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
     }
 
     public EtapeIG getEtape() {
