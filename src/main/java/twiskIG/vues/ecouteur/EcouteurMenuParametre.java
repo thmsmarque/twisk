@@ -157,7 +157,7 @@ public class EcouteurMenuParametre implements EventHandler<ActionEvent> {
                         GuichetIG guich = (GuichetIG) this.etape;
                         try {
                             guich.changerNbJeton(value1);
-                            guich.setLargeur(TailleComposants.getInstance().getTailleCoteGuichetPlace()*value1);
+                            //guich.setLargeur(TailleComposants.getInstance().getTailleCoteGuichetPlace()*value1);
                             guich.setPointsdeC();
                         } catch (TwiskException ex) {
                             throw new RuntimeException(ex);

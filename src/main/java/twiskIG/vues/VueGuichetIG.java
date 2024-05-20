@@ -22,7 +22,7 @@ public class VueGuichetIG extends VueEtapeIG  {
     private HBox box;
     private boolean simEnCours = false;
     private ArrayList<HBox> boxList; //Correspond aux emplacements pour accueillir les clients
-
+    private int nombreDePlacesDansLafile = 15;
 
     /**
      * Constructeur de la classe VueEtapeIG
@@ -34,7 +34,8 @@ public class VueGuichetIG extends VueEtapeIG  {
 
         this.boxList = new ArrayList<>();
 
-        for(int i = 0; i<etape.getNbJeton();i++)
+
+        for(int i = 0; i<nombreDePlacesDansLafile;i++)
         {
             HBox pane = new HBox();
             //pane.getChildren().add(new VueClientIG());
@@ -46,7 +47,7 @@ public class VueGuichetIG extends VueEtapeIG  {
 
         //Style et taille :
 
-        //etape.setLargeur(taille.getTailleCoteGuichetPlace()* etape.getNbJeton());
+        //etape.setLargeur(taille.getTailleCoteGuichetPlace()* nombreDePlacesDansLaFile);
         this.setPrefSize(etape.getLargeur(), etape.getHauteur());
 
 
@@ -70,6 +71,20 @@ public class VueGuichetIG extends VueEtapeIG  {
 
     public void setSimEnCours(boolean estSelectionne) {
         this.simEnCours = estSelectionne;
+    }
+
+    public int getNombreDePlacesDansLafile()
+    {
+        return nombreDePlacesDansLafile;
+    }
+
+    /**
+     * Methode qui définit dans quel sens va la file
+     * @return -1 si erreur, 0 si gauche->droite, 1 si droite->gauche
+     */
+    public int sensFile()
+    {
+        return 0;
     }
 
     @Override

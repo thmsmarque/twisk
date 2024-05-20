@@ -126,7 +126,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
                 break;
             case "Guichet" :
                 System.out.println("AJout théorique d'un guichet : " + type+num);
-                GuichetIG g = new GuichetIG(type+num, TailleComposants.getInstance().getTailleCoteGuichetPlace()*5,TailleComposants.getInstance().getTailleVBOXGuichet());
+                GuichetIG g = new GuichetIG(type+num, TailleComposants.getInstance().getTailleCoteGuichetPlace()*15,TailleComposants.getInstance().getTailleVBOXGuichet());
                 map.put(g.getIdentifiant(),g);
                 this.notifierObservateurs();
                 break;
