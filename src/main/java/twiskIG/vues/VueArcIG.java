@@ -14,7 +14,10 @@ public class VueArcIG extends Group implements Observateur {
 
     private ArcIG arc;
 
-    public VueArcIG(MondeIG monde , ArcIG arc){
+    private boolean simEnCours = false;
+
+
+    public VueArcIG(MondeIG monde , ArcIG arc,boolean simEnCours){
         this.monde = monde;
 
         this.arc=arc;
@@ -57,13 +60,17 @@ public class VueArcIG extends Group implements Observateur {
             poly.setStyle("-fx-background-color: magenta; -fx-fill: magenta");
         }
 
-        this.setOnMouseClicked(new EcouteurSelection(monde, arc));
+        if(!simEnCours) this.setOnMouseClicked(new EcouteurSelection(monde, arc));
 
         getChildren().add(poly);
         getChildren().add(line);
 
     }
 
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
+    }
 
 
     @Override

@@ -9,28 +9,29 @@ import twiskIG.vues.ecouteur.EcouteurSelection;
 
 public class VueActiviteIG extends VueEtapeIG {
 
-    HBox box;
+    private HBox box;
+    private boolean simEnCours = false;
     /**
      * Constructeur de la classe VueEtapeIG
      *
      * @param monde
      * @param etape
      */
-    public VueActiviteIG(MondeIG monde, EtapeIG etape) {
+    public VueActiviteIG(MondeIG monde, EtapeIG etape,boolean simEnCours) {
         super(monde, etape);
         this.box = new HBox();
+        this.simEnCours=simEnCours;
 
         //Style et taille :
 
         this.box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
 
         TailleComposants taille = TailleComposants.getInstance();
+
        this.box.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
-       /*for(ClientIG c : etape.clientsDansEtape)
-       {
-           box.getChildren().add(new VueClientIG());
-       }*/
-        this.setOnMouseClicked(new EcouteurSelection(monde, etape));
+
+        if(!this.simEnCours) this.setOnMouseClicked(new EcouteurSelection(monde, etape));
+
         this.getChildren().add(box);
 
     }
@@ -38,6 +39,10 @@ public class VueActiviteIG extends VueEtapeIG {
     public HBox getBox()
     {
         return box;
+    }
+
+    public void setSimEnCours(boolean estSelectionne) {
+        this.simEnCours = estSelectionne;
     }
 
     @Override

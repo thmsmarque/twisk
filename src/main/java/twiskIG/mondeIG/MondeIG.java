@@ -269,11 +269,3 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     public void reagir() {
     }
 }
-
-/*
-RAPPEL :
-Guichet ne epeut pas être une sortie
-On ne rentre pas dans une activité restreinte
-Si on a une étape, on doit pouvoir y avoir accès depuis une sortie
-Si on a une étape, il doit y avoir des successeurs menant à une sortie
- */
