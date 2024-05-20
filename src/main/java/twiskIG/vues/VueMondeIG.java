@@ -70,6 +70,7 @@ private final MondeIG monde;
                     if(etape.estGuichet())
                     {
                         VueEtapeIG vueetape = new VueGuichetIG(monde, (GuichetIG)etape);
+                        etapes.add(vueetape);
                         getChildren().add(vueetape );
                     }
 
@@ -82,22 +83,27 @@ private final MondeIG monde;
                         //System.out.println("les étapes youpiiii");
 
                         if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
-                            //System.out.println("les activité youpiiii");
+                            System.out.println("les activité youpiiii");
 
                             VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
                                 HBox box = ac.getBox();
-                                box.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                                box.getChildren().add(new VueClientIG());
 
 
                             }
-                        }else if(vueEtapeIG.getEtape().estGuichet())
+                        }
+                        if(vueEtapeIG.getEtape().estGuichet())
                         {
-                            //System.out.println("les guichets youpiiii");
+                            System.out.println("les guichets youpiiii");
 
                             VueGuichetIG guich = (VueGuichetIG)vueEtapeIG;
+                            ArrayList<HBox> listBox = guich.getBoxList();
+                            Iterator<HBox> it = listBox.iterator();
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                                guich.getChildren().add(new VueClientIG(vueEtapeIG.getEtape()));
+                                HBox pane = it.next();
+                                System.out.println(pane);
+                                pane.getChildren().add(new VueClientIG());
                             }
                         }
 

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import twiskIG.mondeIG.EtapeIG;
 import twiskIG.mondeIG.GuichetIG;
 import twiskIG.mondeIG.MondeIG;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class VueGuichetIG extends VueEtapeIG  {
 
-    private ArrayList<Pane> boxList; //Correspond aux emplacements pour accueillir les clients
+    private ArrayList<HBox> boxList; //Correspond aux emplacements pour accueillir les clients
     HBox box;
 
 
@@ -34,7 +35,9 @@ public class VueGuichetIG extends VueEtapeIG  {
 
         for(int i = 0; i<etape.getNbJeton();i++)
         {
-            boxList.add(new Pane());
+            HBox pane = new HBox();
+            //pane.getChildren().add(new VueClientIG());
+            boxList.add(pane);
         }
 
         this.box = new HBox();
@@ -48,7 +51,7 @@ public class VueGuichetIG extends VueEtapeIG  {
 
 
         //Style et taille :
-        for(Pane box : this.boxList){
+        for(HBox box : this.boxList){
             box.setPrefSize((double) taille.getTailleCoteGuichetPlace(), (double) taille.getTailleCoteGuichetPlace());
             box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
             this.box.getChildren().add(box);
@@ -57,6 +60,11 @@ public class VueGuichetIG extends VueEtapeIG  {
         this.getChildren().add(box);
 
 
+    }
+
+    public ArrayList<HBox> getBoxList()
+    {
+        return boxList;
     }
 
     @Override
