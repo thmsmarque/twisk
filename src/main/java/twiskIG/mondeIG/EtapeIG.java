@@ -1,5 +1,6 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.annotations.Expose;
 import twisk.simulation.Client;
 import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.FabriqueIdentifiant;
@@ -11,17 +12,30 @@ import java.util.*;
  * Classe abstraite ActiviteIG
  */
 public abstract class EtapeIG implements Iterable<PointDeControleIG> {
+
+    @Expose
     private String nom;
+    @Expose
     private String identifiant;
+    @Expose
     private int posX;
+    @Expose
     private int posY;
+    @Expose
     private int largeur;
+    @Expose
     private int hauteur;
+    @Expose
     private int delai;
+    @Expose
     private int ecart;
+    @Expose
     private boolean selection;
+
     private ArrayList<PointDeControleIG> pointsdeC;
+    @Expose
     private boolean estUneEntree;
+    @Expose
     private boolean estUneSortie;
     public HashMap<String,EtapeIG> predecesseurs;
     public HashMap<String,EtapeIG> successeurs;

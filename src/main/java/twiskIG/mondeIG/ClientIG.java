@@ -1,11 +1,15 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Classe ClientIG
  */
 public class ClientIG {
 
+    @Expose
     private int posx;
+    @Expose
     private int posy;
 
     /**

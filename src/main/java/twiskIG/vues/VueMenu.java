@@ -14,7 +14,7 @@ import twiskIG.vues.ecouteur.*;
 public class VueMenu extends MenuBar implements Observateur {
 
     private MondeIG monde;
-    private MenuItem quitter,supprimer,renommer,desactiver, entree, sortie, parametres;
+    private MenuItem quitter,supprimer,renommer,desactiver, entree, sortie, parametres,sauvegarder,charger;
     public VueMenu(MondeIG monde){
         super();
         this.monde=monde;
@@ -27,6 +27,8 @@ public class VueMenu extends MenuBar implements Observateur {
         //Quitter :
         quitter = new MenuItem("Quitter");
         quitter.setOnAction(new EcouteurMenuQuitter());
+        sauvegarder = new MenuItem("Sauvegarder");
+        sauvegarder.setOnAction(new EcouteurSauvegarder(monde));
 
         //Supprimer
         supprimer = new MenuItem("Supprimer");
@@ -65,7 +67,7 @@ public class VueMenu extends MenuBar implements Observateur {
         parametres.setDisable(true);
         
         menu2.getItems().addAll(supprimer,renommer,desactiver);
-        menu.getItems().addAll(quitter);
+        menu.getItems().addAll(quitter,sauvegarder);
         menu3.getItems().addAll(entree,sortie);
         menu4.getItems().addAll(parametres);
         this.getMenus().addAll(menu,menu2,menu3,menu4);

@@ -48,6 +48,7 @@ public class VueMondeIG extends Pane implements Observateur  {
     public void reagir() {
         this.simEnCours=monde.getEnCoursDeSim(); //true = en cours en simulation
         Pane pane = this;
+
         Runnable command = new Runnable() {
             @Override
             public void run() {

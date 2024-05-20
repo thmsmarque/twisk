@@ -1,5 +1,6 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.annotations.Expose;
 import twiskIG.outils.FabriqueIdentifiant;
 
 /**
@@ -7,11 +8,15 @@ import twiskIG.outils.FabriqueIdentifiant;
  */
 public class PointDeControleIG {
 
+    @Expose
     private String identifiant;
-
+    @Expose
     private int posX;
+    @Expose
     private int posY;
+    @Expose
     private String identifiantEtape;
+
     private EtapeIG etape;
 
     /**
