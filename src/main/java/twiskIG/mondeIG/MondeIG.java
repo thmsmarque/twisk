@@ -35,26 +35,54 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
      */
     public void ajouter(PointDeControleIG pt1,PointDeControleIG pt2) throws TwiskException {
         //Il y a déjà un arc avec les deux points
-        if ((pt1 == pt2)) {
-            throw new TwiskException("Nous ne pouvons pas faire un arc avec le même point");
-        }
+        if (estMemePdc(pt1, pt2)) throw new TwiskException("Nous ne pouvons pas faire un arc avec le même point");
 
-        for (ArcIG arc : arcs) {
-            //Recréer le même arc
-            if ((arc.getP1() == pt1 && arc.getP2() == pt2) || (arc.getP2() == pt1 && arc.getP1() == pt2)) {
-                throw new TwiskException("Il y a déjà un arc qui relie ses deux activités");
-            }
+        if (arcExisteDeja(pt1, pt2)) throw new TwiskException("Il y a déjà un arc qui relie ses deux activités");
 
-            // Pt de contrôle appartient à la même activité
-            if ((pt1.getIdentifiantEtape() == arc.getP1().getIdentifiantEtape() && pt2.getIdentifiantEtape() == arc.getP2().getIdentifiantEtape())
-                    || (pt2.getIdentifiantEtape() == arc.getP1().getIdentifiantEtape() && pt1.getIdentifiantEtape() == arc.getP2().getIdentifiantEtape())) {
-                throw new TwiskException("Il y a déjà un arc reliant ses deux activités");
-            }
-        }
+        if (arcMemeActivite(pt1, pt2)) throw new TwiskException("Il y a déjà un arc reliant ses deux activités");
 
-        if(estAccessibleDepuis(pt1.getEtape(), pt2.getEtape())) throw new TwiskException("Il y a un cycle entre "+ pt1.getEtape().getNom() + " et " + pt2.getEtape().getNom());
+        if (estAccessibleDepuis(pt1.getEtape(), pt2.getEtape()))
+            throw new TwiskException("Il y a un cycle entre " + pt1.getEtape().getNom() + " et " + pt2.getEtape().getNom());
         arcs.add(new ArcIG(pt1, pt2));
         this.pointSauv = null;
+    }
+
+    public boolean estMemePdc(PointDeControleIG pt1, PointDeControleIG pt2) {
+        if ((pt1 == pt2)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * On vérifie qu'on n'est pas en train de recrééer le même arc
+     * @param pt1
+     * @param pt2
+     * @return
+     */
+    public boolean arcExisteDeja(PointDeControleIG pt1, PointDeControleIG pt2) {
+        for (ArcIG arc : arcs) {
+            if ((arc.getP1() == pt1 && arc.getP2() == pt2) || (arc.getP2() == pt1 && arc.getP1() == pt2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * On vérifie que le Point de contrôle n'appartient pas à la même activité
+     * @param pt1
+     * @param pt2
+     * @return
+     */
+    public boolean arcMemeActivite(PointDeControleIG pt1, PointDeControleIG pt2) {
+        for (ArcIG arc : arcs) {
+            if ((pt1.getIdentifiantEtape() == arc.getP1().getIdentifiantEtape() && pt2.getIdentifiantEtape() == arc.getP2().getIdentifiantEtape())
+                    || (pt2.getIdentifiantEtape() == arc.getP1().getIdentifiantEtape() && pt1.getIdentifiantEtape() == arc.getP2().getIdentifiantEtape())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

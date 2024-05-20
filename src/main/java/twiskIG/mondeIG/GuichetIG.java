@@ -4,7 +4,12 @@ import twiskIG.exceptions.TwiskException;
 
 public class GuichetIG extends EtapeIG {
 
-    int nbJeton;
+    /**
+     * false : gauche à droite
+     * true : droite à gauche
+     */
+    private boolean sens;
+    private int nbJeton;
 
     /**
      * Constructeur de la classe abstraite EtapeIG
@@ -16,6 +21,15 @@ public class GuichetIG extends EtapeIG {
     public GuichetIG(String nom, int larg, int haut) {
         super(nom, larg, haut);
         nbJeton = 5;
+        this.sens=true; // de droite à gauche de base
+    }
+
+    public void setSens(boolean sens) {
+        this.sens = sens;
+    }
+
+    public boolean getSens(){
+        return this.sens;
     }
 
     @Override
