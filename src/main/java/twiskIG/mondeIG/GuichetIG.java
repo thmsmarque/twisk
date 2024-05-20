@@ -1,5 +1,6 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.annotations.Expose;
 import twiskIG.exceptions.TwiskException;
 
 public class GuichetIG extends EtapeIG {
@@ -8,7 +9,9 @@ public class GuichetIG extends EtapeIG {
      * false : gauche à droite
      * true : droite à gauche
      */
+    @Expose
     private boolean sens;
+    @Expose
     private int nbJeton;
 
     /**

@@ -1,17 +1,24 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import twiskIG.exceptions.TwiskException;
+import twiskIG.outils.CustomExclusionStrategy;
 import twiskIG.outils.TailleComposants;
 import twiskIG.vues.Observateur;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Classe MondeIG
  */
 public class MondeIG  extends SujetObserve implements Observateur, Iterable<EtapeIG>{
+    @Expose
     private HashMap<String,EtapeIG> map;
-
+    @Expose
     private ArrayList<ArcIG> arcs;
 
     private PointDeControleIG pointSauv;
@@ -122,7 +129,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     {
         enCoursDeSim = !enCoursDeSim;
         System.out.println("L'état de la sim est passée à"+enCoursDeSim);
-        //this.notifierObservateurs();
+        this.notifierObservateurs();
         return enCoursDeSim;
     }
 
@@ -283,6 +290,25 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
      */
     public HashMap<String, EtapeIG> getMap() {
         return map;
+    }
+
+
+    public void sauvegarderMonde()
+    {
+        Gson gson = new GsonBuilder()
+                .setExclusionStrategies(new CustomExclusionStrategy())
+                .create();
+        try (FileWriter writer = new FileWriter("data.json")) {
+            // Sérialiser les objets en JSON et les écrire dans un fichier
+            gson.toJson(this, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void chargerMonde()
+    {
+
     }
 
     @Override

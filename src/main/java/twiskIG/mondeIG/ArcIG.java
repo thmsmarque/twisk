@@ -1,11 +1,15 @@
 package twiskIG.mondeIG;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Classe ArcIG
  */
 public class ArcIG {
 
+    @Expose
     private PointDeControleIG p1;
+    @Expose
     private PointDeControleIG p2;
     private boolean selection;
 
