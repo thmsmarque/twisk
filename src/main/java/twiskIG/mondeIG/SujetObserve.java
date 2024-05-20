@@ -13,7 +13,7 @@ public class SujetObserve {
     public void notifierObservateurs(){
 
         for(Observateur o : listeobs){
-            System.out.println("Fais réagir: "+o.toString());
+            //System.out.println("Fais réagir: "+o.toString());
 
             o.reagir();
         }

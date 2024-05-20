@@ -1,5 +1,6 @@
 package twiskIG.vues;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -95,26 +96,39 @@ public class VueOutils extends TilePane implements Observateur {
         this.boutonGuichet.setOnAction(new EcouteurAjoutGuichet(this.monde,num));
         this.boutonLancement.setOnAction(new EcouteurLancementSimulation(monde));
 
+        Runnable command = new Runnable() {
+            @Override
+            public void run() {
+                if(!monde.getEnCoursDeSim())
+                {
+                    boutonLancement.setText("|>");
+                    boutonLancement.setStyle("-fx-border-radius: 20px; " +
+                            "-fx-background-radius: 20px; " +
+                            "-fx-font-weight: bold;" +
+                            "-fx-font-size: 15px;" +
+                            "-fx-background-color: darkgreen");
+                    boutonLancement.setTooltip(new Tooltip("Lancement Simulation"));
+                }else
+                {
+                    boutonLancement.setText("X");
+                    boutonLancement.setStyle("-fx-border-radius: 20px; " +
+                            "-fx-background-radius: 20px; " +
+                            "-fx-font-weight: bold;" +
+                            "-fx-font-size: 15px;" +
+                            "-fx-background-color: darkred");
+                    boutonLancement.setTooltip(new Tooltip("Arrêt Simulation"));
+                }
+            }
+        };
 
-        if(!monde.getEnCoursDeSim())
+        if(Platform.isFxApplicationThread())
         {
-            this.boutonLancement.setText("|>");
-            this.boutonLancement.setStyle("-fx-border-radius: 20px; " +
-                    "-fx-background-radius: 20px; " +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 15px;" +
-                    "-fx-background-color: darkgreen");
-            boutonLancement.setTooltip(new Tooltip("Lancement Simulation"));
+            command.run();
         }else
         {
-            this.boutonLancement.setText("X");
-            this.boutonLancement.setStyle("-fx-border-radius: 20px; " +
-                    "-fx-background-radius: 20px; " +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 15px;" +
-                    "-fx-background-color: darkred");
-            boutonLancement.setTooltip(new Tooltip("Arrêt Simulation"));
+            Platform.runLater(command);
         }
+
     }
 
 }

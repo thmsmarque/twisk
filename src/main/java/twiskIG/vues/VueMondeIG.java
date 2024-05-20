@@ -46,12 +46,11 @@ private final MondeIG monde;
     @Override
     public void reagir() {
         Pane pane = this;
-        this.getChildren().clear();
-        System.out.println("réagir de VueMondeIG");
         Runnable command = new Runnable() {
             @Override
             public void run() {
                 etapes.clear();
+                pane.getChildren().clear();
 
 
                 Iterator<ArcIG> arcs = monde.iteratorarc();
@@ -78,7 +77,7 @@ private final MondeIG monde;
                         getChildren().add(new VuePointDeControle(monde,pc));
                     }
 //AJOUTER LES CLIENTS :------------------------------
-                    //System.out.println("les étapes :" + etapes);
+                    System.out.println("les étapes :" + etapes);
                     for(VueEtapeIG vueEtapeIG : etapes){
                         //System.out.println("les étapes youpiiii");
 
