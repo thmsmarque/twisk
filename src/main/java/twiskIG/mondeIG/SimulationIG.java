@@ -20,6 +20,7 @@ public class SimulationIG implements Observateur {
     ClassLoaderPerso cl;
     private Class<?> sim;
     private SimulationIG simIG;
+    private int nbClient;
 
     public SimulationIG(MondeIG mondeIG) throws MondeException{
         this.mondeIG = mondeIG;
@@ -275,6 +276,7 @@ PAs d'activite restreinte entree
                     Object simulationInstance = sim.newInstance();
                     sim.getMethod("ajOb",SimulationIG.class).invoke(simulationInstance,simIG);
                     System.out.println(sim.getMethod("getListeobs").invoke(simulationInstance));
+                    /// CA SERA ICI POUR CHANGER LES CLIENTS DANS LA SIMULATION :
                     sim.getMethod("setNbClients", int.class).invoke(simulationInstance, 6);
                     sim.getMethod("simuler", Monde.class, MondeIG.class).invoke(simulationInstance, creerMonde(), mondeIG);
 
@@ -407,5 +409,7 @@ PAs d'activite restreinte entree
         }
     }
 
-
+    public void setNbClient(int nbClient) {
+        this.nbClient = nbClient;
+    }
 }

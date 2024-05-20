@@ -39,6 +39,7 @@ public class Simulation extends SujetObserve {
 
         System.out.println(this.getListeobs().toString());
         mondeIG.switchEtatSim();
+        setNbClients(mondeIG.getNbCLient());
         System.out.println("Lancement de la simulation logique");
                 GestionnaireClients g = monde.getG();
                 KitC kit = new KitC();
@@ -55,7 +56,6 @@ public class Simulation extends SujetObserve {
                 // Ecriture du main.c ---------------------------------
                 int nbEtapes = monde.nbEtapes();
                 int nbGuichets = monde.nbGuichets();
-                int nbClients = 10;
                 int[] tabJetonsGuichet = new int[nbGuichets];
                 for(Etape et : monde.getLesEtapes())
                 {
@@ -165,8 +165,11 @@ public class Simulation extends SujetObserve {
     }
 
     public void setNbClients(int nbClients){
-        System.out.println("Le nombre de client est à : "+nbClients);
         this.nbClients=nbClients; //de base
+    }
+
+    public int getNbClients() {
+        return nbClients;
     }
 
     public GestionnaireClients getG() {

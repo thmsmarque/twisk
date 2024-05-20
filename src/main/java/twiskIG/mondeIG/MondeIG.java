@@ -18,6 +18,8 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     private boolean enCoursDeSim;
 
+    private int nbCLient;
+
     /**
      * Constructeur de MondeIG
      */
@@ -285,5 +287,13 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     @Override
     public void reagir() {
+    }
+
+    public int getNbCLient() {
+        return nbCLient;
+    }
+
+    public void setNbCLient(int nbCLient) {
+        this.nbCLient = nbCLient;
     }
 }
