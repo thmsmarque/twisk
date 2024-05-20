@@ -21,7 +21,7 @@ public class SimulationIG implements Observateur {
     private Class<?> sim;
     private SimulationIG simIG;
 
-    public SimulationIG(MondeIG mondeIG) {
+    public SimulationIG(MondeIG mondeIG) throws MondeException{
         this.mondeIG = mondeIG;
         cl = new ClassLoaderPerso((SimulationIG.class.getClassLoader()));
         try {
@@ -50,6 +50,7 @@ public class SimulationIG implements Observateur {
      * @throws MondeException
      */
     public void verifierMondeIG() throws MondeException {
+        test0();
         test1();
         test2();
         test3();
@@ -71,7 +72,7 @@ PAs d'activite restreinte entree
     public void test1() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
             if (etape.estGuichet() && etape.getEstUneSortie()) {
-                throw new MondeException("Erreur dans le test 1. Un guichet est déclaré comme sortie : " + etape);
+                throw new MondeException("Erreur dans le test 1. Un guichet est déclaré comme sortie : " + etape.getNom());
             }
         }
     }
@@ -89,7 +90,7 @@ PAs d'activite restreinte entree
                                     (etape.getEstUneEntree() && !etape.getEstUneSortie())  // une entrée mais pas une sortie
                     )
             ) {
-                throw new MondeException("Erreur dans le test 2. Un élément n'est relié à rien dans le monde : " + etape);
+                throw new MondeException("Erreur dans le test 2. Un élément n'est relié à rien dans le monde : " + etape.getNom());
             }
         }
     }
@@ -101,7 +102,7 @@ PAs d'activite restreinte entree
     public void test3() throws MondeException {
         for (EtapeIG etape : this.mondeIG) {
             if (etape.estActivite() && etape.nbPredecesseurs() == 0 && !etape.getEstUneEntree()) {
-                throw new MondeException("Erreur dans le test 3. L'activité n'est pas reliée à une entrée : " + etape);
+                throw new MondeException("Erreur dans le test 3. L'activité n'est pas reliée à une entrée : " + etape.getNom());
             }
         }
     }
@@ -115,7 +116,7 @@ PAs d'activite restreinte entree
             if (etape.estGuichet() && etape.nbSuccesseurs() > 0) { // etape est un guichet et possède des successeurs
                 for (EtapeIG etapesuccesseur : etape.getSuccesseurs().values()) { // on itère sur les successeurs de l'étape à analyser
                     if (etapesuccesseur.estGuichet()) { //si l'un des successeurs est un guichet (=2 guichets se suivent)
-                        throw new MondeException("Erreur dans le test 4. Deux guichets se suivent :" + etape + " et" + etapesuccesseur);
+                        throw new MondeException("Erreur dans le test 4. Deux guichets se suivent :" + etape.getNom() + " et " + etapesuccesseur.getNom());
                     }
                 }
             }
@@ -136,7 +137,7 @@ PAs d'activite restreinte entree
                     if (etapesuccesseur.estActivite()) { //l'un des successeurs est une activité
 
                         nbActivite=nbActivite+1;
-                        if(nbActivite>=2) throw new MondeException("Erreur dans le test 5. Deux activités suivent le guichet :" + etape);
+                        if(nbActivite>=2) throw new MondeException("Erreur dans le test 5. Deux activités suivent le guichet :" + etape.getNom());
                     }
                 }
             }
@@ -181,7 +182,7 @@ PAs d'activite restreinte entree
             if (!etape.getEstUneEntree() && (etape.nbPredecesseurs() > 0)) {
                 boolean accessible = estAccessibleDepuisEntree(etape);
                 if (!accessible) {
-                    throw new MondeException("Erreur dans le test 6. L'étape n'est pas accessible par une entrée :" + etape);
+                    throw new MondeException("Erreur dans le test 6. L'étape n'est pas accessible par une entrée :" + etape.getNom());
                 }
             }
         }
@@ -222,7 +223,7 @@ PAs d'activite restreinte entree
     public void test7() throws MondeException{
         for (EtapeIG etape : this.mondeIG) {
             if (!estAccessibleJusquaSortie(etape)) {
-                throw new MondeException("Erreur dans le test 7. L'étape ne donne pas accès à une sortie :" + etape);
+                throw new MondeException("Erreur dans le test 7. L'étape ne donne pas accès à une sortie :" + etape.getNom());
             }
         }
     }
@@ -246,16 +247,31 @@ PAs d'activite restreinte entree
     }
 
     /**
+     * Vérifie qu'il y a au moins une activité dans le monde
+     * @throws MondeException
+     */
+    public void test0() throws MondeException
+    {
+        if(!mondeIG.iterator().hasNext()){
+            throw new MondeException("Il n'y a aucune activité dans ce monde");
+        }
+    }
+
+
+    /**
      * Cette méthode simule le monde, elle fait appel à simuler de Simulation
      */
-    private void simuler(){
+    private void simuler() throws MondeException{
+        try {
+            verifierMondeIG();
+
+        } catch(MondeException e) {throw new MondeException(e.getMessage());}
 
 
         Task<Void> task = new Task<Void>() {
-            protected Void call() throws Exception {
-                try
-                {
-                    verifierMondeIG();
+            protected Void call() throws MondeException, Exception {
+
+                try{
                     Object simulationInstance = sim.newInstance();
                     sim.getMethod("ajOb",SimulationIG.class).invoke(simulationInstance,simIG);
                     System.out.println(sim.getMethod("getListeobs").invoke(simulationInstance));
@@ -266,7 +282,7 @@ PAs d'activite restreinte entree
                     System.gc();
                     //Simulation sim = new Simulation();    //faire une introspection
                     //sim.simuler(creerMonde(),mondeIG);
-                } catch(MondeException | InstantiationException | IllegalAccessException |
+                } catch( InstantiationException | IllegalAccessException |
                         NoSuchMethodException |
                         InvocationTargetException e)
                 {
@@ -309,7 +325,6 @@ PAs d'activite restreinte entree
                 //Si elle l'est alors c'est une activité restreinte
                 if(succedeUnGuichet)
                 {
-                    System.out.println(etIG.getNom() + " est une activité restreinte");
 
                     ActiviteRestreinte activiteRestreinte = new ActiviteRestreinte(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,activiteRestreinte);
@@ -317,7 +332,6 @@ PAs d'activite restreinte entree
 
                 }else //Sinon quoi c'est une activité normale
                 {
-                    System.out.println(etIG.getNom() + " est une activité");
 
                     Activite etape = new Activite(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,etape);
@@ -328,7 +342,6 @@ PAs d'activite restreinte entree
             }//Si ce n'est pas une activité mais un guichet
             else if(etIG.estGuichet())
             {
-                System.out.println(etIG.getNom() + " est un guichet");
 
                 GuichetIG guichetIG = (GuichetIG) etIG;
                 Guichet guichet = new Guichet(etIG.getNom(), guichetIG.getNbJeton());
@@ -383,9 +396,6 @@ PAs d'activite restreinte entree
             Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
             while( etapeIG.getClientsDansEtape().size()!=e.getNbClientDansEtape()) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
                 //mise à jour de l'ig
-
-                System.out.println("================\n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape());
-
                 if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
                     int nbclientasupprimer = etapeIG.getClientsDansEtape().size()- e.getNbClientDansEtape();
                         etapeIG.supprimerClients(nbclientasupprimer);
@@ -393,9 +403,6 @@ PAs d'activite restreinte entree
                 } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
                 }
-
-                System.out.println("APRÈS \n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape() + "\n ===========================");
-
             }
         }
     }

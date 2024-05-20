@@ -94,8 +94,6 @@ public class KitC {
                 ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", command);
                 Process process = processBuilder.start();
                 process.waitFor();
-                System.out.println("Process with PID " + pid + " has been killed.");
-
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }

@@ -83,12 +83,9 @@ public class VueMondeIG extends Pane implements Observateur  {
                     }
                 }
 //AJOUTER LES CLIENTS :------------------------------
-                    System.out.println("les étapes :" + etapes);
                     for(VueEtapeIG vueEtapeIG : etapes){
-                        //System.out.println("les étapes youpiiii");
 
                         if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
-                            ///System.out.println("les activité youpiiii");
 
                             VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
@@ -100,8 +97,6 @@ public class VueMondeIG extends Pane implements Observateur  {
                         }
                         if(vueEtapeIG.getEtape().estGuichet())
                         {
-                            System.out.println("les guichets youpiiii");
-
                             VueGuichetIG guich = (VueGuichetIG)vueEtapeIG;
                             GuichetIG guichetEtape = (GuichetIG)guich.getEtape();
                             ArrayList<HBox> listBox = guich.getBoxList();
@@ -114,9 +109,7 @@ public class VueMondeIG extends Pane implements Observateur  {
                                 }
                             }
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                                System.out.println("Le client : " + client.toString());
                                 if(it.hasNext()) {
-                                    System.out.println("Affichage client");
                                     HBox pane = it.next();
                                     pane.getChildren().add(new VueClientIG());
                                 }
