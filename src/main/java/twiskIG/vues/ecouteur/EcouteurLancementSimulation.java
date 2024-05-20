@@ -27,7 +27,6 @@ public class EcouteurLancementSimulation implements EventHandler<ActionEvent> {
             try {
                 SimulationIG sim = new SimulationIG(m);
             } catch (MondeException e) {
-                System.out.println("oohhhh");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Erreur lors de l'instanciation du monde");

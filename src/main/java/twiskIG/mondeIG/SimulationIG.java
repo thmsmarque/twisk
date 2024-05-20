@@ -325,7 +325,6 @@ PAs d'activite restreinte entree
                 //Si elle l'est alors c'est une activité restreinte
                 if(succedeUnGuichet)
                 {
-                    System.out.println(etIG.getNom() + " est une activité restreinte");
 
                     ActiviteRestreinte activiteRestreinte = new ActiviteRestreinte(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,activiteRestreinte);
@@ -333,7 +332,6 @@ PAs d'activite restreinte entree
 
                 }else //Sinon quoi c'est une activité normale
                 {
-                    System.out.println(etIG.getNom() + " est une activité");
 
                     Activite etape = new Activite(etIG.getNom(),etIG.getDelai(),etIG.getEcart());
                     correspondancesEtapes.ajouter(etIG,etape);
@@ -344,7 +342,6 @@ PAs d'activite restreinte entree
             }//Si ce n'est pas une activité mais un guichet
             else if(etIG.estGuichet())
             {
-                System.out.println(etIG.getNom() + " est un guichet");
 
                 GuichetIG guichetIG = (GuichetIG) etIG;
                 Guichet guichet = new Guichet(etIG.getNom(), guichetIG.getNbJeton());
@@ -399,9 +396,6 @@ PAs d'activite restreinte entree
             Iterator<ClientIG> c = etapeIG.getClientsDansEtape().iterator();
             while( etapeIG.getClientsDansEtape().size()!=e.getNbClientDansEtape()) { // on vérifie qu'il y a autant de client dans l'étape IG dans dans l'etape de base
                 //mise à jour de l'ig
-
-                System.out.println("================\n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape());
-
                 if (etapeIG.getClientsDansEtape().size() > e.getNbClientDansEtape()) { //il y a plus de client dans l'ig que dans l'etape
                     int nbclientasupprimer = etapeIG.getClientsDansEtape().size()- e.getNbClientDansEtape();
                         etapeIG.supprimerClients(nbclientasupprimer);
@@ -409,9 +403,6 @@ PAs d'activite restreinte entree
                 } else if(etapeIG.getClientsDansEtape().size()<e.getNbClientDansEtape()) { //il y a plus de client dans l'étape que dans l'IG
                     etapeIG.ajouterClients(new ClientIG(etapeIG.getPosX(),etapeIG.getPosY()));
                 }
-
-                System.out.println("APRÈS \n IG : " + etapeIG.getClientsDansEtape().size() + "\n Sim :" + e.getNbClientDansEtape() + "\n ===========================");
-
             }
         }
     }
