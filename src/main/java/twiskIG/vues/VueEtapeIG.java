@@ -35,7 +35,8 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
     public VueEtapeIG(MondeIG monde, EtapeIG etape,boolean simEnCours){
         this.etape = etape;
         this.monde = monde;
-        this.label = new Label(etape.getNom());
+        if(etape.estGuichet()) {this.label = new Label(etape.getNom() + " : " + etape.getNbJeton() + " jetons");}
+        else {this.label = new Label(etape.getNom());}
         this.simEnCours = simEnCours;
         label.setStyle("-fx-text-fill: black; -fx-font-weight: bold");
         setPadding(new Insets(5));

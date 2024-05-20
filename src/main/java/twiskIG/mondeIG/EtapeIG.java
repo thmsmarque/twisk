@@ -338,4 +338,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     public Iterator<PointDeControleIG> iterator() {
         return pointsdeC.iterator();
     }
+
+    public int getNbJeton() { return 0;
+    }
 }
