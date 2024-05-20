@@ -60,8 +60,6 @@ public class VueGuichetIG extends VueEtapeIG  {
         }
         if(!simEnCours) this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
-
-
     }
 
     public ArrayList<HBox> getBoxList()

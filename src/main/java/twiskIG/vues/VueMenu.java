@@ -46,13 +46,18 @@ public class VueMenu extends MenuBar implements Observateur {
 
         desactiver = new MenuItem("Effacer la selection");
         desactiver.setOnAction(new EcouteurDesactiverSelection(monde));
+        desactiver.setAccelerator(KeyCombination.keyCombination("Ctlr+x"));
 
         //entree sortie
         entree = new MenuItem("Entree");
         entree.setOnAction(new EcouteurMenuEntree(monde));
+        entree.setAccelerator(KeyCombination.keyCombination("Ctrl+e"));
+        entree.setDisable(true);
 
         sortie = new MenuItem("Sortie");
         sortie.setOnAction(new EcouteurMenuSortie(monde));
+        sortie.setAccelerator(KeyCombination.keyCombination("Alt+e"));
+        sortie.setDisable(true);
 
         //Parametre
         parametres = new MenuItem("Paramètres de l'activite");
@@ -78,8 +83,19 @@ public class VueMenu extends MenuBar implements Observateur {
                 nb+=1;
             }
         }
+        if(nb!=0) {
+            entree.setDisable(false);
+            sortie.setDisable(false);
+        } else {
+            entree.setDisable(true);
+            sortie.setDisable(true);
+        }
         if(nb!=1) afficher = false;
         renommer.setDisable(!afficher);
         parametres.setDisable(!afficher);
+        if(monde.getEnCoursDeSim()) {
+            entree.setDisable(monde.getEnCoursDeSim());
+            sortie.setDisable(monde.getEnCoursDeSim());
+        }
     }
 }
