@@ -28,7 +28,7 @@ public class VueGuichetIG extends VueEtapeIG  {
      * @param monde
      * @param etape
      */
-    public VueGuichetIG(MondeIG monde, GuichetIG etape){
+    public VueGuichetIG(MondeIG monde, GuichetIG etape,boolean simEnCours){
         super(monde,etape);
 
         this.boxList = new ArrayList<>();
@@ -54,7 +54,7 @@ public class VueGuichetIG extends VueEtapeIG  {
             box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
             this.box.getChildren().add(box);
         }
-        this.setOnMouseClicked(new EcouteurSelection(monde, etape));
+        if(!simEnCours) this.setOnMouseClicked(new EcouteurSelection(monde, etape));
         this.getChildren().add(box);
 
 

@@ -30,7 +30,7 @@ public class VueMondeIG extends Pane implements Observateur  {
 
         monde.ajouterObservateur(this);
         for(EtapeIG etape : monde){
-            VueEtapeIG vueetape = new VueActiviteIG(monde,etape);
+            VueEtapeIG vueetape = new VueActiviteIG(monde,etape,getSimEnCours());
             etapes.add(vueetape);
             getChildren().add(vueetape);
         }
@@ -46,7 +46,7 @@ public class VueMondeIG extends Pane implements Observateur  {
 
     @Override
     public void reagir() {
-
+        this.simEnCours=monde.getEnCoursDeSim(); //true = en cours en simulation
         Pane pane = this;
         Runnable command = new Runnable() {
             @Override
@@ -57,7 +57,9 @@ public class VueMondeIG extends Pane implements Observateur  {
 
                 Iterator<ArcIG> arcs = monde.iteratorarc();
                 while(arcs.hasNext()){
-                    pane.getChildren().add(new VueArcIG(monde,arcs.next()));
+                    VueArcIG vuearc = new VueArcIG(monde,arcs.next(),getSimEnCours());
+                    vuearc.setSimEnCours(getSimEnCours());
+                    pane.getChildren().add(vuearc);
                 }
 
 
@@ -65,18 +67,19 @@ public class VueMondeIG extends Pane implements Observateur  {
                 for (EtapeIG etape : monde) {
                     if(etape.estActivite())
                     {
-                        VueEtapeIG vueetape = new VueActiviteIG(monde, etape);
+                        VueEtapeIG vueetape = new VueActiviteIG(monde, etape,getSimEnCours());
                         etapes.add(vueetape);
                         pane.getChildren().add(vueetape );
                     }
                     if(etape.estGuichet())
                     {
-                        VueEtapeIG vueetape = new VueGuichetIG(monde, (GuichetIG)etape);
+                        VueEtapeIG vueetape = new VueGuichetIG(monde, (GuichetIG)etape,getSimEnCours());
                         getChildren().add(vueetape );
                     }
 
                     for(PointDeControleIG pc : etape){
-                        getChildren().add(new VuePointDeControle(monde,pc));
+                        VuePointDeControle vuepdc = new VuePointDeControle(monde,pc,getSimEnCours());
+                        getChildren().add(vuepdc);
                     }
 //AJOUTER LES CLIENTS :------------------------------
                     System.out.println("les étapes :" + etapes);

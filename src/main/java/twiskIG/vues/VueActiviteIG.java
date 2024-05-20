@@ -17,14 +17,14 @@ public class VueActiviteIG extends VueEtapeIG {
      * @param monde
      * @param etape
      */
-    public VueActiviteIG(MondeIG monde, EtapeIG etape) {
+    public VueActiviteIG(MondeIG monde, EtapeIG etape,boolean simEnCours) {
         super(monde, etape);
         this.box = new HBox();
+        this.simEnCours=simEnCours;
 
         //Style et taille :
 
         this.box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
-
 
         TailleComposants taille = TailleComposants.getInstance();
 

@@ -14,13 +14,16 @@ public class VuePointDeControle extends Circle implements Observateur{
 
     private PointDeControleIG point;
 
+    private boolean simEnCours;
+
     /**
-     * Constructeur de la classe VuePointDeControle
+     * Constructeur de la classe VuePointDeControl
      * @param monde
      */
-    public VuePointDeControle(MondeIG monde, PointDeControleIG point) {
+    public VuePointDeControle(MondeIG monde, PointDeControleIG point, boolean simEnCours) {
         this.monde=monde;
         this.point =point;
+        this.simEnCours=simEnCours;
 
         //TEMP :
         setCenterX(point.getPosX());
@@ -29,7 +32,7 @@ public class VuePointDeControle extends Circle implements Observateur{
         //Visuel :
         setRadius(5);
         setFill(Color.BLUEVIOLET);
-        setOnMouseClicked(new EcouteurVuePointDeControleIG(monde,point));
+        if(!this.simEnCours) setOnMouseClicked(new EcouteurVuePointDeControleIG(monde,point));
 
 
         //ajouter observateur et notifier
@@ -41,6 +44,10 @@ public class VuePointDeControle extends Circle implements Observateur{
 
     public void setY(int y){
         setCenterY(y);
+    }
+
+    public void setSimEnCours(boolean simEnCours) {
+        this.simEnCours = simEnCours;
     }
 
     @Override
