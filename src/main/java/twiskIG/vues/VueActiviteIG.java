@@ -18,7 +18,7 @@ public class VueActiviteIG extends VueEtapeIG {
      * @param etape
      */
     public VueActiviteIG(MondeIG monde, EtapeIG etape,boolean simEnCours) {
-        super(monde, etape);
+        super(monde, etape,simEnCours);
         this.box = new HBox();
         this.simEnCours=simEnCours;
 
