@@ -32,7 +32,7 @@ public class VueGuichetIG extends VueEtapeIG  {
      * @param etape
      */
     public VueGuichetIG(MondeIG monde, GuichetIG etape,boolean simEnCours){
-        super(monde,etape);
+        super(monde,etape,simEnCours);
 
         this.boxList = new ArrayList<>();
 

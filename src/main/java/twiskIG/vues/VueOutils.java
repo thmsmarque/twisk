@@ -92,9 +92,15 @@ public class VueOutils extends TilePane implements Observateur {
      */
     public void reagir(){
         num++;
+        boolean afficher = false;
         this.boutonAct.setOnAction(new EcouteurOutils(this.monde,num));
         this.boutonGuichet.setOnAction(new EcouteurAjoutGuichet(this.monde,num));
-        this.boutonLancement.setOnAction(new EcouteurLancementSimulation(monde));
+        if(monde.getEnCoursDeSim()) afficher = true;
+
+        this.boutonGuichet.setDisable(afficher);
+        this.boutonAct.setDisable(afficher);
+
+            this.boutonLancement.setOnAction(new EcouteurLancementSimulation(monde));
 
         Runnable command = new Runnable() {
             @Override

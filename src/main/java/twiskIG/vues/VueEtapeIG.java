@@ -32,10 +32,11 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
      * @param monde
      * @param etape
      */
-    public VueEtapeIG(MondeIG monde, EtapeIG etape){
+    public VueEtapeIG(MondeIG monde, EtapeIG etape,boolean simEnCours){
         this.etape = etape;
         this.monde = monde;
         this.label = new Label(etape.getNom());
+        this.simEnCours = simEnCours;
         label.setStyle("-fx-text-fill: black; -fx-font-weight: bold");
         setPadding(new Insets(5));
         HBox h = new HBox();
@@ -80,8 +81,8 @@ public abstract class VueEtapeIG extends VBox implements Observateur  {
         getChildren().add(h);
 
         //Drag n drop :
-        this.setId(etape.getIdentifiant());
-        setOnDragDetected(new EcouteurSource(this));
+        if(!this.simEnCours) this.setId(etape.getIdentifiant());
+        if(!this.simEnCours) setOnDragDetected(new EcouteurSource(this));
 
     }
 

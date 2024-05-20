@@ -33,9 +33,6 @@ public class VuePointDeControle extends Circle implements Observateur{
         setRadius(5);
         setFill(Color.BLUEVIOLET);
         if(!this.simEnCours) setOnMouseClicked(new EcouteurVuePointDeControleIG(monde,point));
-
-
-        //ajouter observateur et notifier
     }
 
     public void setX(int x){
