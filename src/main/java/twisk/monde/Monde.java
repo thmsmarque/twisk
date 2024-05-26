@@ -9,6 +9,7 @@ public class Monde implements Iterable<Etape> {
     private SasEntree entree;
     private SasSortie sortie;
     private GestionnaireClients g;
+    private String probaEntree;
     /**
      * Constructeur de la classe Monde
      */
@@ -153,4 +154,17 @@ public class Monde implements Iterable<Etape> {
                 "\n\t\t, entree=" + entree +
                 '}';
     }
+
+    public void probaType(String proba){
+        System.out.println("\n"+proba+"\n");
+        switch(proba){
+            case "uniforme":
+                break;
+            case "exponentielle":
+                break;
+            case "gaussienne" :
+                break;
+        }
+    }
 }
+

@@ -43,6 +43,7 @@ public class Simulation extends SujetObserve {
         System.out.println("Lancement de la simulation logique");
                 GestionnaireClients g = monde.getG();
                 KitC kit = new KitC();
+                monde.probaType(mondeIG.getProba());
                 String fichierC = monde.toC();
                 System.out.println(fichierC);
                 kit.creerFichier(fichierC);

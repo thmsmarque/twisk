@@ -69,9 +69,11 @@ public class VueMenu extends MenuBar implements Observateur {
 
         //LOI :
         gaussienne = new MenuItem("Gaussienne");
-
+        gaussienne.setOnAction(e-> monde.setProba("gaussienne"));
         exponentielle = new MenuItem("Exponentielle");
+        exponentielle.setOnAction(e-> monde.setProba("exponentielle"));
         uniforme = new MenuItem("Uniforme");
+        uniforme.setOnAction(e-> monde.setProba("uniforme"));
         loi = new Menu("Loi");
         loi.getItems().addAll(gaussienne, exponentielle, uniforme);
 
