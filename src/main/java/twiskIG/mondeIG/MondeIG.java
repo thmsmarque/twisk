@@ -35,6 +35,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
         this.pointSauv=null;
         arcs = new ArrayList<>();
         enCoursDeSim = false;
+        this.nbCLient=10;
         //this.ajouter("Activite0");
     }
 

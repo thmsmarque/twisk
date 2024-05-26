@@ -14,7 +14,8 @@ import twiskIG.vues.ecouteur.*;
 public class VueMenu extends MenuBar implements Observateur {
 
     private MondeIG monde;
-    private MenuItem quitter,supprimer,renommer,desactiver, entree, sortie, parametres,sauvegarder,charger,client;
+    private MenuItem quitter,supprimer,renommer,desactiver, entree, sortie, parametres,sauvegarder,charger,client,exponentielle,gaussienne, uniforme;
+    private Menu loi;
     public VueMenu(MondeIG monde){
         super();
         this.monde=monde;
@@ -66,6 +67,14 @@ public class VueMenu extends MenuBar implements Observateur {
         parametres.setAccelerator(KeyCombination.keyCombination("Ctrl+p"));
         parametres.setDisable(true);
 
+        //LOI :
+        gaussienne = new MenuItem("Gaussienne");
+
+        exponentielle = new MenuItem("Exponentielle");
+        uniforme = new MenuItem("Uniforme");
+        loi = new Menu("Loi");
+        loi.getItems().addAll(gaussienne, exponentielle, uniforme);
+
         //Clients :
         client = new MenuItem("Nombre de clients");
         client.setOnAction(new EcouteurSetClients(monde));
@@ -75,7 +84,7 @@ public class VueMenu extends MenuBar implements Observateur {
         menu2.getItems().addAll(supprimer,renommer,desactiver);
         menu.getItems().addAll(quitter,sauvegarder);
         menu3.getItems().addAll(entree,sortie);
-        menu4.getItems().addAll(parametres,client);
+        menu4.getItems().addAll(parametres,client,loi);
         this.getMenus().addAll(menu,menu2,menu3,menu4);
 
         monde.ajouterObservateur(this);
