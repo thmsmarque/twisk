@@ -12,7 +12,7 @@ public class Client {
     public Client(int numero){
         this.numeroClient=numero;
         rang = 0;
-        Etape fantome = new Activite("temporaire"); // A voir pour la suite
+        Etape fantome = new Activite("");
         etape= fantome;
     }
 
