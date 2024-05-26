@@ -121,9 +121,7 @@ public class Monde implements Iterable<Etape> {
         Etape etDef = this.getLesEtapes().getListeetapes().iterator().next();
         //System.out.println(et);
         String res = "#include \"def.h\"\n" +
-                "#include <stdio.h>\n" +
-                "#include <stdlib.h>\n" +
-                "#include <unistd.h> \n" +
+                "#include <math.h> \n"+
             etDef.defineName() + "\n" +
                 this.probaEntree +
             "\n\nvoid simulation(int ids)\n{\n" +
@@ -131,7 +129,7 @@ public class Monde implements Iterable<Etape> {
                 "entrer("+getEntree().getDefineName()+");\n" +
                 /*"delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +*/
 
-                "usleep("+this.nomFonctionProbaEntree +"*10000); \n" +
+                "sleep("+this.nomFonctionProbaEntree +"); \n" +
 
                 "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC();
         StringBuilder build = new StringBuilder();
@@ -204,7 +202,7 @@ public class Monde implements Iterable<Etape> {
                                 "{\n" +
                                 "    double U1 = rand() / (double)RAND_MAX;\n" +
                                 "    double U2 = rand() / (double)RAND_MAX;\n" +
-                                "    double Z = sqrt(-2.0 * log(U1)) * cos(2.0 * M_PI * U2);\n" +
+                                "    double Z = sqrt(-2.0 * log(U1)) * cos(2.0 * 3.14159265358979323846 * U2);\n" +
                                 "    double X = moyenne + Z * ecartype;\n" +
                                 "return X; \n" +
                                 "}\n";

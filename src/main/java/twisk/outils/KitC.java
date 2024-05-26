@@ -61,7 +61,7 @@ public class KitC {
      * Automatise la compilation du fichier client.c
      */
     public void compiler(){
-        ProcessBuilder pb = new ProcessBuilder("gcc","-Wall","-ansi","-pedantic","-fPIC","-c","/tmp/twisk/client.c","-o","/tmp/twisk/client.o");
+        ProcessBuilder pb = new ProcessBuilder("gcc","-Wall","-ansi","-pedantic","-fPIC","-c","/tmp/twisk/client.c","-o","/tmp/twisk/client.o","-lm");
         try {
             pb.inheritIO().start().waitFor();
         } catch (InterruptedException | IOException e) {
