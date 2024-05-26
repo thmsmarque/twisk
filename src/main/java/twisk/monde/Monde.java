@@ -10,6 +10,7 @@ public class Monde implements Iterable<Etape> {
     private SasSortie sortie;
     private GestionnaireClients g;
     private String probaEntree;
+    private String nomFonctionProbaEntree;
     /**
      * Constructeur de la classe Monde
      */
@@ -156,13 +157,49 @@ public class Monde implements Iterable<Etape> {
     }
 
     public void probaType(String proba){
-        System.out.println("\n"+proba+"\n");
         switch(proba){
             case "uniforme":
+                System.out.println("uniforme");
+               // this.nomFonctionProbaEntree =
+                this.probaEntree =
+                        "void delaiUniforme(int temps, int delta)\n" +
+                                "{\n" +
+                                "    int bi, bs;\n" +
+                                "    int n, nbSec;\n" +
+                                "    bi = temps - delta;\n" +
+                                "    if (bi < 0)\n" +
+                                "        bi = 0;\n" +
+                                "    bs = temps + delta;\n" +
+                                "    n = bs - bi + 1;\n" +
+                                "    nbSec = (rand() / (float)RAND_MAX) * n;\n" +
+                                "    nbSec += bi;\n" +
+                                "    printf(\"%d\\n\", nbSec);\n" +
+                                "}" ;
                 break;
             case "exponentielle":
+                System.out.println("exponentielle");
+
+                this.probaEntree =
+                        "void delaiExponentiel(double lambda)\n" +
+                                "{\n" +
+                                "    double U = rand() / (double)RAND_MAX;\n" +
+                                "    double X = -log(U) / lambda;\n" +
+                                "    printf(\"%f\\n\", X);\n" +
+                                "}";
                 break;
             case "gaussienne" :
+                System.out.println("gaussienne");
+
+                this.probaEntree =
+                        "void delaiGauss(double moyenne, double ecartype)\n" +
+                                "{\n" +
+                                "    double U1 = rand() / (double)RAND_MAX;\n" +
+                                "    double U2 = rand() / (double)RAND_MAX;\n" +
+                                "    double Z = sqrt(-2.0 * log(U1)) * cos(2.0 * M_PI * U2);\n" +
+                                "    double X = moyenne + Z * ecartype;\n" +
+                                "    printf(\"%f\\n\", X);\n" +
+                                "}";
+
                 break;
         }
     }
