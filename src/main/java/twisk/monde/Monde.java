@@ -121,11 +121,18 @@ public class Monde implements Iterable<Etape> {
         Etape etDef = this.getLesEtapes().getListeetapes().iterator().next();
         //System.out.println(et);
         String res = "#include \"def.h\"\n" +
-            etDef.defineName() +
+                "#include <stdio.h>\n" +
+                "#include <stdlib.h>\n" +
+                "#include <unistd.h> \n" +
+            etDef.defineName() + "\n" +
+                this.probaEntree +
             "\n\nvoid simulation(int ids)\n{\n" +
                 "int nb; \n" +
                 "entrer("+getEntree().getDefineName()+");\n" +
-                "delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +
+                /*"delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +*/
+
+                "usleep("+this.nomFonctionProbaEntree +"*10000); \n" +
+
                 "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC();
         StringBuilder build = new StringBuilder();
         //build.append(res).append(et.toC());
@@ -160,9 +167,9 @@ public class Monde implements Iterable<Etape> {
         switch(proba){
             case "uniforme":
                 System.out.println("uniforme");
-               // this.nomFonctionProbaEntree =
+               this.nomFonctionProbaEntree = "delaiUniforme("+getEntree().getTemps()+","+getEntree().getEcartTemps()+")";
                 this.probaEntree =
-                        "void delaiUniforme(int temps, int delta)\n" +
+                        "int delaiUniforme(int temps, int delta)\n" +
                                 "{\n" +
                                 "    int bi, bs;\n" +
                                 "    int n, nbSec;\n" +
@@ -173,32 +180,34 @@ public class Monde implements Iterable<Etape> {
                                 "    n = bs - bi + 1;\n" +
                                 "    nbSec = (rand() / (float)RAND_MAX) * n;\n" +
                                 "    nbSec += bi;\n" +
-                                "    printf(\"%d\\n\", nbSec);\n" +
-                                "}" ;
+                                "return nbSec; \n"+
+                                "}\n" ;
                 break;
             case "exponentielle":
                 System.out.println("exponentielle");
+                this.nomFonctionProbaEntree = "delaiExponentiel("+getEntree().getTemps()+")";
 
                 this.probaEntree =
-                        "void delaiExponentiel(double lambda)\n" +
+                        "int delaiExponentiel(double lambda)\n" +
                                 "{\n" +
                                 "    double U = rand() / (double)RAND_MAX;\n" +
                                 "    double X = -log(U) / lambda;\n" +
-                                "    printf(\"%f\\n\", X);\n" +
-                                "}";
+                                "   return X; \n"+
+                                "}\n";
                 break;
             case "gaussienne" :
                 System.out.println("gaussienne");
+                this.nomFonctionProbaEntree = "delaiGauss("+getEntree().getTemps()+","+getEntree().getEcartTemps()+")";
 
                 this.probaEntree =
-                        "void delaiGauss(double moyenne, double ecartype)\n" +
+                        "int delaiGauss(double moyenne, double ecartype)\n" +
                                 "{\n" +
                                 "    double U1 = rand() / (double)RAND_MAX;\n" +
                                 "    double U2 = rand() / (double)RAND_MAX;\n" +
                                 "    double Z = sqrt(-2.0 * log(U1)) * cos(2.0 * M_PI * U2);\n" +
                                 "    double X = moyenne + Z * ecartype;\n" +
-                                "    printf(\"%f\\n\", X);\n" +
-                                "}";
+                                "return X; \n" +
+                                "}\n";
 
                 break;
         }
