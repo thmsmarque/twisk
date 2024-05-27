@@ -373,11 +373,11 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
             {
                     ecrire.write(a.getP1().getEtape().getIdentifiant());
                     ecrire.newLine();
-                    ecrire.write(a.getP1().getPositionSurEtape());
+                    ecrire.write(a.getP1().positionSurEtape);
                     ecrire.newLine();
                 ecrire.write(a.getP2().getEtape().getIdentifiant());
                 ecrire.newLine();
-                ecrire.write(a.getP2().getPositionSurEtape());
+                ecrire.write(a.getP2().positionSurEtape);
                 ecrire.newLine();
                 System.out.println(a.getP1().getPositionSurEtape() + ":"+a.getP1().getEtape().getNom()+ "\t\t" + a.getP2().getPositionSurEtape() + ":"+a.getP2().getEtape().getNom());
 

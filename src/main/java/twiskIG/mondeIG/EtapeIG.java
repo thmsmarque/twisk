@@ -81,11 +81,15 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
         if(this.estGuichet()){
             for (int i = 0; i < 2; i++) {
-                this.pointsdeC.add(new PointDeControleIG(0, 0, this));
+                PointDeControleIG temp = new PointDeControleIG(0,0,this);
+                temp.setPositionSurEtape(i);
+                this.pointsdeC.add(temp);
             }
         } else {
             for (int i = 0; i < 4; i++) {
-                this.pointsdeC.add(new PointDeControleIG(0, 0, this));
+                PointDeControleIG temp = new PointDeControleIG(0,0,this);
+                temp.setPositionSurEtape(i);
+                this.pointsdeC.add(temp);
             }
         }
 
@@ -182,26 +186,22 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         //Point de droite
         this.pointsdeC.get(1).setPosX(this.posX + this.largeur);
         this.pointsdeC.get(1).setPosY(this.posY + this.hauteur / 2);
-        this.pointsdeC.get(1).setPositionSurEtape(1);
 
         //Point de gauche
         this.pointsdeC.get(0).setPosX(this.posX);
         this.pointsdeC.get(0).setPosY(this.posY + this.hauteur / 2);
-        this.pointsdeC.get(0).setPositionSurEtape(0);
 
 
         if (!this.estGuichet()) {
             //Point du haut
             this.pointsdeC.get(2).setPosX(this.posX + this.largeur / 2);
             this.pointsdeC.get(2).setPosY(this.posY);
-            this.pointsdeC.get(2).setPositionSurEtape(2);
 
 
 
             //Point du bas
             this.pointsdeC.get(3).setPosX(this.posX + this.largeur / 2);
             this.pointsdeC.get(3).setPosY(this.posY + this.hauteur);
-            this.pointsdeC.get(3).setPositionSurEtape(3);
 
 
         }

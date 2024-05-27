@@ -19,7 +19,7 @@ public class PointDeControleIG {
 
     private EtapeIG etape;
     @Expose
-    private int positionSurEtape;
+    public int positionSurEtape;
 
     /**
      * Constructeur de la classe PointDeControle
