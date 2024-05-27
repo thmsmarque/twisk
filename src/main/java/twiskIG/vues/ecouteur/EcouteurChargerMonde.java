@@ -6,10 +6,10 @@ import twiskIG.mondeIG.MondeIG;
 
 import java.io.File;
 
-public class EcouteurSauvegarder implements EventHandler<ActionEvent> {
+public class EcouteurChargerMonde implements EventHandler<ActionEvent> {
 
     MondeIG monde;
-    public EcouteurSauvegarder(MondeIG monde)
+    public EcouteurChargerMonde(MondeIG monde)
     {
         this.monde = monde;
     }
@@ -17,6 +17,6 @@ public class EcouteurSauvegarder implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         File file = new File("sauv.json");
-        monde.sauvegarderMonde(file);
+        monde.chargerMonde(file);
     }
 }

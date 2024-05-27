@@ -8,6 +8,7 @@ import twiskIG.outils.TailleComposants;
 
 import java.util.*;
 
+
 /**
  * Classe abstraite ActiviteIG
  */
@@ -29,7 +30,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private int delai;
     @Expose
     private int ecart;
-    @Expose
+
     private boolean selection;
 
     private ArrayList<PointDeControleIG> pointsdeC;
@@ -41,10 +42,14 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     public HashMap<String,EtapeIG> successeurs;
     public ArrayList<ClientIG> clientsDansEtape;
 
+
+
+
+
     /**Constructeur de la classe abstraite EtapeIG
-     * @param nom
-     * @param larg
-     * @param haut
+     * @param nom nom de l'activité
+     * @param larg largeur
+     * @param haut hauteur
      */
     public EtapeIG(String nom, int larg, int haut)
     {
@@ -162,29 +167,50 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.selection = selection;
     }
 
+    /**
+     * Définit un nouvel identifiant
+     * @param id nouvel identifiant
+     */
+    public void setIdentifiant(String id)
+    {
+        this.identifiant = id;
+    }
+
     public void setPointsdeC() {
 
 
         //Point de droite
         this.pointsdeC.get(1).setPosX(this.posX + this.largeur);
         this.pointsdeC.get(1).setPosY(this.posY + this.hauteur / 2);
+        this.pointsdeC.get(1).setPositionSurEtape(1);
 
         //Point de gauche
         this.pointsdeC.get(0).setPosX(this.posX);
         this.pointsdeC.get(0).setPosY(this.posY + this.hauteur / 2);
+        this.pointsdeC.get(0).setPositionSurEtape(0);
+
 
         if (!this.estGuichet()) {
             //Point du haut
             this.pointsdeC.get(2).setPosX(this.posX + this.largeur / 2);
             this.pointsdeC.get(2).setPosY(this.posY);
+            this.pointsdeC.get(2).setPositionSurEtape(2);
+
 
 
             //Point du bas
             this.pointsdeC.get(3).setPosX(this.posX + this.largeur / 2);
             this.pointsdeC.get(3).setPosY(this.posY + this.hauteur);
+            this.pointsdeC.get(3).setPositionSurEtape(3);
+
 
         }
 
+    }
+
+    public PointDeControleIG getPointDeC(int position)
+    {
+        return this.pointsdeC.get(position);
     }
 
     public ArrayList<PointDeControleIG> getPointsdeC()

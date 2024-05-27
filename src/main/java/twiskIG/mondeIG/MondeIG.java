@@ -5,11 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import twiskIG.exceptions.TwiskException;
 import twiskIG.outils.CustomExclusionStrategy;
+import twiskIG.outils.FabriqueIdentifiant;
 import twiskIG.outils.TailleComposants;
 import twiskIG.vues.Observateur;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -165,6 +166,20 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     }
 
     /**
+     * Retourne l'étape correspondant à son identifiant
+     * @param id identifiant de l'étape
+     * @return l'étape correspondante
+     */
+    public EtapeIG getEtapeByID(String id)
+    {
+        if(map.containsKey(id))
+        {
+            return (EtapeIG)map.get(id);
+        }else
+            return null;
+    }
+
+    /**
      * Renvoie le dernier point de sauvegarde cliqué
      * @return
      */
@@ -297,22 +312,231 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
     }
 
 
-    public void sauvegarderMonde()
+    public void sauvegarderMonde(File file)
     {
-        Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new CustomExclusionStrategy())
-                .create();
-        try (FileWriter writer = new FileWriter("data.json")) {
-            // Sérialiser les objets en JSON et les écrire dans un fichier
-            gson.toJson(this, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Gson gson = new Gson();
+        try
+        {
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter ecrire = new BufferedWriter(fileWriter);
+
+
+            ecrire.write(gson.toJson(this.map.size()));
+            ecrire.newLine();
+            for(EtapeIG e : this.map.values())
+            {
+                if(e.estGuichet())
+                {
+                    //Si l'étape est un guicht
+                    GuichetIG guich = (GuichetIG) e;
+                    ecrire.write(gson.toJson('g'));
+                    ecrire.newLine();
+                    ecrire.write(gson.toJson(guich.getNbJeton()));
+                    ecrire.newLine();
+                    ecrire.write(gson.toJson(guich.getSens()));
+                    ecrire.newLine();
+                }
+                else
+                {
+                    //Si l'étape est une activité
+                    ecrire.write(gson.toJson('a'));
+                    ecrire.newLine();
+                }
+
+                ecrire.write(gson.toJson(e.getNom()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getIdentifiant()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getLargeur()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getHauteur()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getPosX()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getPosY()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getDelai()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getEcart()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getEstUneEntree()));
+                ecrire.newLine();
+                ecrire.write(gson.toJson(e.getEstUneSortie()));
+                ecrire.newLine();
+
+            }
+
+
+            ecrire.write(gson.toJson(this.arcs.size()));
+            ecrire.newLine();
+            for(ArcIG a : this.arcs)
+            {
+                    ecrire.write(a.getP1().getEtape().getIdentifiant());
+                    ecrire.newLine();
+                    ecrire.write(a.getP1().getPositionSurEtape());
+                    ecrire.newLine();
+                ecrire.write(a.getP2().getEtape().getIdentifiant());
+                ecrire.newLine();
+                ecrire.write(a.getP2().getPositionSurEtape());
+                ecrire.newLine();
+                System.out.println(a.getP1().getPositionSurEtape() + ":"+a.getP1().getEtape().getNom()+ "\t\t" + a.getP2().getPositionSurEtape() + ":"+a.getP2().getEtape().getNom());
+
+            }
+
+            ecrire.close();
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
-    public void chargerMonde()
+    public void resetModne()
     {
+        this.map.clear();
+        this.arcs.clear();
 
+        this.supprimerSelection();
+
+        FabriqueIdentifiant.getInstance().reset();
+    }
+
+    public void chargerMonde(File file)
+    {
+        resetModne();
+        Gson gson = new Gson();
+        try
+        {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader lire = new BufferedReader(fileReader);
+
+
+            int size = gson.fromJson(lire.readLine(), int.class);
+            for(int i = 0;i < size;i++)
+            {
+                char typeEtape = gson.fromJson(lire.readLine(), char.class);
+
+
+                if(typeEtape == 'g')
+                {
+                    GuichetIG temp;
+                    int nombreJetons = gson.fromJson(lire.readLine(), int.class);
+                    boolean sens = gson.fromJson(lire.readLine(), boolean.class);
+                    String nomEtape = gson.fromJson(lire.readLine(), String.class);
+                    String idEtape = gson.fromJson(lire.readLine(), String.class);
+                    int largeur = gson.fromJson(lire.readLine(), int.class);
+                    int hauteur = gson.fromJson(lire.readLine(), int.class);
+                    int posX = gson.fromJson(lire.readLine(), int.class);
+                    int posY = gson.fromJson(lire.readLine(), int.class);
+                    int delai = gson.fromJson(lire.readLine(), int.class);
+                    int ecart = gson.fromJson(lire.readLine(), int.class);
+                    boolean estUneEntree = gson.fromJson(lire.readLine(), boolean.class);
+                    boolean estUneSortie = gson.fromJson(lire.readLine(), boolean.class);
+
+
+                    temp = new GuichetIG(nomEtape, largeur, hauteur);
+                    try {
+                        temp.changerNbJeton(nombreJetons);
+                    } catch (TwiskException e) {
+                        throw new RuntimeException(e);
+                    }
+                    temp.setSens(sens);
+                    temp.setIdentifiant(idEtape);
+                    temp.setPosX(posX);
+                    temp.setPosY(posY);
+                    temp.setPointsdeC();
+                    temp.setEstUneEntree(estUneEntree);
+                    temp.setEstUneSortie(estUneSortie);
+                    try {
+                        temp.setDelai(delai);
+                        temp.setEcart(ecart);
+                    } catch (TwiskException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    this.map.put(idEtape, temp);
+
+
+                }
+                else
+                {
+                    ActiviteIG ac;
+                    String nomEtape = gson.fromJson(lire.readLine(), String.class);
+                    String idEtape = gson.fromJson(lire.readLine(), String.class);
+                    int largeur = gson.fromJson(lire.readLine(), int.class);
+                    int hauteur = gson.fromJson(lire.readLine(), int.class);
+                    int posX = gson.fromJson(lire.readLine(), int.class);
+                    int posY = gson.fromJson(lire.readLine(), int.class);
+                    int delai = gson.fromJson(lire.readLine(), int.class);
+                    int ecart = gson.fromJson(lire.readLine(), int.class);
+                    boolean estUneEntree = gson.fromJson(lire.readLine(), boolean.class);
+                    boolean estUneSortie = gson.fromJson(lire.readLine(), boolean.class);
+
+                    ac = new ActiviteIG(nomEtape, largeur, hauteur);
+                    ac.setPosX(posX);
+                    ac.setPosY(posY);
+                    ac.setPointsdeC();
+                    ac.setEstUneEntree(estUneEntree);
+                    ac.setEstUneSortie(estUneSortie);
+                    ac.setIdentifiant(idEtape);
+                    try {
+                        ac.setDelai(delai);
+                        ac.setEcart(ecart);
+                    } catch (TwiskException e) {
+                        throw new RuntimeException(e);
+                    }
+                    this.map.put(idEtape, ac);
+                }
+
+
+            }
+
+            size = gson.fromJson(lire.readLine(), int.class);
+            for(int i = 0;i < size;i++)
+            {
+                String IdEtape1 = gson.fromJson(lire.readLine(), String.class);
+                int pos1 = gson.fromJson(lire.readLine(), int.class);
+                String IdEtape2 = gson.fromJson(lire.readLine(), String.class);
+                int pos2 = gson.fromJson(lire.readLine(), int.class);
+
+                PointDeControleIG p1 = getEtapeByID(IdEtape1).getPointDeC(pos1);
+                PointDeControleIG p2 = getEtapeByID(IdEtape2).getPointDeC(pos2);
+
+                try {
+                    ajouter(p1,p2);
+                } catch (TwiskException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+
+            lire.close();
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        this.notifierObservateurs();
+    }
+
+    public int getNbGuichets()
+    {
+        int res = 0;
+        for(EtapeIG e : map.values())
+        {
+            if(e.estGuichet()) res++;
+        }
+        return res;
+    }
+
+    public int getNbActivite()
+    {
+        int res = 0;
+        for(EtapeIG e : map.values())
+        {
+            if(e.estActivite()) res++;
+        }
+        return res;
     }
 
     @Override

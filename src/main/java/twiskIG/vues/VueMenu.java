@@ -30,6 +30,8 @@ public class VueMenu extends MenuBar implements Observateur {
         quitter.setOnAction(new EcouteurMenuQuitter());
         sauvegarder = new MenuItem("Sauvegarder");
         sauvegarder.setOnAction(new EcouteurSauvegarder(monde));
+        charger = new MenuItem("Charger");
+        charger.setOnAction(new EcouteurChargerMonde(monde));
 
         //Supprimer
         supprimer = new MenuItem("Supprimer");
@@ -84,7 +86,7 @@ public class VueMenu extends MenuBar implements Observateur {
 
 
         menu2.getItems().addAll(supprimer,renommer,desactiver);
-        menu.getItems().addAll(quitter,sauvegarder);
+        menu.getItems().addAll(quitter,sauvegarder,charger);
         menu3.getItems().addAll(entree,sortie);
         menu4.getItems().addAll(parametres,client,loi);
         this.getMenus().addAll(menu,menu2,menu3,menu4);

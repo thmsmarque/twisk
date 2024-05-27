@@ -56,4 +56,11 @@ public class FabriqueIdentifiant {
         return s.toString();
     }
 
+    public void reset()
+    {
+        noEtape=0;
+        noPC1='a';
+        noPC2=0;
+    }
+
 }
