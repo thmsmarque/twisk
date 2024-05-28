@@ -94,20 +94,14 @@ public class VueMondeIG extends Pane implements Observateur  {
 
                             VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
                             VBox box = ac.getVbox();
-                            ArrayList<HBox> Hboxs = new ArrayList<>();
-                            for(int i =0; i<vueEtapeIG.getEtape().getClientsDansEtape().size()%10;i++)
-                            {
-                                TailleComposants taille = TailleComposants.getInstance();
-                                HBox hbox = new HBox();
-                                hbox.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
-                                Hboxs.add(hbox);
-                            }
+                            HBox[] hboxs = new HBox[vueEtapeIG.getEtape().getClientsDansEtape().size()%10];
+
                             int compteurClients = 0;
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                                HBox hbox = Hboxs.get(compteurClients%10);
-                                hbox.getChildren().add(new VueClientIG());
+                                hboxs[compteurClients%10].getChildren().add(new VueClientIG());
                                 compteurClients++;
                             }
+                            ac.getVbox().getChildren().addAll(hboxs);
                         }
                         if(vueEtapeIG.getEtape().estGuichet())
                         {

@@ -47,6 +47,7 @@ public class KitC {
         FileWriter flot;
         BufferedWriter flotfiltre;
         try{
+            System.out.println("Création du client.c dans le tmp");
             flot = new FileWriter("/tmp/twisk/client.c"); //remettre le bon chemin quand ^ fonctionnera
             flotfiltre = new BufferedWriter(flot);
             flotfiltre.write(codeC);
