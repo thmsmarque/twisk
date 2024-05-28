@@ -101,7 +101,8 @@ public class VueMondeIG extends Pane implements Observateur  {
                                 hboxs[compteurClients%10].getChildren().add(new VueClientIG());
                                 compteurClients++;
                             }
-                            ac.getVbox().getChildren().addAll(hboxs);
+                            if(compteurClients >0)
+                                ac.getVbox().getChildren().addAll(hboxs);
                         }
                         if(vueEtapeIG.getEtape().estGuichet())
                         {
