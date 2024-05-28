@@ -19,12 +19,12 @@ public class PointDeControleIG {
 
     private EtapeIG etape;
     @Expose
-    public int positionSurEtape;
+    public String positionSurEtape;
 
     /**
      * Constructeur de la classe PointDeControle
      */
-    public PointDeControleIG(int posX, int posY, EtapeIG etape, int positionSurEtape){
+    public PointDeControleIG(int posX, int posY, EtapeIG etape, String positionSurEtape){
         this.etape = etape;
         this.identifiant= FabriqueIdentifiant.getInstance().getIdentifiantPointControle();
         this.posX=posX;
@@ -42,18 +42,18 @@ public class PointDeControleIG {
         this.posX=posX;
         this.posY=posY;
         this.identifiantEtape = etape.getIdentifiant();
-        this.positionSurEtape=0;
+        this.positionSurEtape="0";
     }
 
     /**
      * Définit la position sur l'étape
      * @param positionSurEtape nouvelle position
      */
-    public void setPositionSurEtape(int positionSurEtape){
-        this.positionSurEtape=new Integer(positionSurEtape).intValue();
+    public void setPositionSurEtape(String positionSurEtape){
+        this.positionSurEtape = positionSurEtape;
     }
 
-    public int getPositionSurEtape()
+    public String getPositionSurEtape()
     {
         return positionSurEtape;
     }

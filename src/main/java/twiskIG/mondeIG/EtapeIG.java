@@ -82,13 +82,13 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         if(this.estGuichet()){
             for (int i = 0; i < 2; i++) {
                 PointDeControleIG temp = new PointDeControleIG(0,0,this);
-                temp.setPositionSurEtape(i);
+                temp.setPositionSurEtape(""+i);
                 this.pointsdeC.add(temp);
             }
         } else {
             for (int i = 0; i < 4; i++) {
                 PointDeControleIG temp = new PointDeControleIG(0,0,this);
-                temp.setPositionSurEtape(i);
+                temp.setPositionSurEtape(""+i);
                 this.pointsdeC.add(temp);
             }
         }

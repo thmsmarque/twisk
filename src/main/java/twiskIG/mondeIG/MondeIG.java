@@ -495,12 +495,12 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
             for(int i = 0;i < size;i++)
             {
                 String IdEtape1 = gson.fromJson(lire.readLine(), String.class);
-                int pos1 = gson.fromJson(lire.readLine(), int.class);
+                String pos1 = gson.fromJson(lire.readLine(), String.class);
                 String IdEtape2 = gson.fromJson(lire.readLine(), String.class);
-                int pos2 = gson.fromJson(lire.readLine(), int.class);
+                String pos2 = gson.fromJson(lire.readLine(), String.class);
 
-                PointDeControleIG p1 = getEtapeByID(IdEtape1).getPointDeC(pos1);
-                PointDeControleIG p2 = getEtapeByID(IdEtape2).getPointDeC(pos2);
+                PointDeControleIG p1 = getEtapeByID(IdEtape1).getPointDeC(Integer.parseInt(pos1));
+                PointDeControleIG p2 = getEtapeByID(IdEtape2).getPointDeC(Integer.parseInt(pos2));
 
                 try {
                     ajouter(p1,p2);
