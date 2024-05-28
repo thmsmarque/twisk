@@ -129,9 +129,9 @@ public class Monde implements Iterable<Etape> {
                 "entrer("+getEntree().getDefineName()+");\n" +
                 /*"delai("+this.entree.getTemps()+","+this.entree.getEcartTemps()+");\n" +*/
 
-                "sleep("+this.nomFonctionProbaEntree +"); \n" +
+                "usleep("+this.nomFonctionProbaEntree +"*1000000); \n" +
 
-                "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC();
+                "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC() + "\n";
         StringBuilder build = new StringBuilder();
         //build.append(res).append(et.toC());
         return res;
@@ -188,8 +188,9 @@ public class Monde implements Iterable<Etape> {
                 this.probaEntree =
                         "int delaiExponentiel(double lambda)\n" +
                                 "{\n" +
+                                " double lambdabis = 1/lambda; \n"+
                                 "    double U = rand() / (double)RAND_MAX;\n" +
-                                "    double X = -log(U) / lambda;\n" +
+                                "    double X = -log(U) / lambdabis;\n" +
                                 "   return X; \n"+
                                 "}\n";
                 break;
@@ -211,4 +212,5 @@ public class Monde implements Iterable<Etape> {
         }
     }
 }
+
 

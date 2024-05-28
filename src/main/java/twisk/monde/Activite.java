@@ -98,7 +98,7 @@ public class Activite extends Etape {
                 if(i==0) {
                     build.append("\n if (nb==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n");
                 } else {
-                    build.append(" \n else if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n } \n");
+                    build.append(" \n else if (nb ==").append(i).append(") { \n").append(actuel).append(" ").append(suivant).append("\n  \n");
                 }
                 i++;
 
@@ -116,9 +116,10 @@ public class Activite extends Etape {
             res = build.toString();
 */
 
+            build.append("\n}\n");
             res = build.toString();
         }
-        res.replaceAll("}\n}\n","}\n");
+        //res.replaceAll("}\n}\n","}\n");
         return res;
     }
 
