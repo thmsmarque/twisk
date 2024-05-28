@@ -25,7 +25,7 @@ public class MainTwisk extends Application {
 
         root.setCenter(new VueMondeIG(monde));
         root.setBottom(new VueOutils(monde));
-        root.setTop(new VueMenu(monde));
+        root.setTop(new VueMenu(monde,stage));
 
         //pour récupérer la taille de l'écran :
         TailleComposants taille = TailleComposants.getInstance();
