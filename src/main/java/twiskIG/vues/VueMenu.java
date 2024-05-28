@@ -4,6 +4,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Stage;
 import twiskIG.mondeIG.EtapeIG;
 import twiskIG.mondeIG.MondeIG;
 import twiskIG.vues.ecouteur.*;
@@ -16,7 +17,7 @@ public class VueMenu extends MenuBar implements Observateur {
     private MondeIG monde;
     private MenuItem quitter,supprimer,renommer,desactiver, entree, sortie, parametres,sauvegarder,charger,client,exponentielle,gaussienne, uniforme;
     private Menu loi;
-    public VueMenu(MondeIG monde){
+    public VueMenu(MondeIG monde, Stage stage){
         super();
         this.monde=monde;
 
@@ -29,9 +30,9 @@ public class VueMenu extends MenuBar implements Observateur {
         quitter = new MenuItem("Quitter");
         quitter.setOnAction(new EcouteurMenuQuitter());
         sauvegarder = new MenuItem("Sauvegarder");
-        sauvegarder.setOnAction(new EcouteurSauvegarder(monde));
+        sauvegarder.setOnAction(new EcouteurSauvegarder(monde,stage));
         charger = new MenuItem("Charger");
-        charger.setOnAction(new EcouteurChargerMonde(monde));
+        charger.setOnAction(new EcouteurChargerMonde(monde,stage));
 
         //Supprimer
         supprimer = new MenuItem("Supprimer");
