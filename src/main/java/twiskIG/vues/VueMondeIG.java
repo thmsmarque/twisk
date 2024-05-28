@@ -3,7 +3,10 @@ package twiskIG.vues;
 import javafx.application.Platform;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import twiskIG.mondeIG.*;
+import twiskIG.outils.TailleComposants;
 import twiskIG.vues.ecouteur.EcouteurPanneauDragOver;
 import twiskIG.vues.ecouteur.EcouteurPanneauDropped;
 
@@ -79,6 +82,8 @@ public class VueMondeIG extends Pane implements Observateur  {
 
                     for (PointDeControleIG pc : etape) {
                         VuePointDeControle vuepdc = new VuePointDeControle(monde, pc, getSimEnCours());
+                        if(pc.equals(monde.getPointSauv()))
+                            vuepdc.setFill(Color.HOTPINK);
                         getChildren().add(vuepdc);
                     }
                 }
@@ -88,11 +93,20 @@ public class VueMondeIG extends Pane implements Observateur  {
                         if(vueEtapeIG.getEtape().estActivite() || vueEtapeIG.getEtape().estActiviteRestreinte()) {
 
                             VueActiviteIG ac = (VueActiviteIG)vueEtapeIG;
+                            VBox box = ac.getVbox();
+                            ArrayList<HBox> Hboxs = new ArrayList<>();
+                            for(int i =0; i<vueEtapeIG.getEtape().getClientsDansEtape().size()%10;i++)
+                            {
+                                TailleComposants taille = TailleComposants.getInstance();
+                                HBox hbox = new HBox();
+                                hbox.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
+                                Hboxs.add(hbox);
+                            }
+                            int compteurClients = 0;
                             for (ClientIG client : vueEtapeIG.getEtape().getClientsDansEtape()) {
-                                HBox box = ac.getBox();
-                                box.getChildren().add(new VueClientIG());
-
-
+                                HBox hbox = Hboxs.get(compteurClients%10);
+                                hbox.getChildren().add(new VueClientIG());
+                                compteurClients++;
                             }
                         }
                         if(vueEtapeIG.getEtape().estGuichet())
