@@ -21,20 +21,20 @@ public class VueActiviteIG extends VueEtapeIG {
      */
     public VueActiviteIG(MondeIG monde, EtapeIG etape,boolean simEnCours) {
         super(monde, etape,simEnCours);
-        this.vbox = new VBox(3);
+        this.box = new HBox();
         this.simEnCours=simEnCours;
 
         //Style et taille :
 
-        this.vbox.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
+        this.box.setStyle("-fx-border-color: #e81bd7; -fx-background-color: white ; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px;");
 
         TailleComposants taille = TailleComposants.getInstance();
 
-       this.vbox.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
+       this.box.setPrefSize(taille.gettailleHBOXActivite() , taille.gettailleHBOXActivite());
 
         if(!this.simEnCours) this.setOnMouseClicked(new EcouteurSelection(monde, etape));
 
-        this.getChildren().add(vbox);
+        this.getChildren().add(box);
 
     }
 
