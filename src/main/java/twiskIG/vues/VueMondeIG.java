@@ -1,6 +1,7 @@
 package twiskIG.vues;
 
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,6 +11,7 @@ import twiskIG.outils.TailleComposants;
 import twiskIG.vues.ecouteur.EcouteurPanneauDragOver;
 import twiskIG.vues.ecouteur.EcouteurPanneauDropped;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -122,6 +124,11 @@ public class VueMondeIG extends Pane implements Observateur  {
 
                     }
 
+                    //afficher le temps total si temps!=-1
+                    if(monde.getTempsSim()!=-1.0){
+                        afficherTemps(monde.getTempsSim());
+                        monde.setTempsSim(-1.0);
+                    }
             }
         };
         if(Platform.isFxApplicationThread())
@@ -133,6 +140,18 @@ public class VueMondeIG extends Pane implements Observateur  {
         }
 
 
+    }
+
+    public void afficherTemps(double temps){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Temps de la simulation");
+        alert.setHeaderText("Temps de la simulation : ");
+        DecimalFormat df = new DecimalFormat("#.00");
+        String formatTemps = df.format(temps);
+        alert.setContentText("Il y avait "+ monde.getNbCLient()+" clients dans votre simulation, \n" +
+                "ils sont rentrés en suivant une lois " + monde.getProba() + " et \n" +
+                "ils ont mis : "+ formatTemps + " secondes à atteindre la sortie.");
+        alert.show();
     }
 
     public void setSimEnCours(boolean estSelectionne) {

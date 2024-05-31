@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -25,22 +26,15 @@ public class EcouteurSetClients implements EventHandler<ActionEvent>{
     public void handle(ActionEvent actionEvent) {
         int nbClient=0;
 
-        Label label = new Label("Veuillez choisir le nombre de vlients");
-        Label labeld = new Label("jetons :");
+        Label label = new Label("Veuillez choisir le nombre de clients :");
 
 
         VBox root = new VBox();
         Stage stage = new Stage();
         //Group root = new Group();
-        Scene scene = new Scene(root, 600, 230);
-
-        // set Scene to the stage
+        Scene scene = new Scene(root, 400, 130);
         stage.setScene(scene);
-
-        // set title for the frame
-            stage.setTitle("Nombre de clients dans la simulation : ");
-
-        // input field
+        stage.setTitle("Paramètres de clients");
         TextField input1 = new TextField();
 
         // bouton pour quitter --------------------------
@@ -48,7 +42,19 @@ public class EcouteurSetClients implements EventHandler<ActionEvent>{
         b.setOnAction(e -> {
             // Action à effectuer lors du clic sur le bouton "OK"
             int value1 = Integer.parseInt(input1.getText());
-            monde.setNbCLient(value1);
+            if(value1>=50){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Nombre de clients invalide.");
+                alert.setContentText("Les clients doivent être inférieur à 50.");
+                alert.showAndWait();
+            } else if(value1<=0){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Nombre de clients invalide.");
+                alert.setContentText("Les clients doivent être supérieur à 0");
+                alert.showAndWait();
+            } else monde.setNbCLient(value1);
             stage.close();
             monde.notifierObservateurs();
 
@@ -56,7 +62,7 @@ public class EcouteurSetClients implements EventHandler<ActionEvent>{
         // mise en place du fond ------------------------
         root.setPadding(new Insets(20));
         root.setSpacing(10);
-        root.getChildren().addAll(label, labeld, input1, b);
+        root.getChildren().addAll(label, input1, b);
         stage.setScene(scene);
 
         stage.show();

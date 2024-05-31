@@ -30,6 +30,8 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     private String proba;
 
+    private double tempsSim;
+
     /**
      * Constructeur de MondeIG
      */
@@ -40,6 +42,7 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
         enCoursDeSim = false;
         this.nbCLient=10;
         this.proba = "uniforme";
+        this.tempsSim=-1.0;
         //this.ajouter("Activite0");
     }
 
@@ -553,6 +556,14 @@ public class MondeIG  extends SujetObserve implements Observateur, Iterable<Etap
 
     public void setProba(String proba) {
         this.proba = proba;
+    }
+
+    public double getTempsSim() {
+        return tempsSim;
+    }
+
+    public void setTempsSim(double tempsSim) {
+        this.tempsSim = tempsSim;
     }
 
     public String getProba() {
