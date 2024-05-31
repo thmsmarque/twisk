@@ -1,0 +1,242 @@
+@startuml
+
+
+package outils{
+
+class ClassLoaderPerso extends ClassLoader
+{
+	public ClassLoaderPerso(ClassLoader parent)
+	public Class<?> loadClass(String name)
+	private Class<?> getClass(String name)
+	private byte[] loadClassData(String name)
+}
+
+class FabriqueNumero
+{
+	int cptEtape
+	int cptSemaphore
+
+	private FabriqueNumero()
+	static public FabriqueNumero getInstance()
+	public int getNumeroEtape()
+	public int getNumeroSemaphore()
+	public void reset()
+}
+
+class FabriqueNumeroLibTwisk
+{
+	int cpt
+	private FabriqueNumeroLibTwisk()
+	static public FabriqueNumeroLibTwisk getInstance()
+	public int getNumero()
+	public void incrementer()
+	public void reset()
+}
+
+class KitC
+{
+	KitC()
+	public void creerEnvironnement()
+	public void creerFichier(String codeC)
+	public void compiler()
+	public void construireLaBibliothese()
+	public void detruireLesProcessus(int pid)	
+}
+
+class ThreadsManager
+{
+	private ThreadsManager()
+	public static ThreadsManager getInstance()
+	public void lancer(Task<?> task)
+	public void detruireTout()
+}
+
+}
+
+package monde{
+
+class Activite extends Etape
+{
+	int temps
+	int ecartTemps
+	public Activite(String nom)
+	public Activite(String nom, int temps, int ecartTemps)
+	public int getEcartTemps()
+	public int getTemps()
+	public boolean estUneActivite()
+	public String toString()
+	public String toC()
+	public String defineName()
+	public String getDefineName()
+}
+
+class ActiviteRestreinte extends Activite
+{
+	public ActiviteRestreinte(String nom)
+	public ActiviteRestreinte(String nom, int temps, int ecartTemps)
+	public String toC(int semaphore)
+}
+
+abstract class Etape
+{
+	String nom
+	HashMap<Integer,Client> clientDansLetape
+	int indice
+
+	public Etape(String nom)
+	public void ajouterClient(Client c)
+	public void retirerClient(int numprocessus)
+	public String getNom()
+	public GestionnaireEtapes getGestionnaire()
+	public ajouterSuccesseur(Etape... successeurs)
+	public boolean estUneActivite()
+	public boolean estUnGuichet()
+	public Iterator<Etape> iterator()
+	public String toString()
+	public getNbClientDansEtape()
+	public getIndiceEtape()
+
+	public abstract toC()
+	public abstract String defineName()
+    	public abstract String getDefineName()
+}
+
+class Guichet extends Etape
+{
+	int nbJetons
+	int indiceGuichet
+
+	public Guichet(String nom)
+	public Guichet(String nom, int nb)
+	public int getSemaphore()
+	public boolean estUnGuichet()
+	public String toString()
+	public String toC()
+	public String DefineName()
+	public String getDefineName()
+	public String getSemaphoreName()
+}
+
+class CorrespondancesEtapes
+{
+	HashMap<EtapeIG, Etape> etapes
+
+	public CorrespondanceEtapes()
+	public ajouter(EtapeIG etapeIG, Etape etape)
+	public Etape get(EtapeIG etapeIG)
+	public void ajouter(Etape... etapes)
+	public int nbEtapes()
+	public Iterator<Etape> iterator()
+	public Boolean estVide()
+	public String toString()
+	
+}
+
+class GestionnaireEtapes
+{
+	public GestionnaireEtapes()
+	public ArrayList<Etape> getListeetapes()
+}
+
+class Monde
+{
+	String probaEntree
+	String nomFonctionProbaEntree
+	public Monde()
+	public void aCommeEntree(Etape... etapes)
+	public void aCommeSortie(Etape... etapes)
+	public SasEntree getEntree()
+	public SasSortie getSortie()
+	public GestionnaireEtapes getLesEtapes()
+	public void ajouter(Etape... etapes)
+	public int nbEtapes()
+	public int nbGuichets()
+	public String toC()
+	public Iterator<Etape> iterator()
+	public GestionnaireClients getG()
+	public String toString()
+	public void probaType(String proba)
+	
+}
+
+class SasEntree extends Etape
+{	
+	public SasEntree()
+	public String toC()
+	public String getDefineName()
+	public String defineName()
+	public String toString()
+}
+
+class SasSortie extends Etape
+{	
+	public SasSortie()
+	public String toC()
+	public String getDefineName()
+	public String defineName()
+	public String toString()
+}
+
+}
+
+package simulation
+{
+
+class Client
+{
+	private int numeroClient
+    	private int rang
+	public Client(int numero)
+	public void allerA(Etape etape, int rang)
+	public String toString()
+	public int getNumeroClient()
+	public Etape getEtape()
+	public int getRang()
+}
+	
+class GestionnaireClients
+{
+	HashMap<Integer,Client> mapClient
+	public GestionnaireClients()
+	public void setClients(int...tabClients)
+	public void allerA(int numeroClient, Etape etape, int rang)
+	public void nettoyer()
+	public Client getClient(int numeroClient)
+	public Iterator<Client> iterator()
+	public String toString()
+}
+
+class Simulation extends SujetObserve
+{
+	int nbClients;
+	public Simulation()
+	public void ajOb(SimulationIG ob)
+	public void simuler(Monde monde, MondeIG mondeIG)
+	
+	public native int[] start_simulation (int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichet)
+    	public native int[] ou_sont_les_clients(int nbEtapes, int nbClients)
+    	public native void nettoyage()
+}
+
+}
+
+
+
+Monde "1"--"1" GestionnaireEtapes
+Monde "1"--"1" SasEntree
+Monde "1"--"1" SasSortie
+Monde --"1" GestionnaireClients
+
+Etape --"1" GestionnaireEtapes
+
+FabriqueNumero --"1" FabriqueNumero
+FabriqueNumeroLibTwisk --"1" FabriqueNumeroLibTwisk
+ThreadsManager -- "1" ThreadsManager
+
+Client --"1" Etape
+
+Simulation --"1" KitC
+Simulation --"1" GestionnaireClients
+
+
+@enduml
