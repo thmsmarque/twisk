@@ -55,16 +55,16 @@ public class Guichet extends Etape{
     @Override
     public String toC() {
         //ids à vérifiere
-        Iterator<Etape> etapes = this.gestionnaire.getListeetapes().iterator();
-        Etape et = this.getGestionnaire().getListeetapes().iterator().next();
+
+        ActiviteRestreinte et =(ActiviteRestreinte) this.getGestionnaire().getListeetapes().get(0);
         //System.out.println("Est ici (guichet) "+ et);
         String res = "P("+ "ids"+ ","+this.getSemaphoreName()+"); \n" +
                 "transfert("+this.getDefineName()+","
                 + et.getDefineName()  +");\n" +
-                et.toC() +
+                et.toC(getSemaphore());/* +
                 "V("+ "ids,"+ this.getSemaphoreName()+");\n"
                 +"transfert("+ et.getDefineName()
-                + "," + et.iterator().next().getDefineName() + ");\n" + et.iterator().next().toC();
+                + "," + et.iterator().next().getDefineName() + ");\n" + et.iterator().next().toC();*/
 
         return res;
     }

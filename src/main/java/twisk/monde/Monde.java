@@ -131,7 +131,7 @@ public class Monde implements Iterable<Etape> {
 
                 "usleep("+this.nomFonctionProbaEntree +"*1000000); \n" +
 
-                "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC() + "\n";
+                "transfert("+getEntree().getDefineName()+","+et.getDefineName() +");\n" + et.toC() + "\n}" ;
         StringBuilder build = new StringBuilder();
         //build.append(res).append(et.toC());
         return res;
